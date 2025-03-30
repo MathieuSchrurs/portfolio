@@ -1,0 +1,25 @@
+/* src/components/ui/AnimatedLogo.css */
+
+/* Style for the static background path */
+.signature-path-static {
+    /* It's visible by default, no dash properties needed */
+    /* Opacity is set inline in the component, but could be set here */
+    /* opacity: 0.3; */
+  }
+  
+  /* Style for the path that will be animated */
+  .signature-path-animated {
+    /* Set dash array and initial offset to the path length */
+    stroke-dasharray: 642.528076171875; /* <-- Use YOUR measured value */
+    stroke-dashoffset: 642.528076171875; /* <-- Use YOUR measured value */
+  
+    /* Define the transition for the drawing effect */
+    transition: stroke-dashoffset 1.5s ease-in-out; /* Adjust duration/easing */
+  }
+  
+  /* Define the hover state targeting ONLY the animated path */
+  /* When the parent link (a) is hovered, animate the animated path */
+  a:hover .signature-path-animated {
+    stroke-dashoffset: 0; /* Draw the path */
+  }
+  
