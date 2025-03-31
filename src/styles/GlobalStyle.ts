@@ -389,7 +389,12 @@ const GlobalStyle = createGlobalStyle`
     counter-reset: section;
   }
 
-  /* Keep commented out styles */
+  /*
+   * Logo styles are now handled locally within Nav.tsx
+   * using StyledLogoWrapper to avoid global conflicts
+   * and manage state via React props.
+   */
+
   // {TransitionStyles};
   // {PrismStyles};
 `;
