@@ -1,10 +1,6 @@
-/* src/components/ui/AnimatedLogo.css */
-
 /* Style for the static background path */
 .signature-path-static {
-    /* It's visible by default, no dash properties needed */
-    /* Opacity is set inline in the component, but could be set here */
-    /* opacity: 0.3; */
+    opacity: 0.3;
   }
   
   /* Style for the path that will be animated */

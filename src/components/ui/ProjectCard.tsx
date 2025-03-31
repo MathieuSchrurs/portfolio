@@ -20,7 +20,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
     return (
         // Updated card styling
-        <div className="bg-light-navy rounded shadow-lg p-6 transition-transform duration-300 hover:-translate-y-2 flex flex-col justify-between h-full">
+        <div className="bg-light-navy rounded-sm shadow-lg p-6 transition-transform duration-300 hover:-translate-y-2 flex flex-col justify-between h-full">
             <div>
                 <div className="flex justify-between items-center mb-4">
                     {/* Folder Icon */}

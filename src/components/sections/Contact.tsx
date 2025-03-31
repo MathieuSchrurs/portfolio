@@ -1,6 +1,3 @@
-// src/components/sections/Contact.tsx
-// Remove Button import if not using the complex form
-
 const Contact = () => {
     return (
         <section id="contact" className="py-24 mx-auto max-w-xl text-center">
@@ -16,7 +13,7 @@ const Contact = () => {
             </p>
             <a
                 href="mailto:your.email@example.com" // Update email
-                className="inline-block font-mono text-sm text-green border border-green rounded px-8 py-4 hover:bg-green/10 transition-colors duration-300"
+                className="inline-block font-mono text-sm text-green border border-green rounded-sm px-8 py-4 hover:bg-green/10 transition-colors duration-300"
             >
                 Say Hello
             </a>

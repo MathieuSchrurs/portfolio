@@ -1,30 +1,35 @@
-import Header from './components/layout/Header'; // Import new Header
-import LeftSidebar from './components/layout/LeftSidebar'; // Import LeftSidebar
-import RightSidebar from './components/layout/RightSidebar'; // Import RightSidebar
+import React from 'react';
+// Removed styled-components import if not used directly here
+import Layout from './components/layout/Layout'; // Import the main Layout
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
 import Experience from './components/sections/Experience';
 import Work from './components/sections/Work';
 import Contact from './components/sections/Contact';
+// Removed Header, LeftSidebar, RightSidebar imports
+
+// Removed StyledAppContainer, StyledMainContainer, StyledLeftSidebar, StyledRightSidebar
 
 function App() {
-  return (
-    <div className="bg-navy font-sans text-slate min-h-screen">
-      <Header /> {/* Use new Header */}
-      <LeftSidebar /> {/* Add LeftSidebar */}
-      <RightSidebar /> {/* Add RightSidebar */}
+  // Removed theme useEffect logic - it's now in Layout.tsx
+  // Removed socialLinks definition - it's now in config.ts and used by Social.tsx
 
-      <main className="mx-auto min-h-screen max-w-screen-xl px-6 py-0 md:px-12 md:py-20 lg:px-24 lg:py-0">
-        {/* Add pt-24 or similar padding top if header overlaps */}
-        <div className="pt-24 md:pt-32"> {/* Add padding top to avoid header overlap */}
-          <Hero />
-          <About />
-          <Experience />
-          <Work />
-          <Contact />
-        </div>
+  // Determine location if needed for Layout (e.g., using React Router)
+  // const location = useLocation(); // Example if using React Router
+
+  return (
+    // Pass location if Layout needs it
+    <Layout /* location={location} */ >
+      {/* The children passed to Layout are rendered inside its #content div */}
+      {/* Add className="fillHeight" to main tag inside Layout for index page */}
+      <main className="fillHeight">
+        <Hero />
+        <About />
+        <Experience />
+        <Work />
+        <Contact />
       </main>
-    </div>
+    </Layout>
   );
 }
 

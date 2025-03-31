@@ -1,4 +1,3 @@
-// src/components/sections/Experience.tsx
 const Experience = () => {
     // Replace with your actual experience data
     const jobs = [
@@ -26,7 +25,6 @@ const Experience = () => {
         },
     ];
 
-    // For simplicity, we'll just display the first job details.
     // A real implementation would use state to switch between jobs (e.g., with tabs).
     const currentJob = jobs[0];
 

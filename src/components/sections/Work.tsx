@@ -60,7 +60,7 @@ const Work = () => {
 
             {/* Optional: "Show More" button if you have many projects */}
             {/* <div className="text-center mt-12">
-        <button className="font-mono text-sm text-green border border-green rounded px-8 py-4 hover:bg-green/10 transition-colors duration-300">
+        <button className="font-mono text-sm text-green border border-green rounded-sm px-8 py-4 hover:bg-green/10 transition-colors duration-300">
           Show More
         </button>
       </div> */}

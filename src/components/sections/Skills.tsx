@@ -24,7 +24,7 @@ const Skills = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {skillCategories.map((category, index) => (
-                        <div key={index} className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
+                        <div key={index} className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-xs">
                             <h3 className="text-xl font-bold mb-4 text-blue-600">{category.title}</h3>
                             <ul className="space-y-2">
                                 {category.skills.map((skill, skillIndex) => (
