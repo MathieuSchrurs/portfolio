@@ -61,7 +61,7 @@ const StyledExperiencesGrid = styled.div`
 const StyledTimelineItem = styled.div`
   display: flex;
   width: 100%;
-  margin-bottom: -2rem; /* Negative margin to bring cards closer/overlap */
+  margin-bottom: -10rem; /* Negative margin to bring cards closer/overlap */
   position: relative;
     &:nth-child(odd) {
     justify-content: flex-start; /* Left-align odd cards */
