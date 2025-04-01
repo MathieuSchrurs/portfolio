@@ -1,4 +1,3 @@
-// src/components/sections/Skills.tsx
 const Skills = () => {
     const skillCategories = [
         {

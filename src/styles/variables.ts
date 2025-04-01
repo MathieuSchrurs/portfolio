@@ -30,8 +30,8 @@ const variables = css`
 
     /* Logo Colors */
     --logo-color-default-light: #000000; /* Black for light mode */
-    --logo-color-hover-light: #8b5cf6; /* Purple for light mode hover */
     --logo-color-default-dark: #ffffff; /* White for dark mode */
+    --logo-color-hover-light: #8b5cf6; /* Purple for light mode hover */
     --logo-color-hover-dark: #64ffda; /* Green for dark mode hover */
 
     /* Font Stacks */
@@ -83,6 +83,8 @@ const variables = css`
     --toggle-bg: var(--toggle-background-dark);
     --logo-hover-color: var(--logo-color-hover-dark); /* Green for hover */
     --logo-default-color: var(--logo-color-default-dark); /* White for default */
+    --gradient-middle-color: #64ffda; /* Lighter green middle */
+    --gradient-end-color: #005F43; /* Darker green end */
   }
 
   /* Light Mode Variables */
@@ -101,6 +103,8 @@ const variables = css`
     --toggle-bg: var(--toggle-background-light);
     --logo-hover-color: var(--logo-color-hover-light); /* Purple for hover */
     --logo-default-color: var(--logo-color-default-light); /* Black for default */
+    --gradient-middle-color: #a78bfa; 
+    --gradient-end-color: var(--slate);
   }
 `;
 

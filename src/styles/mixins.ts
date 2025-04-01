@@ -92,10 +92,11 @@ const mixins = {
     background-color: transparent;
     border: 1px solid var(--accent-color);
     border-radius: var(--border-radius);
-    padding: 0.75rem 1rem;
+    padding: 0.85rem 1.2rem;
+    margin: 0.2rem;
     font-size: var(--fz-xs);
     font-family: var(--font-mono);
-    line-height: 1;
+    line-height: 0.8;
     text-decoration: none;
     cursor: pointer;
     transition: var(--transition);
@@ -104,9 +105,8 @@ const mixins = {
     &:focus-visible {
       background-color: var(--accent-tint-color);
       outline: none;
-      /* Optional: Add target's shadow/translate effect */
-      /* box-shadow: 3px 3px 0 0 var(--accent-color);
-             transform: translate(-4px, -4px); */
+      box-shadow: 3px 3px 0 0 var(--accent-color);
+             transform: translate(-2px, -2px);
     }
     &:after {
       display: none !important;

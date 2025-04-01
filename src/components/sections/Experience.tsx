@@ -1,62 +1,168 @@
-const Experience = () => {
-    // Replace with your actual experience data
-    const jobs = [
-        {
-            company: 'Company A',
-            title: 'Software Engineer',
-            range: 'Jan 2022 - Present',
-            url: 'https://companya.com',
-            tasks: [
-                'Developed and maintained critical features for customer-facing web applications using React and Node.js.',
-                'Collaborated with designers and product managers to translate requirements into technical solutions.',
-                'Improved application performance by optimizing database queries and frontend rendering.',
-            ],
-        },
-        {
-            company: 'Company B',
-            title: 'Junior Developer',
-            range: 'May 2020 - Dec 2021',
-            url: 'https://companyb.com',
-            tasks: [
-                'Assisted senior developers in building and testing new features.',
-                'Fixed bugs and improved existing codebase.',
-                'Participated in code reviews and team meetings.',
-            ],
-        },
-    ];
+import React from 'react';
+import styled from 'styled-components';
+import ExperienceCard from '../ui/ExperienceCard';
+import config from '@config';
 
-    // A real implementation would use state to switch between jobs (e.g., with tabs).
-    const currentJob = jobs[0];
+const StyledExperienceSection = styled.section`
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 100px 0;
+`;
+
+const StyledHeading = styled.h2`
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 10px 0 40px;
+  width: 100%;
+  font-size: clamp(26px, 5vw, var(--fz-heading));
+  color: var(--text-primary-color);
+  white-space: nowrap;
+
+  &:before {
+    position: relative;
+    bottom: 4px;
+    content: '02.';
+    margin-right: 10px;
+    color: var(--accent-color);
+    font-family: var(--font-mono);
+    font-size: clamp(var(--fz-md), 3vw, var(--fz-xl));
+    font-weight: 400;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    position: relative;
+    top: -5px;
+    width: 300px;
+    height: 1px;
+    margin-left: 20px;
+    background-color: var(--border-color);
+
+    @media (max-width: 1080px) {
+      width: 200px;
+    }
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+    @media (max-width: 600px) {
+      margin-left: 10px;
+    }
+  }
+`;
+
+const StyledExperiencesGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative; /* Add positioning context */
+`;
+
+const StyledTimelineItem = styled.div`
+  display: flex;
+  width: 100%;
+  margin-bottom: -2rem; /* Negative margin to bring cards closer/overlap */
+  position: relative;
+    &:nth-child(odd) {
+    justify-content: flex-start; /* Left-align odd cards */
+    align-items: flex-start;
+  }
+  &:nth-child(even) {
+    justify-content: flex-end; /* Right-align even cards */
+    align-items: flex-end;
+  }
+   @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center; /* Center on smaller screens */
+    margin-bottom: 1rem; /* Give space */
+    &:nth-child(odd),
+    &:nth-child(even) {
+      align-items: center;
+      
+    }
+`;
+
+const StyledCardWrapper = styled.div`
+  width: 50%;
+  padding: 0 1rem;
+  position: relative; /* Needed for connector line positioning */
+
+  @media (max-width: 768px) {
+    width: 80%; /* Adjusted width for smaller screens */
+    padding: 0;
+    margin-bottom: 1rem; /* Some space after cards */
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2rem; /* Length of the horizontal line */
+    height: 1px;
+    background-color: var(--light-slate);
+    /* Place the connector according to which side the card is on */
+    right:  0; /* For odd cards (left side) */
+  }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 2rem; /* Width of the horizontal line */
+        height: 1px;
+        background-color: var(--light-slate);
+        /* Place the connector according to which side the card is on */
+        left: 0; /* For even cards (right side) */
+    }
+    &:nth-child(even) {
+        flex-direction: row-reverse;
+        align-items: flex-end;
+  }
+
+     @media (max-width: 768px) {
+          &::after,
+          &::before{
+            content: none;
+          }
+
+        }
+
+`;
+
+const StyledTimelineConnector = styled.div`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 100%;
+  background-color: var(--light-slate);
+  z-index: 1;
+
+   @media (max-width: 768px) {
+            display: none;
+   }
+`;
+
+const Experience = () => {
+    const { jobs } = config;
 
     return (
-        <section id="experience" className="py-24 mx-auto max-w-3xl">
-            <h2 className="flex items-center mb-8 text-2xl font-semibold text-lightest-slate whitespace-nowrap after:content-[''] after:block after:relative after:top-px after:w-full after:h-px after:ml-4 after:bg-lightest-navy">
-                <span className="text-green font-mono text-xl mr-2">02.</span>
-                Where I've Worked
-            </h2>
-
-            {/* Simplified display - shows only the first job */}
-            {/* TODO: Implement tab switching logic if needed */}
-            <div className="text-slate">
-                <h3 className="text-xl font-medium text-lightest-slate mb-1">
-                    {currentJob.title}{' '}
-                    <span className="text-green">
-                        @{' '}
-                        <a href={currentJob.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                            {currentJob.company}
-                        </a>
-                    </span>
-                </h3>
-                <p className="font-mono text-xs mb-4">{currentJob.range}</p>
-                <ul className="space-y-2 list-none p-0">
-                    {currentJob.tasks.map((task, index) => (
-                        <li key={index} className="relative pl-6 text-sm before:content-['▹'] before:absolute before:left-0 before:text-green">
-                            {task}
-                        </li>
+        <StyledExperienceSection id="experience">
+            <StyledHeading>Where I've Worked</StyledHeading>
+            <StyledExperiencesGrid>
+                {jobs &&
+                    jobs.map((job, index) => (
+                        <StyledTimelineItem key={index}>
+                            <StyledCardWrapper>
+                                <ExperienceCard {...job} />
+                            </StyledCardWrapper>
+                            <StyledTimelineConnector />
+                        </StyledTimelineItem>
                     ))}
-                </ul>
-            </div>
-        </section>
+            </StyledExperiencesGrid>
+        </StyledExperienceSection>
     );
 };
 

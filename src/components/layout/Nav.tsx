@@ -1,20 +1,22 @@
 // src/components/layout/Nav.tsx
+
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import config from '@config';
-import { useScrollDirection, usePrefersReducedMotion } from '../../hooks';
-import AnimatedLogo from '../ui/AnimatedLogo';
-import ThemeToggle from '../ui/ThemeToggle';
-import CVDownload from '../ui/CVDownload';
+import config from '@config'; // Assuming '@config' resolves to your config file
+import { useScrollDirection, usePrefersReducedMotion } from '../../hooks'; // Assuming '@hooks' resolves correctly
+import AnimatedLogo from '../ui/AnimatedLogo'; // Adjust path if necessary
+import ThemeToggle from '../ui/ThemeToggle'; // Adjust path if necessary
+// Import the refactored CVDownload component (which now uses StyledButtonLink)
+import CVDownload from '../ui/CVDownload'; // Adjust path if necessary
 
-// --- StyledHeader remains the same ---
+// Interface for the styled header props (used for scroll effects)
 interface StyledHeaderProps {
   scrollDirection: 'up' | 'down' | null;
   scrolledToTop: boolean;
 }
 
+// Styled component for the main header element
 const StyledHeader = styled.header<StyledHeaderProps>`
-  /* ... existing styles ... */
   ${({ theme }) => theme.mixins.flexBetween};
   position: fixed;
   top: 0;
@@ -36,6 +38,7 @@ const StyledHeader = styled.header<StyledHeaderProps>`
     padding: 0 25px;
   }
 
+  /* Scroll effects */
   @media (prefers-reduced-motion: no-preference) {
     ${(props) =>
     props.scrollDirection === 'up' &&
@@ -58,13 +61,13 @@ const StyledHeader = styled.header<StyledHeaderProps>`
   }
 `;
 
-// Styled Wrapper - "Erase on Unhover" Logic
+// Styled component for the logo wrapper (handles hover animation state)
 const StyledLogoWrapper = styled.div<{ isHovered: boolean }>`
   display: block;
   width: 55px;
   height: 55px;
   cursor: pointer;
-  position: relative; /* Needed for absolute positioning if used */
+  position: relative;
 
   a {
     display: block;
@@ -80,35 +83,26 @@ const StyledLogoWrapper = styled.div<{ isHovered: boolean }>`
     width: 100%;
     height: 100%;
     user-select: none;
-    /* Ensure SVGs overlap if needed, though opacity should handle it */
-    /* position: absolute;
-       top: 0;
-       left: 0; */
 
+    /* Styles for the logo paths, controlled by isHovered prop */
     .logo-path-static {
       stroke: var(--logo-default-color);
-      /* Fade in/out based on hover */
       opacity: ${(props) => (props.isHovered ? 0 : 1)};
-      /* Add a slight delay on fade-in during unhover */
       transition: opacity 0.1s ease-in-out ${(props) => (props.isHovered ? '0s' : '1.2s')};
     }
 
     .logo-path-animated {
       stroke-dasharray: 642.528076171875;
-      /* Always use hover color */
       stroke: var(--logo-hover-color);
-      /* Animate offset based on hover */
       stroke-dashoffset: ${(props) =>
     props.isHovered ? 0 : 642.528076171875};
-      /* Only transition the offset */
       transition: stroke-dashoffset 1.3s linear;
-      /* Control visibility via offset, but ensure it's potentially visible */
       opacity: 1;
     }
   }
 `;
 
-// --- StyledNav, StyledLinks remain the same ---
+// Styled component for the <nav> element itself
 const StyledNav = styled.nav`
   ${({ theme }) => theme.mixins.flexBetween};
   position: relative;
@@ -119,18 +113,19 @@ const StyledNav = styled.nav`
   z-index: 12;
 `;
 
+// Styled component for the links section (nav items, buttons)
 const StyledLinks = styled.div`
   display: flex;
   align-items: center;
 
   @media (max-width: 768px) {
-    display: none;
+    display: none; /* Hide links on smaller screens for mobile menu */
   }
 
   ol {
     ${({ theme }) => theme.mixins.flexBetween};
     padding: 0;
-    margin: 0 10px 0 0;
+    margin: 0 10px 0 0; /* Space between links and buttons */
     list-style: none;
 
     li {
@@ -144,6 +139,7 @@ const StyledLinks = styled.div`
         color: var(--text-primary-color);
         text-decoration: none;
 
+        /* Numbered prefix for nav links */
         &:before {
           content: '0' counter(item) '.';
           margin-right: 5px;
@@ -159,48 +155,54 @@ const StyledLinks = styled.div`
     }
   }
 
-  .cv-button {
-    ${({ theme }) => theme.mixins.smallButton};
-    margin-left: 15px;
-    font-size: var(--fz-xs);
-  }
+  /* --- Removed .cv-button CSS definition --- */
+  /* Styling is now handled by the StyledButtonLink component used within CVDownload */
 
+  /* Styling for the theme toggle wrapper if needed */
   .theme-toggle {
-    margin-left: 20px;
+    margin-left: 20px; /* Space before theme toggle */
   }
 `;
 
-// --- Nav Component remains the same (state, handlers, rendering) ---
+// Props for the Nav component
 interface NavProps {
-  isHome: boolean;
+  isHome: boolean; // Passed from Layout to potentially adjust behavior/animations
 }
 
+// The Nav component
 const Nav: React.FC<NavProps> = ({ isHome }) => {
+  // State for animations/mounting (can be expanded later)
   const [isMounted, setIsMounted] = useState(!isHome);
+  // Custom hook to detect scroll direction
   const scrollDirection = useScrollDirection({ initialDirection: 'down' });
+  // State to track if scrolled to the very top
   const [scrolledToTop, setScrolledToTop] = useState(true);
+  // Custom hook to check user's preference for reduced motion
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // State and handlers for logo hover
+  // State for logo hover effect
   const [isLogoHovered, setIsLogoHovered] = useState(false);
   const handleLogoEnter = () => setIsLogoHovered(true);
   const handleLogoLeave = () => setIsLogoHovered(false);
 
+  // Effect to handle scroll events and update scrolledToTop state
   const handleScroll = () => {
     setScrolledToTop(window.pageYOffset < 50);
   };
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    handleScroll();
+    handleScroll(); // Initial check
+    // Cleanup listener on component unmount
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
+  // Get navigation links from the config file
   const { navLinks } = config;
 
-  // Logo rendering using the wrapper and state
+  // Memoize or define the Logo component part
   const Logo = (
     <StyledLogoWrapper
       isHovered={isLogoHovered}
@@ -208,7 +210,6 @@ const Nav: React.FC<NavProps> = ({ isHome }) => {
       onMouseLeave={handleLogoLeave}
     >
       <a href="/" aria-label="home">
-        {/* AnimatedLogo is purely structural */}
         <AnimatedLogo />
       </a>
     </StyledLogoWrapper>
@@ -220,8 +221,10 @@ const Nav: React.FC<NavProps> = ({ isHome }) => {
       scrolledToTop={scrolledToTop}
     >
       <StyledNav>
-        {Logo}
+        {Logo} {/* Render the logo */}
+
         <StyledLinks>
+          {/* Render the numbered navigation links */}
           <ol>
             {navLinks &&
               navLinks.map(({ url, name }, i) => (
@@ -230,14 +233,24 @@ const Nav: React.FC<NavProps> = ({ isHome }) => {
                 </li>
               ))}
           </ol>
-          <div>
-            <CVDownload className="cv-button" />
+
+          {/* --- START: Updated Button Section --- */}
+          {/* Render the CVDownload button */}
+          {/* Add margin using a wrapper div or pass a className if needed */}
+          <div style={{ marginLeft: '5px' }}> {/* Add spacing before CV button */}
+            <CVDownload /> {/* No className needed for styling */}
           </div>
+
+          {/* Render the ThemeToggle button */}
           <div>
             <ThemeToggle className="theme-toggle" />
           </div>
+          {/* --- END: Updated Button Section --- */}
+
         </StyledLinks>
-        {/* Mobile Menu Placeholder */}
+
+        {/* Placeholder for potential Mobile Menu component */}
+        {/* <MobileMenu /> */}
       </StyledNav>
     </StyledHeader>
   );
