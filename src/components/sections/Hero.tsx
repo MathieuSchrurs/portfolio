@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import CVDownload from '../ui/CVDownload';
 import StyledButtonLink from '../ui/StyledButtonLink';
@@ -40,15 +40,6 @@ const InteractiveWordSpan = styled.span<{ isHovered: boolean }>`
   }
 `;
 
-// const HeroParagraph = styled.p`
-//   font-size: 1.125rem; /* text-lg */
-//   max-width: 36rem; /* max-w-xl */
-//   margin-bottom: 3rem; /* mb-12 */
-//   color: var(--text-secondary-color);
-//   padding: 8px 16px; /* Add your desired padding here */
-//   /* You can also add line height, letter spacing, etc. */
-// `;
-
 const Hero = () => {
     const [isWordHovered, setIsWordHovered] = useState(false);
     const handleWordEnter = () => setIsWordHovered(true);
@@ -72,7 +63,7 @@ const Hero = () => {
                     Hi, my name is
                 </p>
                 <h1
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-2" // Changed from mb-4 to mb-2
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-2"
                     style={{
                         color: 'var(--text-primary-color)',
                         fontFamily: '"Fira Code", monospace'

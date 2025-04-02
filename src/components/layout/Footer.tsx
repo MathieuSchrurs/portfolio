@@ -1,6 +1,4 @@
-import React from 'react';
 import styled from 'styled-components';
-// Import config and icons later
 
 const StyledFooter = styled.footer`
   ${({ theme }) => theme.mixins.flexCenter};
@@ -26,31 +24,28 @@ const StyledCredit = styled.div`
 `;
 
 const Footer = () => {
-    // Add GitHub stats fetching later if desired
 
-    return (
-        <StyledFooter>
-            {/* Add social links for mobile later */}
-            <StyledCredit>
-                <a
-                    href="https://github.com/bchiang7/v4"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <div>Design inspired by Brittany Chiang</div>
-                </a>
-                <br /> {/* Simple line break for now */}
-                <a
-                    href="https://github.com/MathieuSchrurs/portfolio" // Link to your repo
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <div>Built by Mathieu Schrurs</div>
-                    {/* Add GitHub stats here later */}
-                </a>
-            </StyledCredit>
-        </StyledFooter>
-    );
+  return (
+    <StyledFooter>
+      <StyledCredit>
+        <a
+          href="https://github.com/bchiang7/v4"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div>Design inspired by Brittany Chiang</div>
+        </a>
+        <br />
+        <a
+          href="https://github.com/MathieuSchrurs/portfolio"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div>Built by Mathieu Schrurs</div>
+        </a>
+      </StyledCredit>
+    </StyledFooter>
+  );
 };
 
 export default Footer;

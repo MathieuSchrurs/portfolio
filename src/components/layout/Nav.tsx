@@ -9,6 +9,7 @@ import CVDownload from '../ui/CVDownload';
 interface StyledHeaderProps {
   scrollDirection: 'up' | 'down' | null;
   scrolledToTop: boolean;
+  prefersReducedMotion: boolean;
 }
 
 const StyledHeader = styled.header<StyledHeaderProps>`
@@ -24,7 +25,7 @@ const StyledHeader = styled.header<StyledHeaderProps>`
   pointer-events: auto !important;
   user-select: auto !important;
   backdrop-filter: blur(10px);
-  transition: var(--transition);
+  transition: background-color 0.3s ease;
 
   @media (max-width: 1080px) {
     padding: 0 40px;
@@ -33,30 +34,27 @@ const StyledHeader = styled.header<StyledHeaderProps>`
     padding: 0 25px;
   }
 
-  /* Scroll effects */
-  @media (prefers-reduced-motion: no-preference) {
-    ${(props) =>
-    props.scrollDirection === 'up' &&
-    !props.scrolledToTop &&
-    css`
-        height: var(--nav-scroll-height);
-        transform: translateY(0px);
-        background-color: var(--header-bg-color);
-        box-shadow: 0 10px 30px -10px var(--shadow-color);
-      `}
+  ${(props) => !props.prefersReducedMotion && css`
+      /* Apply motion transitions only if not reduced */
+      transition: var(--transition); /* Apply full transition */
+      @media (prefers-reduced-motion: no-preference) {
+        ${props.scrollDirection === 'up' && !props.scrolledToTop && css`
+            height: var(--nav-scroll-height);
+            transform: translateY(0px);
+            background-color: var(--header-bg-color);
+            box-shadow: 0 10px 30px -10px var(--shadow-color);
+        `}
 
-    ${(props) =>
-    props.scrollDirection === 'down' &&
-    !props.scrolledToTop &&
-    css`
-        height: var(--nav-scroll-height);
-        transform: translateY(calc(var(--nav-scroll-height) * -1));
-        box-shadow: 0 10px 30px -10px var(--shadow-color);
-      `}
-  }
+        ${props.scrollDirection === 'down' && !props.scrolledToTop && css`
+            height: var(--nav-scroll-height);
+            transform: translateY(calc(var(--nav-scroll-height) * -1));
+            box-shadow: 0 10px 30px -10px var(--shadow-color);
+        `}
+      }
+  `}
 `;
 
-const StyledLogoWrapper = styled.div<{ isHovered: boolean }>`
+const StyledLogoWrapper = styled.div<{ isHovered: boolean; prefersReducedMotion: boolean }>`
   display: block;
   width: 55px;
   height: 55px;
@@ -78,11 +76,11 @@ const StyledLogoWrapper = styled.div<{ isHovered: boolean }>`
     height: 100%;
     user-select: none;
 
-    /* Styles for the logo paths, controlled by isHovered prop */
     .logo-path-static {
       stroke: var(--logo-default-color);
       opacity: ${(props) => (props.isHovered ? 0 : 1)};
-      transition: opacity 0.1s ease-in-out ${(props) => (props.isHovered ? '0s' : '1.2s')};
+      /* Conditional transition */
+      transition: ${(props) => props.prefersReducedMotion ? 'none' : `opacity 0.1s ease-in-out ${props.isHovered ? '0s' : '1.2s'}`};
     }
 
     .logo-path-animated {
@@ -90,7 +88,8 @@ const StyledLogoWrapper = styled.div<{ isHovered: boolean }>`
       stroke: var(--logo-hover-color);
       stroke-dashoffset: ${(props) =>
     props.isHovered ? 0 : 642.528076171875};
-      transition: stroke-dashoffset 1.3s linear;
+      /* Conditional transition */
+      transition: ${(props) => props.prefersReducedMotion ? 'none' : 'stroke-dashoffset 1.3s linear'};
       opacity: 1;
     }
   }
@@ -111,13 +110,13 @@ const StyledLinks = styled.div`
   align-items: center;
 
   @media (max-width: 768px) {
-    display: none; /* Hide links on smaller screens for mobile menu */
+    display: none;
   }
 
   ol {
     ${({ theme }) => theme.mixins.flexBetween};
     padding: 0;
-    margin: 0 10px 0 0; /* Space between links and buttons */
+    margin: 0 10px 0 0;
     list-style: none;
 
     li {
@@ -130,8 +129,8 @@ const StyledLinks = styled.div`
         padding: 10px;
         color: var(--text-primary-color);
         text-decoration: none;
+        /* Transitions handled globally or on hover */
 
-        /* Numbered prefix for nav links */
         &:before {
           content: '0' counter(item) '.';
           margin-right: 5px;
@@ -147,12 +146,8 @@ const StyledLinks = styled.div`
     }
   }
 
-  /* --- Removed .cv-button CSS definition --- */
-  /* Styling is now handled by the StyledButtonLink component used within CVDownload */
-
-  /* Styling for the theme toggle wrapper if needed */
   .theme-toggle {
-    margin-left: 20px; /* Space before theme toggle */
+    margin-left: 20px;
   }
 `;
 
@@ -161,10 +156,9 @@ interface NavProps {
 }
 
 const Nav: React.FC<NavProps> = ({ isHome }) => {
-  const [isMounted, setIsMounted] = useState(!isHome);
   const scrollDirection = useScrollDirection({ initialDirection: 'down' });
   const [scrolledToTop, setScrolledToTop] = useState(true);
-  const prefersReducedMotion = usePrefersReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion(); // Call the hook
 
   const [isLogoHovered, setIsLogoHovered] = useState(false);
   const handleLogoEnter = () => setIsLogoHovered(true);
@@ -187,6 +181,7 @@ const Nav: React.FC<NavProps> = ({ isHome }) => {
   const Logo = (
     <StyledLogoWrapper
       isHovered={isLogoHovered}
+      prefersReducedMotion={prefersReducedMotion} // Pass prop
       onMouseEnter={handleLogoEnter}
       onMouseLeave={handleLogoLeave}
     >
@@ -200,10 +195,10 @@ const Nav: React.FC<NavProps> = ({ isHome }) => {
     <StyledHeader
       scrollDirection={scrollDirection}
       scrolledToTop={scrolledToTop}
+      prefersReducedMotion={prefersReducedMotion} // Pass prop
     >
       <StyledNav>
         {Logo}
-
         <StyledLinks>
           <ol>
             {navLinks &&
@@ -213,19 +208,13 @@ const Nav: React.FC<NavProps> = ({ isHome }) => {
                 </li>
               ))}
           </ol>
-
           <div style={{ marginLeft: '5px' }}>
             <CVDownload />
           </div>
-
           <div>
             <ThemeToggle className="theme-toggle" />
           </div>
-
         </StyledLinks>
-
-        {/* Placeholder for potential Mobile Menu component */}
-        {/* <MobileMenu /> */}
       </StyledNav>
     </StyledHeader>
   );

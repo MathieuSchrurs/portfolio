@@ -14,11 +14,6 @@ export default {
       name: 'Instagram',
       url: 'https://instagram.com/mathieuschrurs',
     },
-    // Add other platforms like Twitter if needed
-    // {
-    //   name: 'BlueSky',
-    //   url: 'https://BlueSky.com/yourusername',
-    // },
   ],
 
   navLinks: [
@@ -112,7 +107,7 @@ export default {
       'The site you are currently viewing! Built with React, TypeScript, and styled-components, featuring theme switching and responsive design.',
     tags: ['React', 'TypeScript', 'Styled Components', 'Vite'],
     liveUrl: 'https://mathieuschrurs.com',
-    codeUrl: 'https://github.com/MathieuSchrurs/portfolio', // Link to this repo
+    codeUrl: 'https://github.com/MathieuSchrurs/portfolio',
   },
   {
     title: 'Internal Issue Tracking Dashboard',

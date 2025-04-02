@@ -1,8 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import variables from './variables';
 import fonts from './fonts';
-// import TransitionStyles from './TransitionStyles'; // Keep commented for now
-// import PrismStyles from './PrismStyles'; // Keep commented for now
+// import TransitionStyles from './TransitionStyles';
+// import PrismStyles from './PrismStyles';
 
 const GlobalStyle = createGlobalStyle`
   ${variables}; // Apply CSS variables
@@ -58,18 +58,18 @@ const GlobalStyle = createGlobalStyle`
 
 
   body {
-    margin: 0; /* Basic reset */
-    padding: 0; /* Basic reset */
+    margin: 0;
+    padding: 0;
     width: 100%;
     min-height: 100%;
     overflow-x: hidden;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     background-color: var(--bg-color);
-    color: var(--text-secondary-color); /* Default text color */
-    font-family: var(--font-sans); /* Use Calibre */
-    font-size: var(--fz-lg); /* Use target's base size */
-    line-height: 1.3; /* Use target's base line-height */
+    color: var(--text-secondary-color);
+    font-family: var(--font-sans);
+    font-size: var(--fz-lg);
+    line-height: 1.3;
     transition: background-color 0.3s ease, color 0.3s ease;
 
     @media (max-width: 480px) {
@@ -79,13 +79,13 @@ const GlobalStyle = createGlobalStyle`
     &.hidden { overflow: hidden; }
     &.blur {
       overflow: hidden;
-      #root > #content > * { // Target content children more specifically
+      #root > #content > * {
          filter: blur(5px) brightness(0.7);
          transition: var(--transition);
          pointer-events: none;
          user-select: none;
       }
-      header { // Ensure header is not blurred
+      header {
          filter: none;
          pointer-events: auto;
          user-select: auto;
@@ -100,13 +100,12 @@ const GlobalStyle = createGlobalStyle`
      grid-template-columns: 100%;
   }
 
-  /* === ADDED LAYOUT RULES === */
   main {
     margin: 0 auto;
     width: 100%;
     max-width: 1600px;
     min-height: 100vh;
-    padding: 200px 150px; // Default padding for non-index pages (like blog posts later)
+    padding: 200px 150px;
 
     @media (max-width: 1080px) {
       padding: 200px 100px;
@@ -118,9 +117,8 @@ const GlobalStyle = createGlobalStyle`
       padding: 125px 25px;
     }
 
-    /* Class for the main index page content area */
     &.fillHeight {
-      padding: 0 150px; // No top/bottom padding
+      padding: 0 150px;
 
       @media (max-width: 1080px) {
         padding: 0 100px;
@@ -136,9 +134,9 @@ const GlobalStyle = createGlobalStyle`
 
   section {
     margin: 0 auto;
-    padding: 100px 0; // Vertical padding for sections
-    max-width: 1000px; // Default max-width for content sections
-    counter-increment: section; // Increment section counter
+    padding: 100px 0;
+    max-width: 1000px;
+    counter-increment: section;
 
     @media (max-width: 768px) {
       padding: 80px 0;
@@ -148,10 +146,7 @@ const GlobalStyle = createGlobalStyle`
       padding: 60px 0;
     }
   }
-  /* === END ADDED LAYOUT RULES === */
 
-
-  /* Basic heading styles */
   h1, h2, h3, h4, h5, h6 {
     margin: 0 0 10px 0;
     font-weight: 600;
@@ -159,7 +154,6 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.1;
   }
 
-  /* Specific heading styles from target */
   .big-heading {
     margin: 0;
     font-size: clamp(40px, 8vw, 80px);
@@ -170,7 +164,6 @@ const GlobalStyle = createGlobalStyle`
     font-size: clamp(40px, 8vw, 60px);
   }
 
-  /* Numbered heading style from target */
   .numbered-heading {
     display: flex;
     align-items: center;
@@ -184,7 +177,7 @@ const GlobalStyle = createGlobalStyle`
     &:before {
       position: relative;
       bottom: 4px;
-      counter-increment: section; // Use the section counter
+      counter-increment: section;
       content: '0' counter(section) '.';
       margin-right: 10px;
       color: var(--accent-color);
@@ -202,17 +195,17 @@ const GlobalStyle = createGlobalStyle`
       content: '';
       display: block;
       position: relative;
-      top: -5px; // Adjust vertical alignment
+      top: -5px;
       width: 300px;
       height: 1px;
       margin-left: 20px;
-      background-color: var(--border-color); // Use theme border color
+      background-color: var(--border-color);
 
       @media (max-width: 1080px) {
         width: 200px;
       }
       @media (max-width: 768px) {
-        width: 100%; // Take remaining width
+        width: 100%;
       }
       @media (max-width: 600px) {
         margin-left: 10px;
@@ -221,7 +214,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
 
-  /* Basic image/svg */
   img, svg {
     max-width: 100%;
     height: auto;
@@ -239,24 +231,22 @@ const GlobalStyle = createGlobalStyle`
     &.feather { fill: none; }
   }
 
-  /* Basic link styles */
   a {
-    display: inline-block; /* Added */
+    display: inline-block;
     text-decoration: none;
-    text-decoration-skip-ink: auto; /* Added */
-    color: inherit; /* Changed from accent-color */
-    position: relative; /* Added */
+    text-decoration-skip-ink: auto;
+    color: inherit;
+    position: relative;
     transition: var(--transition);
     &:hover,
     &:focus {
-      color: var(--accent-color); /* Changed from accent-active-color */
+      color: var(--accent-color);
     }
-    &.inline-link { /* Added */
+    &.inline-link {
       ${({ theme }) => theme.mixins.inlineLink};
     }
   }
 
-  /* Basic button reset */
   button {
     cursor: pointer;
     border: 0;
@@ -269,13 +259,12 @@ const GlobalStyle = createGlobalStyle`
     &:focus {
        outline: none;
     }
-    &:focus-visible { /* Added */
+    &:focus-visible {
        outline: 2px dashed var(--accent-color);
        outline-offset: 3px;
     }
   }
 
-  /* Input/Textarea styles */
   input, textarea {
     border-radius: var(--border-radius);
     outline: 0;
@@ -298,17 +287,15 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  /* Basic list reset */
   ul, ol {
     padding: 0;
     margin: 0;
     list-style: none;
   }
-  ul.fancy-list { /* Added */
+  ul.fancy-list { 
      ${({ theme }) => theme.mixins.fancyList};
   }
 
-  /* Basic paragraph styles */
   p {
     margin: 0 0 15px 0; /* Changed from 1rem */
     line-height: 1.5; /* Changed from 1.6 */
@@ -316,10 +303,10 @@ const GlobalStyle = createGlobalStyle`
     &:last-of-type {
       margin-bottom: 0;
     }
-    & > a { /* Added */
+    & > a { 
       ${({ theme }) => theme.mixins.inlineLink};
     }
-    & > code { /* Added */
+    & > code {
       background-color: var(--light-navy);
       color: var(--lightest-slate);
       font-size: var(--fz-sm);
@@ -328,7 +315,6 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  /* Blockquote */
   blockquote {
     border-left: 3px solid var(--accent-color);
     padding-left: 1rem;
@@ -338,7 +324,6 @@ const GlobalStyle = createGlobalStyle`
     color: var(--text-secondary-color);
   }
 
-  /* HR */
   hr {
     background-color: var(--border-color);
     height: 1px;
@@ -346,7 +331,6 @@ const GlobalStyle = createGlobalStyle`
     margin: 2rem 0;
   }
 
-  /* Code */
   code {
     font-family: var(--font-mono);
     font-size: var(--fz-md);
@@ -357,7 +341,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
 
-  /* Keep Skip Link */
   .skip-to-content {
     ${({ theme }) => theme.mixins.button};
     position: absolute;
@@ -384,16 +367,9 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  /* Reset section counter for main content area */
   main {
     counter-reset: section;
   }
-
-  /*
-   * Logo styles are now handled locally within Nav.tsx
-   * using StyledLogoWrapper to avoid global conflicts
-   * and manage state via React props.
-   */
 
   // {TransitionStyles};
   // {PrismStyles};
