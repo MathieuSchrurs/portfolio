@@ -129,7 +129,6 @@ const StyledLinks = styled.div`
         padding: 10px;
         color: var(--text-primary-color);
         text-decoration: none;
-        /* Transitions handled globally or on hover */
 
         &:before {
           content: '0' counter(item) '.';
@@ -155,10 +154,10 @@ interface NavProps {
   isHome: boolean;
 }
 
-const Nav: React.FC<NavProps> = ({ isHome }) => {
+const Nav: React.FC<NavProps> = () => {
   const scrollDirection = useScrollDirection({ initialDirection: 'down' });
   const [scrolledToTop, setScrolledToTop] = useState(true);
-  const prefersReducedMotion = usePrefersReducedMotion(); // Call the hook
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const [isLogoHovered, setIsLogoHovered] = useState(false);
   const handleLogoEnter = () => setIsLogoHovered(true);
@@ -181,7 +180,7 @@ const Nav: React.FC<NavProps> = ({ isHome }) => {
   const Logo = (
     <StyledLogoWrapper
       isHovered={isLogoHovered}
-      prefersReducedMotion={prefersReducedMotion} // Pass prop
+      prefersReducedMotion={prefersReducedMotion}
       onMouseEnter={handleLogoEnter}
       onMouseLeave={handleLogoLeave}
     >
@@ -195,7 +194,7 @@ const Nav: React.FC<NavProps> = ({ isHome }) => {
     <StyledHeader
       scrollDirection={scrollDirection}
       scrolledToTop={scrolledToTop}
-      prefersReducedMotion={prefersReducedMotion} // Pass prop
+      prefersReducedMotion={prefersReducedMotion}
     >
       <StyledNav>
         {Logo}

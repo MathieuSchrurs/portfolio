@@ -20,7 +20,6 @@ const InteractiveWordSpan = styled.span<{ isHovered: boolean }>`
     white-space: nowrap;
     color: transparent;
 
-    /* Theme-aware gradient */
     background-image: linear-gradient(
       to right,
       var(--accent-color),

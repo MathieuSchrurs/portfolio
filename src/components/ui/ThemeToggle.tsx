@@ -1,19 +1,15 @@
-// src/components/ui/ThemeToggle.tsx
-
 import { useState, useEffect } from 'react';
-// --- Update the import name and path ---
-import AnimatedThemeToggleIcon from './AnimatedThemeToggleIcon'; // Adjust path if necessary
+import AnimatedThemeToggleIcon from './AnimatedThemeToggleIcon';
 
 interface ThemeToggleProps {
-  className?: string; // Allow passing className for positioning/layout
-  theme?: string; // Allow initial theme override if needed
+  className?: string;
+  theme?: string;
 }
 
 const ThemeToggle: React.FC<ThemeToggleProps> = ({
   className,
   theme: initialTheme,
 }) => {
-  // Initialize state (same logic as before)
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (initialTheme === 'light' || initialTheme === 'dark') return initialTheme;
     if (typeof window !== 'undefined') {
@@ -29,7 +25,6 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
     return 'light';
   });
 
-  // Effect to apply theme class and save (same logic as before)
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('theme', theme);
@@ -38,28 +33,25 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
     }
   }, [theme]);
 
-  // Toggle function (same logic as before)
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
   };
 
-  // Define desired icon size
-  const iconSize = '20px'; // Example size (adjust as needed)
+  const iconSize = '20px';
 
   return (
-    // --- Update the rendered component name ---
     <AnimatedThemeToggleIcon
       theme={theme}
       onClick={toggleTheme}
-      className={className} // Pass className for external styling/layout
-      style={{ width: iconSize, height: iconSize }} // Set the size
+      className={className}
+      style={{ width: iconSize, height: iconSize }}
       role="button"
       tabIndex={0}
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault(); // Prevent space bar scrolling
+          e.preventDefault();
           toggleTheme();
         }
       }}

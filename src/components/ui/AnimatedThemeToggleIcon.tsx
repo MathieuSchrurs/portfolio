@@ -1,26 +1,20 @@
-// src/components/ui/AnimatedThemeToggleIcon.tsx
-
 import React from 'react';
 import styled from 'styled-components';
 
-// Define the props the component accepts
 interface AnimatedThemeToggleIconProps {
   theme: 'light' | 'dark';
-  onClick?: () => void; // Accept onClick handler
-  style?: React.CSSProperties; // Allow passing style for size etc.
-  className?: string; // Allow passing className
-  // Add accessibility props
+  onClick?: () => void;
+  style?: React.CSSProperties;
+  className?: string;
   role?: string;
   tabIndex?: number;
   'aria-label'?: string;
   onKeyDown?: (event: React.KeyboardEvent<SVGSVGElement>) => void;
 }
 
-// Define transition duration/easing
 const transitionDuration = '0.4s';
 const transitionEasing = 'ease-out';
 
-// Create the styled SVG component
 const StyledAnimatedSvg = styled.svg<Pick<AnimatedThemeToggleIconProps, 'theme'>>`
   cursor: pointer;
   stroke: ${(props) =>
@@ -35,13 +29,13 @@ const StyledAnimatedSvg = styled.svg<Pick<AnimatedThemeToggleIconProps, 'theme'>
                 fill ${transitionDuration} ${transitionEasing};
     r: ${(props) => (props.theme === 'light' ? 5 : 9)};
     fill: ${(props) =>
-      props.theme === 'light' ? 'var(--sun-color)' : 'var(--moon-color)'};
+    props.theme === 'light' ? 'var(--sun-color)' : 'var(--moon-color)'};
   }
 
   .mask-circle {
     transition: transform ${transitionDuration} ${transitionEasing};
     transform: ${(props) =>
-      props.theme === 'light' ? 'translate(18px, -6px)' : 'translate(0px, 0px)'};
+    props.theme === 'light' ? 'translate(18px, -6px)' : 'translate(0px, 0px)'};
   }
 
   .icon-rays {
@@ -50,7 +44,6 @@ const StyledAnimatedSvg = styled.svg<Pick<AnimatedThemeToggleIconProps, 'theme'>
   }
 `;
 
-// Rename the component function
 const AnimatedThemeToggleIcon: React.FC<AnimatedThemeToggleIconProps> = ({
   theme,
   onClick,
@@ -81,7 +74,7 @@ const AnimatedThemeToggleIcon: React.FC<AnimatedThemeToggleIconProps> = ({
       strokeLinejoin="round"
       aria-hidden={!ariaLabel}
     >
-      <mask id="theme-toggle-mask-css"> {/* Updated mask ID slightly */}
+      <mask id="theme-toggle-mask-css">
         <rect x="0" y="0" width="100%" height="100%" fill="white" />
         <circle className="mask-circle" cx="12" cy="4" r="9" fill="black" />
       </mask>
@@ -105,5 +98,4 @@ const AnimatedThemeToggleIcon: React.FC<AnimatedThemeToggleIconProps> = ({
   );
 };
 
-// Update the export name
 export default AnimatedThemeToggleIcon;

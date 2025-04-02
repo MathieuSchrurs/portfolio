@@ -10,10 +10,10 @@ const CVDownload: React.FC<CVDownloadProps> = ({ className = '' }) => {
         <StyledButtonLink
             href="/CV Mathieu Schrurs.pdf"
             download="Mathieu_Schrurs_CV.pdf"
-            showIcon={true} // Explicitly show the icon for the CV button
-            className={className} // Pass down any className received
+            showIcon={true}
+            className={className}
         >
-            CV {/* Text specific to this button */}
+            CV
         </StyledButtonLink>
     );
 };

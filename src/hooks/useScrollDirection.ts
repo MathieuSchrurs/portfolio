@@ -12,22 +12,19 @@ interface ScrollDirectionOptions {
 }
 
 const useScrollDirection = ({
-  initialDirection = 'up', // Default to 'up' like target seems to imply initially
+  initialDirection = 'up',
   thresholdPixels = 0,
   off = false,
 }: ScrollDirectionOptions = {}): ScrollDirection => {
   const [scrollDir, setScrollDir] = useState<ScrollDirection>(initialDirection);
 
   useEffect(() => {
-    // Store the last scroll position
     let lastScrollY = window.pageYOffset;
-    // Store whether ticking is processing
     let ticking = false;
 
     const updateScrollDir = () => {
       const scrollY = window.pageYOffset;
 
-      // Ignore scroll events that are too small to matter
       if (Math.abs(scrollY - lastScrollY) < thresholdPixels) {
         ticking = false;
         return;
@@ -45,17 +42,14 @@ const useScrollDirection = ({
       }
     };
 
-    // Add or remove the scroll listener
     if (!off) {
       window.addEventListener('scroll', onScroll);
     } else {
-      // Reset scroll direction if 'off' is true
       setScrollDir(initialDirection);
     }
 
-    // Clean up the listener on unmount
     return () => window.removeEventListener('scroll', onScroll);
-  }, [initialDirection, thresholdPixels, off]); // Re-run effect if options change
+  }, [initialDirection, thresholdPixels, off]);
 
   return scrollDir;
 };

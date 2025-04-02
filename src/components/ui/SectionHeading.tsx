@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface SectionHeadingProps {
-    sectionNumber: string;
-    children: React.ReactNode;
-    className?: string;
+  sectionNumber: string;
+  children: React.ReactNode;
+  className?: string;
 }
 
 const StyledHeading = styled.h2<Pick<SectionHeadingProps, 'sectionNumber'>>`
@@ -58,15 +58,15 @@ const StyledHeading = styled.h2<Pick<SectionHeadingProps, 'sectionNumber'>>`
 `;
 
 const SectionHeading: React.FC<SectionHeadingProps> = ({
-    sectionNumber,
-    children,
-    className,
+  sectionNumber,
+  children,
+  className,
 }) => {
-    return (
-        <StyledHeading sectionNumber={sectionNumber} className={className}>
-            {children}
-        </StyledHeading>
-    );
+  return (
+    <StyledHeading sectionNumber={sectionNumber} className={className}>
+      {children}
+    </StyledHeading>
+  );
 };
 
 export default SectionHeading;

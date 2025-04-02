@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// Create a styled component for the icons
 const StyledIconLink = styled.a`
   color: var(--text-secondary-color); // Secondary text color for normal state
   transition: var(--transition);

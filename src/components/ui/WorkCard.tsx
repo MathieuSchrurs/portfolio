@@ -7,7 +7,7 @@ const StyledProjectCard = styled.div`
   background-color: var(--project-card-bg);
   color: var(--text-secondary-color);
   border-radius: var(--border-radius);
-  padding: 1.75rem; /* Adjusted padding slightly */
+  padding: 1.75rem;
   transition: var(--transition);
   position: relative;
   display: flex;
@@ -25,19 +25,16 @@ const StyledProjectCard = styled.div`
 
 const StyledCardHeader = styled.div`
   display: flex;
-  justify-content: space-between; /* Pushes title and links apart */
-  align-items: flex-start; /* Aligns items to the top */
-  margin-bottom: 15px; /* Space below the header area */
+  justify-content: space-between; 
+  align-items: flex-start; 
+  margin-bottom: 15px; 
 `;
 
 const StyledProjectLinks = styled.div`
-  /* position: absolute; REMOVED */
-  /* top: 1.25rem; REMOVED */
-  /* right: 1.75rem; REMOVED */
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  flex-shrink: 0; /* Prevent icons from shrinking if title is very long */
+  flex-shrink: 0;
 `;
 
 const StyledIconLink = styled.a`
@@ -58,12 +55,11 @@ const StyledIconLink = styled.a`
 `;
 
 const StyledTitle = styled.h3`
-  margin: 0; /* Remove default margins */
-  margin-right: 10px; /* Add space between title and icons */
+  margin: 0;
+  margin-right: 10px;
   color: var(--text-primary-color);
   font-size: var(--fz-xxl);
   font-weight: 600;
-  /* Title will naturally wrap if needed */
 `;
 
 const StyledDescription = styled.div`

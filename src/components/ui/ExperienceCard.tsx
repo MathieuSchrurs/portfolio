@@ -32,7 +32,6 @@ const StyledRange = styled.p`
   margin-bottom: 1rem;
 `;
 
-// --- Updated StyledDescription ---
 const StyledDescription = styled.p`
   font-family: var(--font-mono);
   font-size: var(--fz-sm); /* Increased from 0.8rem (14px) */
@@ -43,7 +42,6 @@ const StyledDescription = styled.p`
   /* -webkit-line-clamp: 4; */
   /* -webkit-box-orient: vertical; */
 `;
-// --- End Update ---
 
 interface ExperienceCardProps {
   title: string;

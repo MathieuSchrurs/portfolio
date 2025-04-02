@@ -22,10 +22,10 @@ const StyledSocialList = styled.ul`
   }
 
   li {
-    margin-bottom: 10px; /* Add consistent spacing between icons */
+    margin-bottom: 10px;
     
     &:last-of-type {
-      margin-bottom: 20px; /* Keep your existing spacing before the line */
+      margin-bottom: 20px;
     }
   }
 `;
@@ -39,7 +39,6 @@ const Social: React.FC<{ isHome: boolean }> = ({ isHome }) => {
         {socialMedia &&
           socialMedia.map(({ url, name }, i) => (
             <li key={i}>
-              {/* Use SocialIcon directly */}
               <SocialIcon
                 platform={name.toLowerCase() as any}
                 url={url}

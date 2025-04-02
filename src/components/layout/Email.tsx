@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import config from '@config'; // Import config
-import Side from './Side'; // Import Side component
+import config from '@config';
+import Side from './Side';
 
 const StyledLinkWrapper = styled.div`
   display: flex;
@@ -9,7 +9,6 @@ const StyledLinkWrapper = styled.div`
   align-items: center;
   position: relative;
 
-  /* Style the line like the target */
   &:after {
     content: '';
     display: block;
@@ -23,23 +22,23 @@ const StyledLinkWrapper = styled.div`
     margin: 20px auto;
     padding: 10px;
     font-family: var(--font-mono);
-    font-size: var(--fz-xxs); // Use font size variable
+    font-size: var(--fz-xxs); 
     line-height: var(--fz-lg);
     letter-spacing: 0.1em;
     writing-mode: vertical-rl;
-    color: var(--light-slate); // Match color
-    text-decoration: none; // Remove underline
+    color: var(--light-slate); 
+    text-decoration: none;
 
     &:hover,
     &:focus {
-      transform: translateY(-3px); // Add hover effect
-      color: var(--accent-color); // Use theme accent color
+      transform: translateY(-3px); 
+      color: var(--accent-color);
     }
   }
 `;
 
 interface EmailProps {
-  isHome: boolean; // Prop passed from Layout
+  isHome: boolean;
 }
 
 const Email: React.FC<EmailProps> = ({ isHome }) => (

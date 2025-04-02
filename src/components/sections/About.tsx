@@ -1,4 +1,3 @@
-// src/components/sections/About.tsx
 import React from "react";
 import styled from "styled-components";
 import {

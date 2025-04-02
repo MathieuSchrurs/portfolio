@@ -1,15 +1,9 @@
-/**
- * From: https://www.joshwcomeau.com/snippets/react-hooks/use-prefers-reduced-motion/
- * Adapted for TypeScript
- */
 import { useState, useEffect } from 'react';
 
 const QUERY = '(prefers-reduced-motion: no-preference)';
 const isRenderingOnServer = typeof window === 'undefined';
 
 const getInitialState = (): boolean => {
-  // For initial server render, assume no preference.
-  // This value will be overwritten on the client.
   return isRenderingOnServer ? false : !window.matchMedia(QUERY).matches;
 };
 
@@ -24,8 +18,6 @@ function usePrefersReducedMotion(): boolean {
       setPrefersReducedMotion(!event.matches);
     };
 
-    // Add listener
-    // Use addEventListener for modern browsers, addListener for older ones
     if (mediaQueryList.addEventListener) {
       mediaQueryList.addEventListener('change', listener);
     } else {

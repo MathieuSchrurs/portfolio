@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 // Import hooks and utils later if needed for transitions
 // import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -6,7 +6,7 @@ import styled from 'styled-components';
 // import { usePrefersReducedMotion } from '@hooks';
 
 interface StyledSideElementProps {
-    orientation: 'left' | 'right';
+  orientation: 'left' | 'right';
 }
 
 const StyledSideElement = styled.div<StyledSideElementProps>`
@@ -29,30 +29,29 @@ const StyledSideElement = styled.div<StyledSideElementProps>`
 `;
 
 interface SideProps {
-    children: React.ReactNode;
-    isHome: boolean; // To potentially delay animation on home page
-    orientation: 'left' | 'right';
+  children: React.ReactNode;
+  isHome: boolean;
+  orientation: 'left' | 'right';
 }
 
-const Side: React.FC<SideProps> = ({ children, isHome, orientation }) => {
-    // Add state and effects for animations later if needed
-    // const [isMounted, setIsMounted] = useState(!isHome);
-    // const prefersReducedMotion = usePrefersReducedMotion();
+const Side: React.FC<SideProps> = ({ children, orientation }) => {
+  // Add state and effects for animations later if needed
+  // const [isMounted, setIsMounted] = useState(!isHome);
+  // const prefersReducedMotion = usePrefersReducedMotion();
 
-    // useEffect(() => {
-    //   if (!isHome || prefersReducedMotion) {
-    //     return;
-    //   }
-    //   const timeout = setTimeout(() => setIsMounted(true), loaderDelay);
-    //   return () => clearTimeout(timeout);
-    // }, [isHome, prefersReducedMotion]);
+  // useEffect(() => {
+  //   if (!isHome || prefersReducedMotion) {
+  //     return;
+  //   }
+  //   const timeout = setTimeout(() => setIsMounted(true), loaderDelay);
+  //   return () => clearTimeout(timeout);
+  // }, [isHome, prefersReducedMotion]);
 
-    return (
-        <StyledSideElement orientation={orientation}>
-            {/* Add TransitionGroup wrapper later if adding animations */}
-            {children}
-        </StyledSideElement>
-    );
+  return (
+    <StyledSideElement orientation={orientation}>
+      {children}
+    </StyledSideElement>
+  );
 };
 
 export default Side;
