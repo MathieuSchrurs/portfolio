@@ -1,7 +1,7 @@
+// src/components/sections/About.tsx
 import React from "react";
 import styled from "styled-components";
 import {
-  FaJsSquare, // Keep as it's potentially used if JS skill added back
   FaHtml5,
   FaReact,
   FaNodeJs,
@@ -13,6 +13,7 @@ import {
   SiTailwindcss,
   SiDotnet,
 } from 'react-icons/si';
+import SectionHeading from '../ui/SectionHeading';
 
 interface Skill {
   name: string;
@@ -31,55 +32,6 @@ const StyledAboutSection = styled.section`
 
   @media (max-width: 480px) {
     padding: 60px 0;
-  }
-`;
-
-const StyledHeading = styled.h2`
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin: 10px 0 40px;
-  width: 100%;
-  font-size: clamp(26px, 5vw, var(--fz-heading));
-  color: var(--text-primary-color);
-  white-space: nowrap;
-  font-family: var(--font-sans);
-
-  &:before {
-    position: relative;
-    bottom: 4px;
-    content: "01.";
-    margin-right: 10px;
-    color: var(--accent-color);
-    font-family: var(--font-mono);
-    font-size: clamp(var(--fz-md), 3vw, var(--fz-xl));
-    font-weight: 400;
-
-    @media (max-width: 480px) {
-      margin-bottom: -3px;
-      margin-right: 5px;
-    }
-  }
-
-  &:after {
-    content: "";
-    display: block;
-    position: relative;
-    top: -5px;
-    width: 300px;
-    height: 1px;
-    margin-left: 20px;
-    background-color: var(--border-color);
-
-    @media (max-width: 1080px) {
-      width: 200px;
-    }
-    @media (max-width: 768px) {
-      width: 100%;
-    }
-    @media (max-width: 600px) {
-      margin-left: 10px;
-    }
   }
 `;
 
@@ -178,7 +130,6 @@ const StyledSkillsListRow2 = styled.ul`
   }
 `;
 
-
 const StyledPic = styled.div`
   position: relative;
   max-width: 300px;
@@ -197,26 +148,23 @@ const StyledPic = styled.div`
     max-width: 250px;
   }
 
-  .wrapper {
+ .wrapper {
     position: relative;
     display: block;
     width: 100%;
     border-radius: var(--border-radius);
-    background-color: var(--accent-color);
     transition: var(--transition);
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
 
     &:hover,
     &:focus-within {
       outline: 0;
       transform: translate(-4px, -4px);
+      box-shadow: 4px 4px 0 0 var(--accent-color);
 
       &:after {
         transform: translate(8px, 8px);
-      }
-
-      .img {
-        filter: none;
-        mix-blend-mode: normal;
       }
     }
 
@@ -239,11 +187,11 @@ const StyledPic = styled.div`
     position: relative;
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
     border-radius: var(--border-radius);
-    filter: grayscale(100%) contrast(1);
-    mix-blend-mode: multiply;
     transition: var(--transition);
+    object-fit: cover;
+    object-position: center 20%;
   }
 `;
 
@@ -254,7 +202,6 @@ const About = () => {
     { name: "React / Next.js", Icon: FaReact, color: '#61DAFB' },
     { name: "Node.js", Icon: FaNodeJs, color: '#339933' },
     { name: "HTML & (S)CSS", Icon: FaHtml5, color: '#E34F26' },
-    // --- Skills for second row ---
     { name: "Tailwind CSS", Icon: SiTailwindcss, color: '#06B6D4' },
     { name: "Docker", Icon: FaDocker, color: '#2496ED' },
     { name: "Git & GitHub", Icon: FaGitAlt, color: '#F05032' },
@@ -265,16 +212,17 @@ const About = () => {
 
   return (
     <StyledAboutSection id="about">
-      <StyledHeading>About Me</StyledHeading>
+      <SectionHeading sectionNumber="1">About Me</SectionHeading>
       <StyledAboutContent>
         <StyledPic>
           <div className="wrapper">
             <img
               className="img"
-              src="/images/your-photo.jpg"
+              src="/images/profile-picture.jpg"
               alt="Headshot of Mathieu Schrurs"
               width="300"
               height="300"
+              loading="lazy"
             />
           </div>
         </StyledPic>
@@ -282,21 +230,18 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! I'm Mathieu, a Software Engineer based in Ghent, Belgium.
-              I thrive on the process of creation, building high-quality,
-              performant, and user-centric digital experiences – whether
-              that's bringing a dynamic website to life or architecting a
-              comprehensive web application.
+              Hello! I'm Mathieu, a Software Engineer in Ghent, Belgium, passionate
+              about creating high-quality, performant, and user-centric digital
+              experiences. My journey started with C# .NET, fueling a drive to
+              build robust solutions.
             </p>
             <p>
-              My journey into development started with a deep dive into the C# .NET
-              ecosystem. That foundation sparked a passion for building robust
-              solutions, and I've since expanded my expertise significantly.
-              I've had the opportunity to grow through hands-on experience,
-              tackling challenges like [mention a specific challenging project or technical achievement]
-              and contributing to projects such as [mention another specific project type or outcome].
-              This journey has led me to embrace technologies like React and Next.js
-              alongside my .NET skills.
+              Through hands-on experience tackling challenges like designing and
+              implementing an interactive Blazor dashboard to streamline issue prioritization,
+              and developing key features for a C#/.NET stock management web application
+              using JavaScript for the frontend. Building on my strong .NET foundation,
+              this journey has led me to appreciate and adopt complementary frontend tools
+              like React and Next.js, rounding out my capabilities for full-stack development.
             </p>
             <p>
               At the core of my work is a commitment to craftsmanship – writing

@@ -92,7 +92,7 @@ const createFontFaces = (family: FontDefinition, style = "normal") => {
              url(${woff}) format('woff');
         font-weight: ${fontWeight};
         font-style: ${style};
-        font-display: auto; /* Consider 'swap' for better perceived performance */
+        font-display: swap;
       }
     `;
   }

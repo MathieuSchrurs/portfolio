@@ -68,7 +68,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--bg-color);
     color: var(--text-secondary-color); /* Default text color */
     font-family: var(--font-sans); /* Use Calibre */
-    font-size: var(--fz-xl); /* Use target's base size */
+    font-size: var(--fz-lg); /* Use target's base size */
     line-height: 1.3; /* Use target's base line-height */
     transition: background-color 0.3s ease, color 0.3s ease;
 

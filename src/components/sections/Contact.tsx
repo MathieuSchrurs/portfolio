@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import config from '@config';
 
 const StyledContactSection = styled.section`
   max-width: 600px;
@@ -56,7 +57,7 @@ const Contact = () => {
         feel free to reach out!
       </p>
       <StyledEmailLink
-        href="mailto:mathieu@schrurs.be"
+        href={`mailto:${config.email}`}
         className="email-link"
       >
         Say Hello

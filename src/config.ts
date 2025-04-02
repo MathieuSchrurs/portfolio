@@ -105,35 +105,26 @@ export default {
     },
   ],
 
-  projects: [
-    {
-      title: 'Project One',
-      description:
-        'A responsive web application built with React and Firebase...',
-      tags: ['React', 'Firebase', 'Styled Components'],
-      liveUrl: 'https://project-one.example.com',
-      codeUrl: 'https://github.com/yourusername/project-one',
-    },
-    {
-      title: 'E-commerce Platform',
-      description:
-        'Full-stack e-commerce site featuring product browsing...',
-      tags: ['Next.js', 'MongoDB', 'Stripe'],
-      liveUrl: 'https://project-two.example.com',
-      codeUrl: 'https://github.com/yourusername/project-two',
-    },
-    {
-      title: 'Finance Tracker Dashboard',
-      description: 'Data visualization dashboard using D3.js...',
-      tags: ['React', 'D3.js', 'Express'],
-      liveUrl: 'https://project-three.example.com',
-      codeUrl: 'https://github.com/yourusername/project-three',
-    },
-    {
-      title: 'Dev Workflow CLI',
-      description: 'A command-line interface tool built with Node.js...',
-      tags: ['Node.js', 'TypeScript', 'CLI'],
-      codeUrl: 'https://github.com/yourusername/project-four',
-    },
-  ],
+ projects: [
+  {
+    title: 'Personal Portfolio Website',
+    description:
+      'The site you are currently viewing! Built with React, TypeScript, and styled-components, featuring theme switching and responsive design.',
+    tags: ['React', 'TypeScript', 'Styled Components', 'Vite'],
+    liveUrl: 'https://mathieuschrurs.com',
+    codeUrl: 'https://github.com/MathieuSchrurs/portfolio', // Link to this repo
+  },
+  {
+    title: 'Internal Issue Tracking Dashboard',
+    description:
+      'Developed an in-house Blazor application during an internship to provide clear visibility on issue status and priority, improving team workflow.',
+    tags: ['Blazor', '.NET', 'C#', 'Web APIs', 'Entity Framework', 'Azure'],
+  },
+  {
+    title: 'Stock Management Web App',
+    description:
+      'Created a web application for a purchasing department to manage and view stock levels, utilizing a C# backend and JavaScript frontend.',
+    tags: ['C#', '.NET', 'JavaScript', 'HTML', 'CSS', 'SQL Server'],
+  },
+],
 };
