@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import ExperienceCard from '../ui/ExperienceCard';
 import config from '@config';

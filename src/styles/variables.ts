@@ -5,7 +5,7 @@ const variables = css`
     /* Dark Theme Colours */
     --dark-navy: #020c1b; /* Darkest background */
     --navy: #0a192f; /* Main background */
-    --light-navy: #112240; /* Lighter background elements (cards) */
+    --light-navy: #112240; /* Lighter background elements (cards), Used for dark hover */
     --lightest-navy: #233554; /* Lightest background elements (hover) */
     --navy-shadow: rgba(2, 12, 27, 0.7);
     --dark-slate: #495670; /* Darker text/borders */
@@ -27,6 +27,7 @@ const variables = css`
     --light-theme-accent-text: #ffffff; /* Accent text color */
     --light-theme-header-bg: rgba(245, 245, 245, 0.85); /* Header background */
     --light-theme-shadow: rgba(100, 100, 100, 0.1); /* Shadow color */
+    --light-theme-accent-tint: rgba(139, 92, 246, 0.1);
 
     /* Logo Colors */
     --logo-color-default-light: #000000; /* Black for light mode */
@@ -62,7 +63,7 @@ const variables = css`
 
     /* Theme Toggle Variables */
     --toggle-background-dark: #303030;
-    --toggle-background-light: #ebebeb;
+    --toggle-background-light: #ebebeb; /* Used for light hover */
     --sun-color: #ffcc00;
     --moon-color: #ade8f0;
   }
@@ -81,10 +82,12 @@ const variables = css`
     --accent-text-color: var(--dark-navy);
     --accent-tint-color: var(--green-tint);
     --toggle-bg: var(--toggle-background-dark);
-    --logo-hover-color: var(--logo-color-hover-dark); /* Green for hover */
-    --logo-default-color: var(--logo-color-default-dark); /* White for default */
-    --gradient-middle-color: #64ffda; /* Lighter green middle */
-    --gradient-end-color: #005F43; /* Darker green end */
+    --logo-hover-color: var(--logo-color-hover-dark);
+    --logo-default-color: var(--logo-color-default-dark);
+    --gradient-middle-color: #64ffda;
+    --gradient-end-color: #005F43;
+    /* --- Hover Variable for Dark Mode --- */
+    --skill-item-hover-bg: var(--light-navy);
   }
 
   /* Light Mode Variables */
@@ -99,12 +102,14 @@ const variables = css`
     --accent-color: var(--light-theme-accent);
     --accent-active-color: var(--light-theme-accent-active);
     --accent-text-color: var(--light-theme-accent-text);
-    --accent-tint-color: rgba(139, 92, 246, 0.1); /* Light accent tint */
+    --accent-tint-color: var(--light-theme-accent-tint);
     --toggle-bg: var(--toggle-background-light);
-    --logo-hover-color: var(--logo-color-hover-light); /* Purple for hover */
-    --logo-default-color: var(--logo-color-default-light); /* Black for default */
-    --gradient-middle-color: #a78bfa; 
+    --logo-hover-color: var(--logo-color-hover-light);
+    --logo-default-color: var(--logo-color-default-light);
+    --gradient-middle-color: #a78bfa;
     --gradient-end-color: var(--slate);
+    /* --- Hover Variable for Light Mode --- */
+    --skill-item-hover-bg: var(--toggle-background-light);
   }
 `;
 

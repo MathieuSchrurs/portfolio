@@ -209,7 +209,7 @@ const Nav: React.FC<NavProps> = ({ isHome }) => {
       onMouseEnter={handleLogoEnter}
       onMouseLeave={handleLogoLeave}
     >
-      <a href="/" aria-label="home">
+      <a href="/#hero" aria-label="home">
         <AnimatedLogo />
       </a>
     </StyledLogoWrapper>

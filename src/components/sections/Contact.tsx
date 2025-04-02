@@ -27,7 +27,7 @@ const StyledPreHeading = styled.h2`
   white-space: nowrap;
 
   &:before {
-    content: '04.';
+    content: '05.';
     margin-right: 10px;
   }
 `;
@@ -45,22 +45,22 @@ const StyledEmailLink = styled.a`
 `;
 
 const Contact = () => {
-    return (
-        <StyledContactSection id="contact">
-            <StyledPreHeading>What's Next?</StyledPreHeading>
-            <StyledTitle>Get In Touch</StyledTitle>
-            <p style={{ color: 'var(--text-secondary-color)' }}>
-                Although I'm not currently looking for new opportunities, my inbox is always open.
-                Whether you have a question or just want to say hi, I'll try my best to get back to you!
-            </p>
-            <StyledEmailLink
-                href="mailto:your.email@example.com" // Update with your email
-                className="email-link"
-            >
-                Say Hello
-            </StyledEmailLink>
-        </StyledContactSection>
-    );
+  return (
+    <StyledContactSection id="contact">
+      <StyledPreHeading>What's Next?</StyledPreHeading>
+      <StyledTitle>Get In Touch</StyledTitle>
+      <p style={{ color: 'var(--text-secondary-color)' }}>
+        Although I'm not currently looking for new opportunities, my inbox is always open.
+        Whether you have a question or just want to say hi, I'll try my best to get back to you!
+      </p>
+      <StyledEmailLink
+        href="mailto:your.email@example.com" // Update with your email
+        className="email-link"
+      >
+        Say Hello
+      </StyledEmailLink>
+    </StyledContactSection>
+  );
 };
 
 export default Contact;

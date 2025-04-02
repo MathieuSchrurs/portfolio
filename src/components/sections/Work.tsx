@@ -26,7 +26,7 @@ const StyledHeading = styled.h2`
   &:before {
     position: relative;
     bottom: 4px;
-    content: '03.';
+    content: '04.';
     margin-right: 10px;
     color: var(--accent-color);
     font-family: var(--font-mono);

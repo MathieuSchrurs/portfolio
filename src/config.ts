@@ -31,6 +31,10 @@ export default {
       url: '/#experience',
     },
     {
+      name: 'Skills',
+      url: '/#skills',
+    },
+    {
       name: 'Work',
       url: '/#work',
     },
@@ -41,17 +45,13 @@ export default {
   ],
 
   colors: {
-    // Reference the CSS variables directly in styled-components
-    // Or define JS constants if needed elsewhere, but CSS vars are preferred
-    green: '#64ffda', // Example from target
-    navy: '#0a192f', // Example from target
-    darkNavy: '#020c1b', // Example from target
-    // Add light theme colors if needed in JS
+    green: '#64ffda',
+    navy: '#0a192f',
+    darkNavy: '#020c1b',
     lightAccent: '#8b5cf6',
   },
 
-  // ScrollReveal config (optional, can add later)
-  srConfig: (delay = 200, viewFactor = 0.25) => ({
+  srConfig: (delay = 100, viewFactor = 0.25) => ({
     origin: 'bottom',
     distance: '20px',
     duration: 500,

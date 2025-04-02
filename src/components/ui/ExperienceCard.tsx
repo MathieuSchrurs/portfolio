@@ -48,22 +48,22 @@ interface ExperienceCardProps {
     company: string;
     range: string;
     description: string;
-  }
-  
-  const ExperienceCard: React.FC<ExperienceCardProps> = ({
+}
+
+const ExperienceCard: React.FC<ExperienceCardProps> = ({
     title,
     company,
     range,
     description,
-  }) => {
+}) => {
     return (
-      <StyledExperienceCard>
-        <StyledTitle>{title}</StyledTitle>
-        <StyledCompany>{company}</StyledCompany>
-        <StyledRange>{range}</StyledRange>
-        <StyledDescription>{description}</StyledDescription>
-      </StyledExperienceCard>
+        <StyledExperienceCard>
+            <StyledTitle>{title}</StyledTitle>
+            <StyledCompany>{company}</StyledCompany>
+            <StyledRange>{range}</StyledRange>
+            <StyledDescription>{description}</StyledDescription>
+        </StyledExperienceCard>
     );
-  };
-  
-  export default ExperienceCard;
+};
+
+export default ExperienceCard;
