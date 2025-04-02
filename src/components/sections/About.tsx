@@ -1,21 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  FaJsSquare,
+  FaJsSquare, // Keep as it's potentially used if JS skill added back
   FaHtml5,
-  FaCss3Alt,
   FaReact,
   FaNodeJs,
   FaDocker,
   FaGitAlt,
-  FaGithub,
 } from 'react-icons/fa';
 import {
   SiTypescript,
   SiTailwindcss,
   SiDotnet,
 } from 'react-icons/si';
-import { TbBrandNextjs } from 'react-icons/tb';
 
 interface Skill {
   name: string;
@@ -23,7 +20,6 @@ interface Skill {
   color?: string;
 }
 
-// Styled components
 const StyledAboutSection = styled.section`
   margin: 0 auto;
   max-width: 1000px;
@@ -287,24 +283,31 @@ const About = () => {
           <div>
             <p>
               Hello! I'm Mathieu, a Software Engineer based in Ghent, Belgium.
-              I specialize in building (and occasionally designing)
-              high-quality, performant, and user-centric digital experiences,
-              from dynamic websites to comprehensive web applications.
+              I thrive on the process of creation, building high-quality,
+              performant, and user-centric digital experiences – whether
+              that's bringing a dynamic website to life or architecting a
+              comprehensive web application.
             </p>
             <p>
-              My journey into the world of development began with my studies as a C# .Net developer.
-              Since then, I've gained hands-on experience developing robust
-              solutions, including [mention 1-2 specific types of projects or
-              achievements] primarily using technologies like
-              React and .NET.
+              My journey into development started with a deep dive into the C# .NET
+              ecosystem. That foundation sparked a passion for building robust
+              solutions, and I've since expanded my expertise significantly.
+              I've had the opportunity to grow through hands-on experience,
+              tackling challenges like [mention a specific challenging project or technical achievement]
+              and contributing to projects such as [mention another specific project type or outcome].
+              This journey has led me to embrace technologies like React and Next.js
+              alongside my .NET skills.
             </p>
             <p>
-              I'm passionate about writing clean, maintainable code and building
-              things the right way. I value collaboration and clear
-              communication – being a native Dutch speaker and fluent in English
-              helps me effectively bridge the gap between technical possibilities
-              and business needs. I'm comfortable working within agile
-              methodologies to deliver iteratively and efficiently.
+              At the core of my work is a commitment to craftsmanship – writing
+              clean, maintainable code isn't just good practice, it's essential
+              for building things that last and evolve. I believe strongly in
+              collaboration and clear communication; being a native Dutch speaker
+              fluent in English allows me to effectively bridge the gap between
+              technical implementation and the real-world needs of users and
+              businesses. I enjoy the iterative nature of agile development,
+              constantly learning and refining solutions to deliver the best
+              possible outcome.
             </p>
 
             <StyledTechStackSubtitle>

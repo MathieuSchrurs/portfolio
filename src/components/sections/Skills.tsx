@@ -1,4 +1,3 @@
-// src/components/sections/Skills.tsx
 import React from 'react';
 import styled from 'styled-components';
 import {
@@ -20,25 +19,19 @@ import {
   SiTypescript,
   SiTailwindcss,
   SiDotnet,
-  SiExpress,
-  SiMongodb,
   SiPostgresql,
   SiAmazon,
   SiVite,
-  SiWebpack,
-  SiJira,
   SiBlazor,
 } from 'react-icons/si';
 import { TbBrandNextjs } from 'react-icons/tb';
 
-// --- Update Skill Interface ---
 interface Skill {
   name: string;
   Icon: React.ComponentType<any>;
-  color?: string; // Add optional color property
+  color?: string;
 }
 
-// --- Styled Components (Keep as before, ensuring svg has no color rule) ---
 const StyledSkillsSection = styled.section`
   margin: 0 auto;
   max-width: 1000px;
@@ -128,7 +121,6 @@ const SkillCategory = styled.div`
         width: 18px;
         height: 18px;
         margin-right: 10px;
-        /* NO color rule here */
         flex-shrink: 0;
       }
     }
@@ -137,44 +129,41 @@ const SkillCategory = styled.div`
 
 
 const Skills = () => {
-    // --- ADD BRAND COLORS TO skillData ---
     const skillData: Record<string, Skill[]> = {
         languages: [
-            { name: 'C#', Icon: SiDotnet, color: '#512BD4' }, // .NET Purple
-            { name: 'JavaScript', Icon: FaJsSquare, color: '#F7DF1E' }, // Yellow
-            { name: 'TypeScript', Icon: SiTypescript, color: '#3178C6' }, // Blue
-            { name: 'HTML5', Icon: FaHtml5, color: '#E34F26' }, // Orange
-            { name: 'CSS3 / SCSS', Icon: FaCss3Alt, color: '#1572B6' }, // Blue (SCSS is Pink #C6538C)
+            { name: 'C#', Icon: SiDotnet, color: '#512BD4' },
+            { name: 'JavaScript', Icon: FaJsSquare, color: '#F7DF1E' },
+            { name: 'TypeScript', Icon: SiTypescript, color: '#3178C6' },
+            { name: 'HTML5', Icon: FaHtml5, color: '#E34F26' },
+            { name: 'CSS3 / SCSS', Icon: FaCss3Alt, color: '#1572B6' },
         ],
         frontend: [
-            { name: 'React', Icon: FaReact, color: '#61DAFB' }, // Light Blue
-            { name: 'Next.js', Icon: TbBrandNextjs, color: '#000000' }, // Black (use var(--text-primary-color) for theme aware?)
-            { name: 'Tailwind CSS', Icon: SiTailwindcss, color: '#06B6D4' }, // Teal
-            { name: 'Blazor', Icon: SiBlazor, color: '#512BD4' }, // .NET Purple
-            { name: 'Angular', Icon: FaAngular, color: '#DD0031' }, // Red
+            { name: 'React', Icon: FaReact, color: '#61DAFB' },
+            { name: 'Next.js', Icon: TbBrandNextjs, color: '#000000' },
+            { name: 'Tailwind CSS', Icon: SiTailwindcss, color: '#06B6D4' },
+            { name: 'Blazor', Icon: SiBlazor, color: '#512BD4' },
+            { name: 'Angular', Icon: FaAngular, color: '#DD0031' },
         ],
         backend: [
             { name: '.NET (Core / Framework)', Icon: SiDotnet, color: '#512BD4' },
-            { name: 'Node.js', Icon: FaNodeJs, color: '#339933' }, // Green
-            { name: 'REST APIs', Icon: FaServer }, // No specific color, will inherit grey
+            { name: 'Node.js', Icon: FaNodeJs, color: '#339933' },
+            { name: 'REST APIs', Icon: FaServer },
         ],
         databases: [
-            { name: 'SQL Server', Icon: FaDatabase, color: '#CC2927' }, // Red (approx MS SQL color)
-            { name: 'PostgreSQL', Icon: SiPostgresql, color: '#4169E1' }, // Blue
-            { name: 'Entity Framework', Icon: FaDatabase }, // No specific color
+            { name: 'SQL Server', Icon: FaDatabase, color: '#CC2927' },
+            { name: 'PostgreSQL', Icon: SiPostgresql, color: '#4169E1' },
+            { name: 'Entity Framework', Icon: FaDatabase },
         ],
         cloudDevOps: [
-            { name: 'Docker', Icon: FaDocker, color: '#2496ED' }, // Blue
-            { name: 'Azure (Basic)', Icon: FaMicrosoft, color: '#0078D4' }, // Microsoft Blue
-            { name: 'AWS (Basic)', Icon: SiAmazon, color: '#FF9900' }, // Orange
-            { name: 'CI/CD (GitHub Actions)', Icon: FaGithub, color: '#181717' }, // Black (use var(--text-primary-color)?)
+            { name: 'Docker', Icon: FaDocker, color: '#2496ED' },
+            { name: 'Azure (Basic)', Icon: FaMicrosoft, color: '#0078D4' },
+            { name: 'AWS (Basic)', Icon: SiAmazon, color: '#FF9900' },
+            { name: 'CI/CD (GitHub Actions)', Icon: FaGithub, color: '#181717' },
         ],
         tools: [
-            { name: 'Git / GitHub', Icon: FaGitAlt, color: '#F05032' }, // Git Orange
-            { name: 'Vite', Icon: SiVite, color: '#646CFF' }, // Purple
-            { name: 'Figma (Basic)', Icon: FaFigma, color: '#F24E1E' }, // Orange/Red
-            // { name: 'Webpack', Icon: SiWebpack, color: '#8DD6F9' },
-            // { name: 'Jira', Icon: SiJira, color: '#0052CC' },
+            { name: 'Git / GitHub', Icon: FaGitAlt, color: '#F05032' },
+            { name: 'Vite', Icon: SiVite, color: '#646CFF' },
+            { name: 'Figma (Basic)', Icon: FaFigma, color: '#F24E1E' },
         ],
     };
 
@@ -193,10 +182,9 @@ const Skills = () => {
                         <ul>
                             {skills.map((skill) => (
                                 <li key={skill.name}>
-                                    {/* --- Pass color prop --- */}
                                     <skill.Icon
                                         aria-hidden="true"
-                                        color={skill.color} // Pass the color if defined
+                                        color={skill.color}
                                     />
                                     <span>{skill.name}</span>
                                 </li>

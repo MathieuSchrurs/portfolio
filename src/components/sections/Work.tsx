@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
-import WorkCard from '../ui/WorkCard'; // Make sure this component uses styled-components too
-import config from '@config'; // Import config
+import WorkCard from '../ui/WorkCard';
+import config from '@config';
 
 const StyledProjectsSection = styled.section`
   margin: 0 auto;
@@ -62,6 +61,8 @@ const StyledProjectsGrid = styled.div`
   gap: 15px;
   position: relative;
   margin-top: 50px;
+      font-family: var(--font-mono);
+
 
   @media (max-width: 1080px) {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
