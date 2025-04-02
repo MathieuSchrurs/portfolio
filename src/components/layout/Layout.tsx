@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import Nav from './Nav';
 import Social from './Social';
@@ -16,8 +16,6 @@ const StyledContent = styled.div`
 `;
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-    const isHome = typeof window !== 'undefined' && window.location.pathname === '/';
-
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
@@ -47,26 +45,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     };
 
     useEffect(() => {
-
         handleExternalLinks();
     }, []);
 
     return (
-        <>
-            {}
-            <div id="root">
-                <a className="skip-to-content" href="#content">
-                    Skip to Content
-                </a>
-                <StyledContent>
-                    <Nav isHome={isHome} />
-                    <Social isHome={isHome} />
-                    <Email isHome={isHome} />
-                    <div id="content">{children}</div>
-                    <Footer />
-                </StyledContent>
-            </div>
-        </>
+        <StyledContent>
+            <a className="skip-to-content" href="#content">
+                Skip to Content
+            </a>
+            <Nav />
+            <Social />
+            <Email />
+            <div id="content">{children}</div>
+            <Footer />
+        </StyledContent>
     );
 };
 

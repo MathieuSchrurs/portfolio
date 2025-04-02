@@ -1,9 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// Import hooks and utils later if needed for transitions
-// import { CSSTransition, TransitionGroup } from 'react-transition-group';
-// import { loaderDelay } from '@utils';
-// import { usePrefersReducedMotion } from '@hooks';
 
 interface StyledSideElementProps {
   orientation: 'left' | 'right';
@@ -15,8 +11,8 @@ const StyledSideElement = styled.div<StyledSideElementProps>`
   bottom: 0;
   left: ${(props) => (props.orientation === 'left' ? '40px' : 'auto')};
   right: ${(props) => (props.orientation === 'left' ? 'auto' : '40px')};
-  z-index: 10; // Match target z-index
-  color: var(--light-slate); // Use theme variable
+  z-index: 10;
+  color: var(--light-slate);
 
   @media (max-width: 1080px) {
     left: ${(props) => (props.orientation === 'left' ? '20px' : 'auto')};
@@ -24,29 +20,16 @@ const StyledSideElement = styled.div<StyledSideElementProps>`
   }
 
   @media (max-width: 768px) {
-    display: none; // Hide on mobile like target
+    display: none;
   }
 `;
 
 interface SideProps {
   children: React.ReactNode;
-  isHome: boolean;
   orientation: 'left' | 'right';
 }
 
 const Side: React.FC<SideProps> = ({ children, orientation }) => {
-  // Add state and effects for animations later if needed
-  // const [isMounted, setIsMounted] = useState(!isHome);
-  // const prefersReducedMotion = usePrefersReducedMotion();
-
-  // useEffect(() => {
-  //   if (!isHome || prefersReducedMotion) {
-  //     return;
-  //   }
-  //   const timeout = setTimeout(() => setIsMounted(true), loaderDelay);
-  //   return () => clearTimeout(timeout);
-  // }, [isHome, prefersReducedMotion]);
-
   return (
     <StyledSideElement orientation={orientation}>
       {children}

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import config from '@config';
 import Side from './Side';
 import SocialIcon from '../ui/SocialIcon';
+import { usePrefersReducedMotion } from '../../hooks';
 
 const StyledSocialList = styled.ul`
   display: flex;
@@ -23,25 +24,28 @@ const StyledSocialList = styled.ul`
 
   li {
     margin-bottom: 10px;
-    
     &:last-of-type {
       margin-bottom: 20px;
     }
   }
 `;
 
-const Social: React.FC<{ isHome: boolean }> = ({ isHome }) => {
+type Platform = 'github' | 'linkedin' | 'twitter' | 'instagram'; // Define Platform type if SocialIcon needs it strictly
+
+const Social: React.FC = () => {
   const { socialMedia } = config;
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   return (
-    <Side isHome={isHome} orientation="left">
+    <Side orientation="left">
       <StyledSocialList>
         {socialMedia &&
           socialMedia.map(({ url, name }, i) => (
             <li key={i}>
               <SocialIcon
-                platform={name.toLowerCase() as any}
+                platform={name.toLowerCase() as Platform} // Use defined type or keep 'as any'
                 url={url}
+                prefersReducedMotion={prefersReducedMotion}
               />
             </li>
           ))}

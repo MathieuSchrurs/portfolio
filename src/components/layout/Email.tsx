@@ -1,9 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import config from '@config';
 import Side from './Side';
+import { usePrefersReducedMotion } from '../../hooks';
 
-const StyledLinkWrapper = styled.div`
+const StyledLinkWrapper = styled.div<{ prefersReducedMotion: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,31 +23,34 @@ const StyledLinkWrapper = styled.div`
     margin: 20px auto;
     padding: 10px;
     font-family: var(--font-mono);
-    font-size: var(--fz-xxs); 
+    font-size: var(--fz-xxs);
     line-height: var(--fz-lg);
     letter-spacing: 0.1em;
     writing-mode: vertical-rl;
-    color: var(--light-slate); 
+    color: var(--light-slate);
     text-decoration: none;
+    transition: ${(props) => props.prefersReducedMotion ? 'none' : 'var(--transition)'};
 
     &:hover,
     &:focus {
-      transform: translateY(-3px); 
       color: var(--accent-color);
+      ${(props) => !props.prefersReducedMotion && css`
+        transform: translateY(-3px);
+      `}
     }
   }
 `;
 
-interface EmailProps {
-  isHome: boolean;
-}
+const Email: React.FC = () => {
+  const prefersReducedMotion = usePrefersReducedMotion();
 
-const Email: React.FC<EmailProps> = ({ isHome }) => (
-  <Side isHome={isHome} orientation="right">
-    <StyledLinkWrapper>
-      <a href={`mailto:${config.email}`}>{config.email}</a>
-    </StyledLinkWrapper>
-  </Side>
-);
+  return (
+    <Side orientation="right">
+      <StyledLinkWrapper prefersReducedMotion={prefersReducedMotion}>
+        <a href={`mailto:${config.email}`}>{config.email}</a>
+      </StyledLinkWrapper>
+    </Side>
+  );
+};
 
 export default Email;

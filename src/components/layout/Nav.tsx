@@ -35,8 +35,7 @@ const StyledHeader = styled.header<StyledHeaderProps>`
   }
 
   ${(props) => !props.prefersReducedMotion && css`
-      /* Apply motion transitions only if not reduced */
-      transition: var(--transition); /* Apply full transition */
+      transition: var(--transition);
       @media (prefers-reduced-motion: no-preference) {
         ${props.scrollDirection === 'up' && !props.scrolledToTop && css`
             height: var(--nav-scroll-height);
@@ -79,7 +78,6 @@ const StyledLogoWrapper = styled.div<{ isHovered: boolean; prefersReducedMotion:
     .logo-path-static {
       stroke: var(--logo-default-color);
       opacity: ${(props) => (props.isHovered ? 0 : 1)};
-      /* Conditional transition */
       transition: ${(props) => props.prefersReducedMotion ? 'none' : `opacity 0.1s ease-in-out ${props.isHovered ? '0s' : '1.2s'}`};
     }
 
@@ -88,7 +86,6 @@ const StyledLogoWrapper = styled.div<{ isHovered: boolean; prefersReducedMotion:
       stroke: var(--logo-hover-color);
       stroke-dashoffset: ${(props) =>
     props.isHovered ? 0 : 642.528076171875};
-      /* Conditional transition */
       transition: ${(props) => props.prefersReducedMotion ? 'none' : 'stroke-dashoffset 1.3s linear'};
       opacity: 1;
     }
@@ -150,11 +147,7 @@ const StyledLinks = styled.div`
   }
 `;
 
-interface NavProps {
-  isHome: boolean;
-}
-
-const Nav: React.FC<NavProps> = () => {
+const Nav: React.FC = () => {
   const scrollDirection = useScrollDirection({ initialDirection: 'down' });
   const [scrolledToTop, setScrolledToTop] = useState(true);
   const prefersReducedMotion = usePrefersReducedMotion();
