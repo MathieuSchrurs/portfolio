@@ -86,8 +86,9 @@ const skillsListItemStyles = `
   border-radius: var(--border-radius);
   padding: 0.4rem 0.8rem;
 
-  min-width: 160px;
+  min-width: auto;
   min-height: 40px;
+  width: 100%;
 
   &:hover {
     background-color: var(--skill-item-hover-bg);
@@ -110,6 +111,19 @@ const StyledSkillsListRow1 = styled.ul`
   list-style: none;
   justify-content: center;
 
+  @media (max-width: 1080px) {
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
   li {
     ${skillsListItemStyles}
   }
@@ -123,6 +137,19 @@ const StyledSkillsListRow2 = styled.ul`
   list-style: none;
   width: fit-content;
   margin: 15px auto 0;
+
+  @media (max-width: 1080px) {
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
 
   li {
     ${skillsListItemStyles}
