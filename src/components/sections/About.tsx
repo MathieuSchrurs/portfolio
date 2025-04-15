@@ -6,13 +6,9 @@ import {
   FaNodeJs,
   FaDocker,
   FaGitAlt,
-} from 'react-icons/fa';
-import {
-  SiTypescript,
-  SiTailwindcss,
-  SiDotnet,
-} from 'react-icons/si';
-import SectionHeading from '../ui/SectionHeading';
+} from "react-icons/fa";
+import { SiTypescript, SiTailwindcss, SiDotnet } from "react-icons/si";
+import SectionHeading from "../ui/SectionHeading";
 
 interface Skill {
   name: string;
@@ -174,7 +170,7 @@ const StyledPic = styled.div`
     max-width: 250px;
   }
 
- .wrapper {
+  .wrapper {
     position: relative;
     display: block;
     width: 100%;
@@ -182,6 +178,10 @@ const StyledPic = styled.div`
     transition: var(--transition);
     overflow: hidden;
     aspect-ratio: 1 / 1;
+    background-image: url("/images/profile-picture.jpg");
+    background-size: cover;
+    background-position: center;
+    pointer-events: none;
 
     &:hover,
     &:focus-within {
@@ -209,28 +209,27 @@ const StyledPic = styled.div`
     }
   }
 
-  .img {
-    position: relative;
-    display: block;
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    border-radius: var(--border-radius);
-    transition: var(--transition);
-    object-fit: cover;
-    object-position: center 20%;
+    background: transparent;
+    z-index: 1;
   }
 `;
 
 const About = () => {
   const currentSkills: Skill[] = [
-    { name: "C# / .NET", Icon: SiDotnet, color: '#512BD4' },
-    { name: "TypeScript", Icon: SiTypescript, color: '#3178C6' },
-    { name: "React / Next.js", Icon: FaReact, color: '#61DAFB' },
-    { name: "Node.js", Icon: FaNodeJs, color: '#339933' },
-    { name: "HTML & (S)CSS", Icon: FaHtml5, color: '#E34F26' },
-    { name: "Tailwind CSS", Icon: SiTailwindcss, color: '#06B6D4' },
-    { name: "Docker", Icon: FaDocker, color: '#2496ED' },
-    { name: "Git & GitHub", Icon: FaGitAlt, color: '#F05032' },
+    { name: "C# / .NET", Icon: SiDotnet, color: "#512BD4" },
+    { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
+    { name: "React / Next.js", Icon: FaReact, color: "#61DAFB" },
+    { name: "Node.js", Icon: FaNodeJs, color: "#339933" },
+    { name: "HTML & (S)CSS", Icon: FaHtml5, color: "#E34F26" },
+    { name: "Tailwind CSS", Icon: SiTailwindcss, color: "#06B6D4" },
+    { name: "Docker", Icon: FaDocker, color: "#2496ED" },
+    { name: "Git & GitHub", Icon: FaGitAlt, color: "#F05032" },
   ];
 
   const skillsRow1 = currentSkills.slice(0, 5);
@@ -241,49 +240,45 @@ const About = () => {
       <SectionHeading sectionNumber="1">About Me</SectionHeading>
       <StyledAboutContent>
         <StyledPic>
-          <div className="wrapper">
-            <img
-              className="img"
-              src="/images/profile-picture.jpg"
-              alt="Headshot of Mathieu Schrurs"
-              width="300"
-              height="300"
-              loading="lazy"
-            />
+          <div
+            className="wrapper"
+            onContextMenu={(e) => e.preventDefault()} // Disable right-click
+          >
+            <div className="overlay" />
           </div>
         </StyledPic>
 
         <StyledText>
           <div>
             <p>
-              Hello! I'm Mathieu, a Software Engineer in Ghent, Belgium, passionate
-              about creating high-quality, performant, and user-centric digital
-              experiences. My journey started with C# .NET, fueling a drive to
-              build robust solutions.
+              Hello! I'm Mathieu, a Software Engineer in Ghent, Belgium,
+              passionate about creating high-quality, performant, and
+              user-centric digital experiences. My journey started with C#
+              .NET, fueling a drive to build robust solutions.
             </p>
             <p>
-              Through hands-on experience tackling challenges like designing and
-              implementing an interactive Blazor dashboard to streamline issue prioritization,
-              and developing key features for a C#/.NET stock management web application
-              using JavaScript for the frontend. Building on my strong .NET foundation,
-              this journey has led me to appreciate and adopt complementary frontend tools
-              like React and Next.js, rounding out my capabilities for full-stack development.
+              Through hands-on experience tackling challenges like designing
+              and implementing an interactive Blazor dashboard to streamline
+              issue prioritization, and developing key features for a C#/.NET
+              stock management web application using JavaScript for the
+              frontend. Building on my strong .NET foundation, this journey has
+              led me to appreciate and adopt complementary frontend tools like
+              React and Next.js, rounding out my capabilities for full-stack
+              development.
             </p>
             <p>
               At the core of my work is a commitment to craftsmanship – writing
               clean, maintainable code isn't just good practice, it's essential
               for building things that last and evolve. I believe strongly in
-              collaboration and clear communication; being a native Dutch speaker
-              fluent in English allows me to effectively bridge the gap between
-              technical implementation and the real-world needs of users and
-              businesses. I enjoy the iterative nature of agile development,
-              constantly learning and refining solutions to deliver the best
-              possible outcome.
+              collaboration and clear communication; being a native Dutch
+              speaker fluent in English allows me to effectively bridge the gap
+              between technical implementation and the real-world needs of
+              users and businesses. I enjoy the iterative nature of agile
+              development, constantly learning and refining solutions to
+              deliver the best possible outcome.
             </p>
 
-            <StyledTechStackSubtitle>
-              Current Tech Stack
-            </StyledTechStackSubtitle>
+            <StyledTechStackSubtitle>Current Tech Stack</StyledTechStackSubtitle>
 
             <StyledSkillsListRow1 aria-label="Main Tech Stack Row 1">
               {skillsRow1.map((skill) => (

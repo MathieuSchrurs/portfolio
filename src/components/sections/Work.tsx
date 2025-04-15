@@ -32,7 +32,7 @@ const Work = () => {
 
   return (
     <StyledProjectsSection id="work">
-      <SectionHeading sectionNumber="4">Some Things I've Built</SectionHeading>
+      <SectionHeading sectionNumber="4">Things I've Built</SectionHeading>
 
       <StyledProjectsGrid>
         {projects &&
