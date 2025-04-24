@@ -253,31 +253,16 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! I'm Mathieu, a Software Engineer in Ghent, Belgium,
-              passionate about creating high-quality, performant, and
-              user-centric digital experiences. My journey started with C#
-              .NET, fueling a drive to build robust solutions.
+              Hi, I'm Mathieu — a software engineer based in Ghent, Belgium. I love building digital products that are robust, user-friendly, and genuinely helpful.
             </p>
             <p>
-              Through hands-on experience tackling challenges like designing
-              and implementing an interactive Blazor dashboard to streamline
-              issue prioritization, and developing key features for a C#/.NET
-              stock management web application using JavaScript for the
-              frontend. Building on my strong .NET foundation, this journey has
-              led me to appreciate and adopt complementary frontend tools like
-              React and Next.js, rounding out my capabilities for full-stack
-              development.
+              My journey began with C# and .NET, and has since grown to include modern frontend tools like React and Next.js. I enjoy working across the stack, turning ideas into real, impactful solutions.
             </p>
             <p>
-              At the core of my work is a commitment to craftsmanship – writing
-              clean, maintainable code isn't just good practice, it's essential
-              for building things that last and evolve. I believe strongly in
-              collaboration and clear communication; being a native Dutch
-              speaker fluent in English allows me to effectively bridge the gap
-              between technical implementation and the real-world needs of
-              users and businesses. I enjoy the iterative nature of agile
-              development, constantly learning and refining solutions to
-              deliver the best possible outcome.
+              As many coders, I care deeply about clean code, thoughtful design, and clear communication. Whether i'm collaborating with others or working solo, I strive to bridge the gap between technology and real-world needs.
+            </p>
+            <p>
+              Outside of coding, I’m always learning, refining, and looking for new ways to grow — as a developer, a partner, a friend, or simply as a human.
             </p>
 
             <StyledTechStackSubtitle>Current Tech Stack</StyledTechStackSubtitle>
@@ -301,6 +286,7 @@ const About = () => {
             </StyledSkillsListRow2>
           </div>
         </StyledText>
+
       </StyledAboutContent>
     </StyledAboutSection>
   );
