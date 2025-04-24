@@ -174,6 +174,8 @@ const StyledPic = styled.div`
     position: relative;
     display: block;
     width: 100%;
+    min-height: 200px;
+    min-width: 200px;
     border-radius: var(--border-radius);
     transition: var(--transition);
     overflow: hidden;
@@ -242,7 +244,7 @@ const About = () => {
         <StyledPic>
           <div
             className="wrapper"
-            onContextMenu={(e) => e.preventDefault()} // Disable right-click
+            onContextMenu={(e) => e.preventDefault()}
           >
             <div className="overlay" />
           </div>
