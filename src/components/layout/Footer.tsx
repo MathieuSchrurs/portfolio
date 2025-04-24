@@ -32,14 +32,6 @@ const Footer = () => {
     <StyledFooter>
       <StyledCredit>
         <a
-          href="https://github.com/bchiang7/v4"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div>Design inspired by Brittany Chiang</div>
-        </a>
-        <br />
-        <a
           href={repoUrl}
           target="_blank"
           rel="noopener noreferrer"
