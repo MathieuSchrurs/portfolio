@@ -9,40 +9,67 @@ interface AnimatedThemeToggleIconProps {
   role?: string;
   tabIndex?: number;
   'aria-label'?: string;
-  onKeyDown?: (event: React.KeyboardEvent<SVGSVGElement>) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
 }
 
-const transitionDuration = '0.4s';
-const transitionEasing = 'ease-out';
+const IconWrapper = styled.span<{ visible: boolean; from: number; to: number }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: ${(p) => (p.visible ? 1 : 0)};
+  transform: rotate(${(p) => (p.visible ? p.to : p.from)}deg)
+    scale(${(p) => (p.visible ? 1 : 0.8)});
+  transition: opacity 0.4s, transform 0.4s cubic-bezier(0.4, 0.2, 0.2, 1);
+  will-change: opacity, transform;
+  pointer-events: ${(p) => (p.visible ? 'auto' : 'none')};
+`;
 
-const StyledAnimatedSvg = styled.svg<Pick<AnimatedThemeToggleIconProps, 'theme'>>`
+const ToggleButton = styled.button`
+  position: relative;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  padding: 0;
   cursor: pointer;
-  stroke: ${(props) =>
-    props.theme === 'light' ? 'var(--sun-color)' : 'var(--moon-color)'};
-  transition: transform ${transitionDuration} ${transitionEasing},
-              stroke ${transitionDuration} ${transitionEasing};
-  transform: ${(props) =>
-    props.theme === 'light' ? 'rotate(90deg)' : 'rotate(40deg)'};
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s cubic-bezier(0.4, 0.2, 0.2, 1);
 
-  .icon-circle {
-    transition: r ${transitionDuration} ${transitionEasing},
-                fill ${transitionDuration} ${transitionEasing};
-    r: ${(props) => (props.theme === 'light' ? 5 : 9)};
-    fill: ${(props) =>
-    props.theme === 'light' ? 'var(--sun-color)' : 'var(--moon-color)'};
-  }
-
-  .mask-circle {
-    transition: transform ${transitionDuration} ${transitionEasing};
-    transform: ${(props) =>
-    props.theme === 'light' ? 'translate(18px, -6px)' : 'translate(0px, 0px)'};
-  }
-
-  .icon-rays {
-    transition: opacity ${transitionDuration} ${transitionEasing};
-    opacity: ${(props) => (props.theme === 'light' ? 1 : 0)};
+  &:hover, 
+  &:focus-visible {
+    transform: scale(1.15);
   }
 `;
+
+const SunIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+    stroke="var(--sun-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="5" fill="var(--sun-color)" />
+    <g stroke="var(--sun-color)">
+      <line x1="12" y1="1" x2="12" y2="3" />
+      <line x1="12" y1="21" x2="12" y2="23" />
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+      <line x1="1" y1="12" x2="3" y2="12" />
+      <line x1="21" y1="12" x2="23" y2="12" />
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+    </g>
+  </svg>
+);
+
+const MoonIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+    stroke="var(--moon-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path
+      d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"
+      fill="var(--moon-color)"
+    />
+  </svg>
+);
 
 const AnimatedThemeToggleIcon: React.FC<AnimatedThemeToggleIconProps> = ({
   theme,
@@ -55,8 +82,7 @@ const AnimatedThemeToggleIcon: React.FC<AnimatedThemeToggleIconProps> = ({
   onKeyDown,
 }) => {
   return (
-    <StyledAnimatedSvg
-      theme={theme}
+    <ToggleButton
       onClick={onClick}
       style={style}
       className={className}
@@ -64,37 +90,15 @@ const AnimatedThemeToggleIcon: React.FC<AnimatedThemeToggleIconProps> = ({
       tabIndex={tabIndex}
       aria-label={ariaLabel}
       onKeyDown={onKeyDown}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden={!ariaLabel}
+      type="button"
     >
-      <mask id="theme-toggle-mask-css">
-        <rect x="0" y="0" width="100%" height="100%" fill="white" />
-        <circle className="mask-circle" cx="12" cy="4" r="9" fill="black" />
-      </mask>
-      <circle
-        className="icon-circle"
-        cx="12"
-        cy="12"
-        mask="url(#theme-toggle-mask-css)"
-      />
-      <g className="icon-rays">
-        <line x1="12" y1="1" x2="12" y2="3" />
-        <line x1="12" y1="21" x2="12" y2="23" />
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-        <line x1="1" y1="12" x2="3" y2="12" />
-        <line x1="21" y1="12" x2="23" y2="12" />
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-      </g>
-    </StyledAnimatedSvg>
+      <IconWrapper visible={theme === 'light'} from={60} to={0}>
+        <SunIcon />
+      </IconWrapper>
+      <IconWrapper visible={theme === 'dark'} from={-60} to={0}>
+        <MoonIcon />
+      </IconWrapper>
+    </ToggleButton>
   );
 };
 
