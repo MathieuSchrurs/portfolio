@@ -1,54 +1,80 @@
-# React + TypeScript + Vite
+Mathieu Schrurs — Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the source code for mathieuschrurs.com
+, my personal portfolio.
+It showcases my background, skills, and projects as a Business Onboarding Specialist and hobby full-stack developer, built with modern web technologies for performance, clarity, and maintainability.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🧩 Tech Stack
 
-## Expanding the ESLint configuration
+Framework: React
+ (with TypeScript
+)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Bundler: Vite
+ for ultra-fast builds and HMR
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Styling: Styled Components
+ + custom CSS variables
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Icons: Lucide React
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Animations: Framer Motion
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Deployment: Vercel
+
+⚙️ Getting Started
+
+Clone the repo and install dependencies:
+
+git clone https://github.com/MathieuSchrurs/portfolio.git
+cd portfolio
+npm install
+
+
+Start the development server:
+
+npm run dev
+
+
+Then open your browser at:
+
+http://localhost:5173
+
+
+🧠 Project Highlights
+
+Responsive design: Built mobile-first, scales smoothly across devices.
+
+Animated skill cards: Interactive hover effects with subtle gradient motion.
+
+Clean component structure: Modular, readable, and TypeScript-safe.
+
+Performance optimized: Lazy-loaded assets, minimal bundle size via Vite.
+
+Continuous deployment: Automatically built and deployed via Vercel on push to main.
+
+
+🧾 License
+
+This project is licensed under the MIT License
+.
+
+
+
+🪄 Future Improvements
+
+Add a blog section powered by Markdown or Notion API.
+
+Integrate analytics (privacy-friendly, no cookies).
+
+
+Contact
+
+If you’d like to reach out about development, fintech, or automation work:
+
+📧 mathieu.schrurs@gmail.com
+
+🌐 mathieuschrurs.com
+
+💼 LinkedIn
