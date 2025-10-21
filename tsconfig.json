@@ -43,8 +43,11 @@
       "@assets/*": [
         "src/assets/*"
       ]
-    }
+    },
+    "types": ["styled-components"],
+    "typeRoots": ["./node_modules/@types", "./src/styles"]
   },
+  
   "include": [
     "src",
     "vite.config.ts"
