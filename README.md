@@ -26,16 +26,13 @@ Clone the repository and install dependencies:
 git clone https://github.com/MathieuSchrurs/portfolio.git
 cd portfolio
 npm install
+
 Start the local development server:
-
-bash
-Copy code
 npm run dev
-Then open your browser at:
 
-arduino
-Copy code
+Then open your browser at:
 http://localhost:5173
+
 🧠 Project Highlights
 Responsive design: Built mobile-first and scales smoothly across all screen sizes.
 
