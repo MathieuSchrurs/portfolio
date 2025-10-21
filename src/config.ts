@@ -67,7 +67,7 @@ export default {
       company: "Twikey",
       title: "Customer Onboarding Specialist",
       range: "2025 - Now",
-      description: "Turning complex fintech onboarding into simple, efficient client experiences.",
+      description: "I turn complex fintech onboarding processes into seamless, automated client journeys. My focus is on clarity, compliance, and creating experiences that scale with every customer.",
     },
     {
       company: "Batt Mobility @ Wintercircus",
