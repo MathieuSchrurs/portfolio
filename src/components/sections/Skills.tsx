@@ -35,10 +35,18 @@ interface Skill {
 }
 
 const StyledSkillsSection = styled.section`
-  margin: 80px auto;
+  margin: 0 auto;
   max-width: 1000px;
-  padding: 40px 0;
+
+  @media (max-width: 768px) {
+    padding: 80px 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 60px 0;
+  }
 `;
+
 
 const SkillsGrid = styled.div`
   display: grid;

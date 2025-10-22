@@ -45,7 +45,13 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
       theme={theme}
       onClick={toggleTheme}
       className={className}
-      style={{ width: iconSize, height: iconSize }}
+        style={{
+          width: iconSize,
+          height: iconSize,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       role="button"
       tabIndex={0}
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}

@@ -14,26 +14,22 @@ const AnimatedLogo: React.FC<AnimatedLogoProps> = ({ className }) => {
       viewBox="0 0 242 108"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className} // Pass className if needed by parent
+      className={className}
       aria-label="MS Logo Signature"
     >
-      {/* Static Path - NO stroke attribute */}
       <path
         className="logo-path-static"
         d={pathData}
         fill="none"
-        /* stroke="var(--logo-default-color)" REMOVED */
         strokeWidth={strokeWidth}
       />
-      {/* Animated Path - NO stroke attribute */}
       <path
         className="logo-path-animated"
         d={pathData}
         fill="none"
-        /* stroke="var(--logo-hover-color)" REMOVED */
         strokeWidth={strokeWidth}
         strokeDasharray="642.528076171875"
-        strokeDashoffset="642.528076171875" // Set initial offset here
+        strokeDashoffset="642.528076171875"
       />
     </svg>
   );

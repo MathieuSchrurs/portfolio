@@ -1,12 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 import variables from './variables';
 import fonts from './fonts';
-// import TransitionStyles from './TransitionStyles';
-// import PrismStyles from './PrismStyles';
 
 const GlobalStyle = createGlobalStyle`
-  ${variables}; // Apply CSS variables
-  ${fonts}; // Apply @font-face rules
+  ${variables};
+  ${fonts};
 
   html {
     box-sizing: border-box;
@@ -25,7 +23,6 @@ const GlobalStyle = createGlobalStyle`
     color: var(--lightest-slate); // Or use theme-aware variable
   }
 
-  /* Basic focus styles - Keep */
   :focus {
     outline: 2px dashed var(--accent-color);
     outline-offset: 3px;
@@ -39,7 +36,6 @@ const GlobalStyle = createGlobalStyle`
     outline-offset: 3px;
   }
 
-  /* Scrollbar Styles - Keep */
   html {
     scrollbar-width: thin;
     scrollbar-color: var(--dark-slate) var(--navy); // Adjust for theme if needed
@@ -134,16 +130,16 @@ const GlobalStyle = createGlobalStyle`
 
   section {
     margin: 0 auto;
-    padding: 100px 0;
     max-width: 1000px;
     counter-increment: section;
+    padding: var(--section-padding-desktop) 0;
 
     @media (max-width: 768px) {
-      padding: 80px 0;
+      padding: var(--section-padding-tablet) 0;
     }
 
     @media (max-width: 480px) {
-      padding: 60px 0;
+      padding: var(--section-padding-mobile) 0;
     }
   }
 
@@ -370,9 +366,6 @@ const GlobalStyle = createGlobalStyle`
   main {
     counter-reset: section;
   }
-
-  // {TransitionStyles};
-  // {PrismStyles};
 `;
 
 export default GlobalStyle;

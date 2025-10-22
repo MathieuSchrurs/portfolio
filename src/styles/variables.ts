@@ -60,6 +60,15 @@ const variables = css`
     --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
     --hamburger-width: 30px;
 
+    /* Layout & Section Spacing */
+    --section-padding-desktop: 100px;
+    --section-padding-tablet: 80px;
+    --section-padding-mobile: 60px;
+
+    /* Navigation & Global UI */
+    --nav-mobile-bg: rgba(10, 10, 25, 0.9);
+
+
     /* Theme Toggle Variables */
     --toggle-background-dark: #303030;
     --toggle-background-light: #ebebeb;

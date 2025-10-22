@@ -6,13 +6,22 @@ import SectionHeading from '../ui/SectionHeading';
 const StyledExperienceSection = styled.section`
   margin: 0 auto;
   max-width: 1200px;
-  padding: 100px 0;
+
+  @media (max-width: 768px) {
+    padding: 80px 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 60px 0;
+  }
 `;
+
 
 const StyledExperiencesGrid = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  padding-bottom: 10px;
 `;
 
 const StyledTimelineItem = styled.div`

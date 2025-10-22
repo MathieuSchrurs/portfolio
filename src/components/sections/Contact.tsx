@@ -4,7 +4,6 @@ import config from '@config';
 const StyledContactSection = styled.section`
   max-width: 600px;
   margin: 0 auto;
-  padding: 100px 0;
   text-align: center;
   font-family: var(--font-mono);
 
