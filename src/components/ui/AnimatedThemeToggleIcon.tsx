@@ -36,9 +36,10 @@ const ToggleButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  line-height: 1;
   transition: transform 0.2s cubic-bezier(0.4, 0.2, 0.2, 1);
 
-  &:hover, 
+  &:hover,
   &:focus-visible {
     transform: scale(1.15);
   }

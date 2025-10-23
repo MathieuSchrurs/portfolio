@@ -116,6 +116,12 @@ const StyledLinks = styled.div`
   align-items: center;
   gap: 1.25rem;
 
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    transform: translateY(-1px);
+  }
+
   @media (max-width: 768px) {
     display: none;
   }
