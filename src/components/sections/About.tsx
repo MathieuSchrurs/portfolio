@@ -226,16 +226,17 @@ const StyledPic = styled.div`
 `;
 
 const About = () => {
-  const currentSkills: Skill[] = [
-    { name: "C# /.NET", Icon: SiDotnet, color: "#512BD4" },
-    { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
-    { name: "React/Next.js", Icon: FaReact, color: "#61DAFB" },
-    { name: "Node.js", Icon: FaNodeJs, color: "#339933" },
-    { name: "HTML & (S)CSS", Icon: FaHtml5, color: "#E34F26" },
-    { name: "Tailwind CSS", Icon: SiTailwindcss, color: "#06B6D4" },
-    { name: "Docker", Icon: FaDocker, color: "#2496ED" },
-    { name: "Git & GitHub", Icon: FaGitAlt, color: "#F05032" },
-  ];
+const currentSkills: Skill[] = [
+  { name: "HTML & (S)CSS", Icon: FaHtml5, color: "#E34F26" },
+  { name: "C# /.NET", Icon: SiDotnet, color: "#512BD4" },
+  { name: "Docker", Icon: FaDocker, color: "#2496ED" },
+  { name: "Git & GitHub", Icon: FaGitAlt, color: "#F05032" },
+  { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
+  { name: "Tailwind CSS", Icon: SiTailwindcss, color: "#06B6D4" },
+  { name: "Node.js", Icon: FaNodeJs, color: "#339933" },
+  { name: "React/Next.js", Icon: FaReact, color: "#61DAFB" },
+];
+
 
   return (
     <StyledAboutSection id="about">

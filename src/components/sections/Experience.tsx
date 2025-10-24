@@ -6,6 +6,7 @@ import SectionHeading from '../ui/SectionHeading';
 const StyledExperienceSection = styled.section`
   margin: 0 auto;
   max-width: 1200px;
+  padding: 60px 0;
 
   @media (max-width: 768px) {
     padding: 80px 0;
@@ -16,81 +17,11 @@ const StyledExperienceSection = styled.section`
   }
 `;
 
-
 const StyledExperiencesGrid = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
-  position: relative;
-  padding-bottom: 10px;
-`;
-
-const StyledTimelineItem = styled.div`
-  display: flex;
-  width: 100%;
-  margin-bottom: -10rem;
-  position: relative;
-    &:nth-child(odd) {
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-  &:nth-child(even) {
-    justify-content: flex-end;
-    align-items: flex-end;
-  }
-   @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1rem;
-    &:nth-child(odd),
-    &:nth-child(even) {
-      align-items: center;
-
-    }
-`;
-
-const StyledCardWrapper = styled.div`
-  width: 50%;
-  padding: 0 1rem;
-  position: relative;
-
-  @media (max-width: 768px) {
-    width: 80%;
-    padding: 0;
-    margin-bottom: 1rem;
-  }
-  &:before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 2rem;
-    height: 1px;
-    background-color: var(--light-slate);
-    right:  0;
-  }
-
-    &::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 2rem;
-        height: 1px;
-        background-color: var(--light-slate);
-        left: 0;
-    }
-    &:nth-child(even) {
-        flex-direction: row-reverse;
-        align-items: flex-end;
-  }
-
-     @media (max-width: 768px) {
-          &::after,
-          &::before{
-            content: none;
-          }
-
-        }
+  margin-top: 8rem;
 
 `;
 
@@ -102,11 +33,76 @@ const StyledTimelineConnector = styled.div`
   width: 1px;
   height: 100%;
   background-color: var(--light-slate);
+  z-index: 0;
+
+  @media (max-width: 768px) {
+    left: 24px;
+  }
+`;
+
+const StyledTimelineItem = styled.div`
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  margin: -4rem 0; /* previously -6rem; less overlap = more breathing room */
   z-index: 1;
 
-   @media (max-width: 768px) {
-            display: none;
-   }
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:nth-child(odd) {
+    flex-direction: row;
+  }
+
+  &:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 2rem 0;
+  }
+`;
+
+const StyledCardWrapper = styled.div`
+  width: 46%;
+  position: relative;
+  z-index: 2;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3rem;
+    height: 1px;
+    background-color: var(--light-slate);
+  }
+
+  ${StyledTimelineItem}:nth-child(odd) &::before {
+    right: -3rem;
+  }
+
+  ${StyledTimelineItem}:nth-child(even) &::before {
+    left: -3rem;
+  }
+
+  @media (max-width: 768px) {
+    &::before {
+      display: none;
+    }
+  }
 `;
 
 const Experience = () => {
@@ -116,13 +112,13 @@ const Experience = () => {
     <StyledExperienceSection id="experience">
       <SectionHeading sectionNumber="2">Where I've Worked</SectionHeading>
       <StyledExperiencesGrid>
+        <StyledTimelineConnector />
         {jobs &&
           jobs.map((job, index) => (
             <StyledTimelineItem key={index}>
               <StyledCardWrapper>
                 <ExperienceCard {...job} />
               </StyledCardWrapper>
-              <StyledTimelineConnector />
             </StyledTimelineItem>
           ))}
       </StyledExperiencesGrid>

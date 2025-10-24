@@ -2,14 +2,27 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledExperienceCard = styled.div`
-    padding: 1.5rem;
-    margin-bottom: 4rem;
-    border-radius: 0.5rem;
-    background-color: transparent; /* Ensure background doesn't obscure timeline */
-    color: var(--text-secondary-color);
-    border: 1px solid var(--border-color);
-    position: relative;
-    z-index: 2;
+  padding: 1.5rem;
+  margin-bottom: 4rem;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: var(--text-secondary-color);
+  border: 1px solid var(--border-color);
+  position: relative;
+  z-index: 2;
+  transition: var(--transition), box-shadow 0.35s ease, transform 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 12px 2px var(--accent-tint-color);
+    color: var(--text-primary-color);
+  }
+
+  &:active {
+    transform: scale(0.995);
+    box-shadow: 0 0 6px 1px var(--accent-tint-color);
+  }
 `;
 
 const StyledTitle = styled.h3`
@@ -34,13 +47,8 @@ const StyledRange = styled.p`
 
 const StyledDescription = styled.p`
   font-family: var(--font-mono);
-  font-size: var(--fz-sm); /* Increased from 0.8rem (14px) */
-  line-height: 1.5; /* Adjusted line-height slightly for readability */
-  /* Removed truncation styles */
-  /* overflow: hidden; */
-  /* display: -webkit-box; */
-  /* -webkit-line-clamp: 4; */
-  /* -webkit-box-orient: vertical; */
+  font-size: var(--fz-sm);
+  line-height: 1.5;
 `;
 
 interface ExperienceCardProps {

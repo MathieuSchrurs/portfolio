@@ -5,8 +5,8 @@ const variables = css`
     /* Dark Theme Colours */
     --dark-navy: #020c1b;
     --navy: #0a192f;
-    --light-navy: #112240; /* Used for dark card bg */
-    --lightest-navy: #233554;
+    --light-navy: #112240;
+    --lightest-navy: #2f3b52; /* darkened for better border & line contrast */
     --navy-shadow: rgba(2, 12, 27, 0.7);
     --dark-slate: #495670;
     --slate: #8892b0;
@@ -20,8 +20,8 @@ const variables = css`
     --light-theme-background: #f5f5f5;
     --light-theme-text-primary: #171717;
     --light-theme-text-secondary: #737373;
-    --light-theme-card: #ffffff; /* Used for light card bg */
-    --light-theme-border: #d4d4d4;
+    --light-theme-card: #ffffff;
+    --light-theme-border: #bfbfbf;
     --light-theme-accent: #8b5cf6;
     --light-theme-accent-active: #7c3aed;
     --light-theme-accent-text: #ffffff;
