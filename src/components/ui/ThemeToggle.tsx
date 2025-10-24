@@ -45,12 +45,13 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
       theme={theme}
       onClick={toggleTheme}
       className={className}
-        style={{
+          style={{
           width: iconSize,
           height: iconSize,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          transform: "translateY(1px)",
         }}
       role="button"
       tabIndex={0}

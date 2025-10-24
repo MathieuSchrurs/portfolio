@@ -80,7 +80,6 @@ const skillsListItemStyles = `
   overflow: hidden;
   transition: transform 0.3s ease, filter 0.3s ease;
 
-  /* --- gradient border & glow --- */
   &::before,
   &::after {
     content: "";
@@ -100,7 +99,6 @@ const skillsListItemStyles = `
     transition: opacity 0.4s ease, filter 0.4s ease;
   }
 
-  /* crisp animated border */
   &::before {
     padding: 2.5px;
     -webkit-mask:
@@ -108,10 +106,9 @@ const skillsListItemStyles = `
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    filter: none; /* stays sharp */
+    filter: none;
   }
 
-  /* soft outer glow */
   &::after {
     top: -4px;
     left: -4px;
@@ -123,14 +120,13 @@ const skillsListItemStyles = `
     pointer-events: none;
   }
 
-  /* Hover effects */
   &:hover {
     transform: translateY(-3px);
   }
 
   &:hover::before {
     opacity: 1;
-    filter: none; /* no blur */
+    filter: none;
     animation: gradientShift 6s linear infinite;
   }
 

@@ -25,17 +25,17 @@ const Line = styled.div`
 const WordStack = styled.span`
   display: inline-flex;
   position: relative;
-  align-items: baseline; /* aligns with text next to it */
-  overflow: visible; /* allow descenders to show */
+  align-items: baseline;
+  overflow: visible;
   min-width: 8ch;
-  margin-left: 0.35em; /* space from "explore" */
+  margin-left: 0.35em;
 `;
 
 const AnimatedWord = styled(motion.span)`
   display: inline-block;
   font-weight: 700;
   color: var(--accent-color);
-  line-height: 1.1; /* slightly looser so descenders fit */
+  line-height: 1.1;
   transform: translateY(0.10em);
 `;
 
@@ -57,11 +57,10 @@ const Hero = () => {
   ];
 
 
-  // Loop indefinitely through the words
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
-    }, 3000); // slower pacing (3 seconds per word)
+    }, 3000);
     return () => clearInterval(interval);
   }, [words.length]);
 

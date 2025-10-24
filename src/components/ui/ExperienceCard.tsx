@@ -5,7 +5,7 @@ const StyledExperienceCard = styled.div`
   padding: 1.5rem;
   margin-bottom: 4rem;
   border-radius: 0.5rem;
-  background-color: transparent;
+  background-color: var(--card-bg-color);
   color: var(--text-secondary-color);
   border: 1px solid var(--border-color);
   position: relative;
@@ -17,6 +17,7 @@ const StyledExperienceCard = styled.div`
     border-color: var(--accent-color);
     box-shadow: 0 0 12px 2px var(--accent-tint-color);
     color: var(--text-primary-color);
+    z-index: 10; /* lifted above connectors and line */
   }
 
   &:active {
