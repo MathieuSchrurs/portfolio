@@ -1,161 +1,161 @@
 import React from 'react';
 import styled from 'styled-components';
 import SectionHeading from '../ui/SectionHeading';
-
 import {
-    FaJsSquare,
-    FaHtml5,
-    FaCss3Alt,
-    FaReact,
-    FaNodeJs,
-    FaDocker,
-    FaGitAlt,
-    FaGithub,
-    FaDatabase,
-    FaServer,
-    FaAngular,
-    FaFigma,
-    FaMicrosoft,
+  FaJsSquare, FaHtml5, FaCss3Alt, FaReact, FaNodeJs, FaDocker,
+  FaGitAlt, FaGithub, FaDatabase, FaServer, FaAngular, FaFigma, FaMicrosoft,
 } from 'react-icons/fa';
 import {
-    SiTypescript,
-    SiTailwindcss,
-    SiDotnet,
-    SiPostgresql,
-    SiAmazon,
-    SiVite,
-    SiBlazor,
+  SiTypescript, SiTailwindcss, SiDotnet, SiPostgresql, SiAmazon, SiVite, SiBlazor,
 } from 'react-icons/si';
 import { TbBrandNextjs } from 'react-icons/tb';
 
 interface Skill {
-    name: string;
-    Icon: React.ComponentType<any>;
-    color?: string;
+  name: string;
+  Icon: React.ComponentType<any>;
+  color?: string;
 }
 
 const StyledSkillsSection = styled.section`
   margin: 0 auto;
-  max-width: 1000px;
-
-  @media (max-width: 768px) {
-    padding: 80px 0;
-  }
-
-  @media (max-width: 480px) {
-    padding: 60px 0;
-  }
+  max-width: 1100px;
+  padding: 100px 0;
+  position: relative;
 `;
-
 
 const SkillsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px 40px;
-  margin-top: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
 `;
 
-const SkillCategory = styled.div`
-  h3 {
-    color: var(--text-primary-color);
-    font-family: var(--font-sans);
-    font-size: var(--fz-xl);
-    margin-bottom: 15px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 5px;
+const CategoryCard = styled.div`
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 2rem 1.75rem;
+  transition: background 0.3s ease, transform 0.25s ease, border-color 0.3s ease;
+  position: relative;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
   }
 
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-family: var(--font-mono);
-    font-size: var(--fz-md);
-    color: var(--text-secondary-color);
-
-    li {
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-
-      svg {
-        width: 18px;
-        height: 18px;
-        margin-right: 10px;
-        flex-shrink: 0;
-      }
+  @media (prefers-color-scheme: light) {
+    background: rgba(245, 245, 245, 0.5);
+    &:hover {
+      background: rgba(245, 245, 245, 0.7);
     }
   }
 `;
 
+const CategoryTitle = styled.h3`
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: var(--fz-sm);
+  color: var(--text-primary-color);
+  opacity: 0.9;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.2rem;
+`;
+
+const SkillList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+`;
+
+const SkillItem = styled.li<{ color?: string }>`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-secondary-color);
+  font-family: var(--font-mono);
+  font-size: var(--fz-sm);
+  opacity: 0.95;
+  transition: opacity 0.2s ease;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    color: ${({ color }) => color || 'var(--text-secondary-color)'};
+    opacity: 0.9;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+`;
 
 const Skills = () => {
-    const skillData: Record<string, Skill[]> = {
-        languages: [
-            { name: 'C#', Icon: SiDotnet, color: '#512BD4' },
-            { name: 'JavaScript', Icon: FaJsSquare, color: '#F7DF1E' },
-            { name: 'TypeScript', Icon: SiTypescript, color: '#3178C6' },
-            { name: 'HTML5', Icon: FaHtml5, color: '#E34F26' },
-            { name: 'CSS3 / SCSS', Icon: FaCss3Alt, color: '#1572B6' },
-        ],
-        frontend: [
-            { name: 'React', Icon: FaReact, color: '#61DAFB' },
-            { name: 'Next.js', Icon: TbBrandNextjs, color: '#000000' },
-            { name: 'Tailwind CSS', Icon: SiTailwindcss, color: '#06B6D4' },
-            { name: 'Blazor', Icon: SiBlazor, color: '#512BD4' },
-            { name: 'Angular', Icon: FaAngular, color: '#DD0031' },
-        ],
-        backend: [
-            { name: '.NET (Core / Framework)', Icon: SiDotnet, color: '#512BD4' },
-            { name: 'Node.js', Icon: FaNodeJs, color: '#339933' },
-            { name: 'REST APIs', Icon: FaServer },
-        ],
-        databases: [
-            { name: 'SQL Server', Icon: FaDatabase, color: '#CC2927' },
-            { name: 'PostgreSQL', Icon: SiPostgresql, color: '#4169E1' },
-            { name: 'Entity Framework', Icon: FaDatabase },
-        ],
-        cloudDevOps: [
-            { name: 'Docker', Icon: FaDocker, color: '#2496ED' },
-            { name: 'Azure (Basic)', Icon: FaMicrosoft, color: '#0078D4' },
-            { name: 'AWS (Basic)', Icon: SiAmazon, color: '#FF9900' },
-            { name: 'CI/CD (GitHub Actions)', Icon: FaGithub, color: '#181717' },
-        ],
-        tools: [
-            { name: 'Git / GitHub', Icon: FaGitAlt, color: '#F05032' },
-            { name: 'Vite', Icon: SiVite, color: '#646CFF' },
-            { name: 'Figma (Basic)', Icon: FaFigma, color: '#F24E1E' },
-        ],
-    };
+  const skillData: Record<string, Skill[]> = {
+    Languages: [
+      { name: 'C#', Icon: SiDotnet, color: '#512BD4' },
+      { name: 'JavaScript', Icon: FaJsSquare, color: '#F7DF1E' },
+      { name: 'TypeScript', Icon: SiTypescript, color: '#3178C6' },
+      { name: 'HTML5', Icon: FaHtml5, color: '#E34F26' },
+      { name: 'CSS3 / SCSS', Icon: FaCss3Alt, color: '#1572B6' },
+    ],
+    Frontend: [
+      { name: 'React', Icon: FaReact, color: '#61DAFB' },
+      { name: 'Next.js', Icon: TbBrandNextjs },
+      { name: 'Tailwind CSS', Icon: SiTailwindcss, color: '#06B6D4' },
+      { name: 'Blazor', Icon: SiBlazor, color: '#512BD4' },
+      { name: 'Angular', Icon: FaAngular, color: '#DD0031' },
+    ],
+    Backend: [
+      { name: '.NET (Core / Framework)', Icon: SiDotnet, color: '#512BD4' },
+      { name: 'Node.js', Icon: FaNodeJs, color: '#339933' },
+      { name: 'REST APIs', Icon: FaServer },
+    ],
+    Databases: [
+      { name: 'SQL Server', Icon: FaDatabase, color: '#CC2927' },
+      { name: 'PostgreSQL', Icon: SiPostgresql, color: '#4169E1' },
+      { name: 'Entity Framework', Icon: FaDatabase },
+    ],
+    'Cloud / DevOps': [
+      { name: 'Docker', Icon: FaDocker, color: '#2496ED' },
+      { name: 'Azure', Icon: FaMicrosoft, color: '#0078D4' },
+      { name: 'AWS', Icon: SiAmazon, color: '#FF9900' },
+      { name: 'CI/CD (GitHub Actions)', Icon: FaGithub, color: '#181717' },
+    ],
+    Tools: [
+      { name: 'Git / GitHub', Icon: FaGitAlt, color: '#F05032' },
+      { name: 'Vite', Icon: SiVite, color: '#646CFF' },
+      { name: 'Figma', Icon: FaFigma, color: '#F24E1E' },
+    ],
+  };
 
-    const formatCategoryTitle = (key: string): string => {
-        const title = key.replace(/([A-Z])/g, ' $1');
-        return title.charAt(0).toUpperCase() + title.slice(1);
-    };
-
-    return (
-        <StyledSkillsSection id="skills">
-            <SectionHeading sectionNumber="3">My Skill Set</SectionHeading>
-            <SkillsGrid>
-                {Object.entries(skillData).map(([categoryKey, skills]) => (
-                    <SkillCategory key={categoryKey}>
-                        <h3>{formatCategoryTitle(categoryKey)}</h3>
-                        <ul>
-                            {skills.map((skill) => (
-                                <li key={skill.name}>
-                                    <skill.Icon
-                                        aria-hidden="true"
-                                        color={skill.color}
-                                    />
-                                    <span>{skill.name}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </SkillCategory>
-                ))}
-            </SkillsGrid>
-        </StyledSkillsSection>
-    );
+  return (
+    <StyledSkillsSection id="skills">
+      <SectionHeading sectionNumber="3">My Skill Set</SectionHeading>
+      <SkillsGrid>
+        {Object.entries(skillData).map(([category, skills]) => (
+          <CategoryCard key={category}>
+            <CategoryTitle>{category}</CategoryTitle>
+            <SkillList>
+              {skills.map((skill) => (
+                <SkillItem key={skill.name} color={skill.color}>
+                  <skill.Icon />
+                  {skill.name}
+                </SkillItem>
+              ))}
+            </SkillList>
+          </CategoryCard>
+        ))}
+      </SkillsGrid>
+    </StyledSkillsSection>
+  );
 };
 
 export default Skills;

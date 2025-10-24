@@ -22,7 +22,7 @@ const StyledExperiencesGrid = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 8rem;
-  z-index: 0; /* establishes stacking context so line can go behind */
+  z-index: 0;
 `;
 
 const StyledTimelineConnector = styled.div`
@@ -33,7 +33,7 @@ const StyledTimelineConnector = styled.div`
   width: 1px;
   height: 100%;
   background-color: var(--light-slate);
-  z-index: -1; /* ensures line is behind everything */
+  z-index: -1;
 
   @media (max-width: 768px) {
     left: 24px;
@@ -74,7 +74,7 @@ const StyledTimelineItem = styled.div`
 const StyledCardWrapper = styled.div`
   width: 46%;
   position: relative;
-  z-index: 3; /* keeps connector below, card above */
+  z-index: 3;
 
   @media (max-width: 768px) {
     width: 90%;
@@ -88,7 +88,7 @@ const StyledCardWrapper = styled.div`
     width: 3rem;
     height: 1px;
     background-color: var(--light-slate);
-    z-index: 2; /* between line (-1) and card (3) */
+    z-index: 2;
   }
 
   ${StyledTimelineItem}:nth-child(odd) &::before {
