@@ -17,26 +17,42 @@ const StyledHero = styled.section`
 `;
 
 const Line = styled.div`
-  display: inline-block;
-  white-space: nowrap;
-  line-height: 1.1em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35em;
+  line-height: 1.15;
+  margin-bottom: 0.1em;
+
+  @media (max-width: 600px) {
+    line-height: 1.25;
+  }
+`;
+
+const Spacer = styled.div`
+  height: 0.25em;
+
+  @media (max-width: 600px) {
+    height: 0.35em;
+  }
 `;
 
 const WordStack = styled.span`
-  display: inline-flex;
   position: relative;
-  align-items: baseline;
-  overflow: visible;
+  display: inline-flex;
   min-width: 8ch;
-  margin-left: 0.35em;
+
+  @media (max-width: 600px) {
+    display: block;
+    margin-left: 0;
+    min-width: auto;
+  }
 `;
 
 const AnimatedWord = styled(motion.span)`
-  display: inline-block;
   font-weight: 700;
   color: var(--accent-color);
   line-height: 1.1;
-  transform: translateY(0.10em);
 `;
 
 const Hero = () => {
@@ -56,13 +72,12 @@ const Hero = () => {
     "craftsmanship"
   ];
 
-
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [words.length]);
+  }, []);
 
   return (
     <StyledHero id="hero">
@@ -84,7 +99,7 @@ const Hero = () => {
             fontFamily: '"Fira Code", monospace',
             fontWeight: 700,
             fontSize: "clamp(2.5rem, 5vw, 4rem)",
-            marginBottom: "0.5rem",
+            marginBottom: "0.75rem",
           }}
         >
           Mathieu Schrurs.
@@ -99,6 +114,7 @@ const Hero = () => {
             marginBottom: "1.5rem",
           }}
         >
+          {/* Line 1 */}
           <Line>
             I explore
             <WordStack>
@@ -128,8 +144,11 @@ const Hero = () => {
               </AnimatePresence>
             </WordStack>
           </Line>
-          <br />
-          through code
+
+          <Spacer />
+
+          {/* Line 2 */}
+          <Line>through code</Line>
         </h2>
 
         <p
