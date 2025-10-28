@@ -3,26 +3,40 @@ import styled from 'styled-components';
 
 const StyledExperienceCard = styled.div`
   padding: 1.5rem;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   border-radius: 0.5rem;
   background-color: var(--card-bg-color);
-  color: var(--text-secondary-color);
   border: 1px solid var(--border-color);
+  color: var(--text-secondary-color);
   position: relative;
   z-index: 2;
-  transition: var(--transition), box-shadow 0.35s ease, transform 0.25s ease;
+  will-change: transform, opacity;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 
   &:hover {
-    transform: translateY(-4px) scale(1.01);
-    border-color: var(--accent-color);
-    box-shadow: 0 0 12px 2px var(--accent-tint-color);
-    color: var(--text-primary-color);
-    z-index: 10; /* lifted above connectors and line */
+    transform: none;
+    box-shadow: none;
   }
 
-  &:active {
-    transform: scale(0.995);
-    box-shadow: 0 0 6px 1px var(--accent-tint-color);
+  animation-timeline: scroll(y);
+  animation-name: scrollLift;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+
+  @keyframes scrollLift {
+    0% {
+      transform: translateY(16px);
+      opacity: 0.9;
+    }
+    50% {
+      transform: translateY(4px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 `;
 
