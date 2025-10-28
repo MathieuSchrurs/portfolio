@@ -64,7 +64,6 @@ const MiddleCol = styled.div`
   }
 `;
 
-/* Opposite side column where the date text lives */
 const DateCol = styled.div<{ $cardSide: Side }>`
   position: relative;
   display: flex;
@@ -80,7 +79,6 @@ const DateCol = styled.div<{ $cardSide: Side }>`
   }
 `;
 
-/* Plain text date — no background, no border */
 const DateText = styled.time<{ $cardSide: Side }>`
   font-family: var(--font-mono);
   font-size: var(--fz-xs);
@@ -92,7 +90,6 @@ const DateText = styled.time<{ $cardSide: Side }>`
   transform: translateY(${({ $cardSide }) => ($cardSide === 'left' ? '-4px' : '4px')});
 `;
 
-/* Mobile fallback: show date above the card */
 const DateMobile = styled.time`
   display: none;
   font-family: var(--font-mono);

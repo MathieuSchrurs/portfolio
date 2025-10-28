@@ -31,11 +31,10 @@ const SkillsGrid = styled.div`
   margin-top: 3rem;
 `;
 
-/* Inherit shell + enable popout if you want parity with Experience */
 const CategoryCard = styled(ChromeCard).attrs({
   padding: '2rem 1.75rem',
   radius: '0.5rem',
-  popoutOnHover: true, // set to false to keep flat hover
+  popoutOnHover: true,
 })``;
 
 const CategoryTitle = styled.h3`

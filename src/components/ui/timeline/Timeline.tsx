@@ -16,7 +16,7 @@ export type TimelineVars = Partial<{
 export interface TimelineItem {
   id: string;
   content: React.ReactNode;
-  dateLabel?: React.ReactNode; // ✅ new
+  dateLabel?: React.ReactNode;
 }
 
 export interface TimelineProps {
@@ -75,7 +75,7 @@ export default function Timeline({ items, vars }: TimelineProps) {
           key={item.id}
           id={item.id}
           side={i % 2 === 0 ? 'left' : 'right'}
-          dateLabel={item.dateLabel} // ✅ pass through
+          dateLabel={item.dateLabel}
         >
           {item.content}
         </TimelineRow>

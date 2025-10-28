@@ -7,7 +7,6 @@ type ChromeCardProps = {
 };
 
 const ChromeCard = styled.div<ChromeCardProps>`
-  /* Source of truth: mirrors original ExperienceCard shell */
   position: relative;
   background-color: var(--card-bg-color);
   border: 1px solid var(--border-color);
@@ -28,7 +27,6 @@ const ChromeCard = styled.div<ChromeCardProps>`
     border-color: var(--border-color);
   }
 
-  /* Opt-in: subtle popout on hover */
   ${({ popoutOnHover }) =>
     popoutOnHover &&
     css`

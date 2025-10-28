@@ -33,8 +33,8 @@ export default function Experience() {
         items={items}
         vars={{
           midW: '180px',
-          rowMin: '72px',      // slightly taller rows
-          rowOverlap: '56px',  // less overlap than 80px -> more space between rows
+          rowMin: '72px', 
+          rowOverlap: '56px',
           cardW: '42%',
           cardMax: '420px',
           cardStub: '10px',
