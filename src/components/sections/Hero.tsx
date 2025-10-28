@@ -17,46 +17,38 @@ const StyledHero = styled.section`
 `;
 
 const Line = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.35em;
-  line-height: 1.15;
-  margin-bottom: 0.1em;
-
-  @media (max-width: 600px) {
-    line-height: 1.25;
-  }
+  gap: 0.5em;
 `;
 
-const Spacer = styled.div`
-  height: 0.25em;
-
-  @media (max-width: 600px) {
-    height: 0.35em;
-  }
+const StaticWord = styled.span`
+  margin-right: 0.005em;
 `;
 
 const WordStack = styled.span`
-  position: relative;
   display: inline-flex;
-  min-width: 8ch;
-
-  @media (max-width: 600px) {
-    display: block;
-    margin-left: 0;
-    min-width: auto;
-  }
+  align-items: baseline;
+  min-width: 5ch;
 `;
 
 const AnimatedWord = styled(motion.span)`
+  display: inline-flex;
+  align-items: flex-end;
   font-weight: 700;
   color: var(--accent-color);
-  line-height: 1.1;
+  line-height: 1.55;
+`;
+
+const Break = styled.div`
+  height: 0.4em;
+  width: 100%;
 `;
 
 const Hero = () => {
   const [index, setIndex] = useState(0);
+
   const words = [
     "creation",
     "curiosity",
@@ -67,15 +59,15 @@ const Hero = () => {
     "elegance",
     "connection",
     "understanding",
-    "transformation",
     "resilience",
-    "craftsmanship"
+    "craftsmanship",
   ];
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % words.length);
-    }, 3000);
+    const interval = setInterval(
+      () => setIndex((prev) => (prev + 1) % words.length),
+      2000
+    );
     return () => clearInterval(interval);
   }, []);
 
@@ -114,9 +106,10 @@ const Hero = () => {
             marginBottom: "1.5rem",
           }}
         >
-          {/* Line 1 */}
           <Line>
-            I explore
+            <StaticWord>I</StaticWord>
+            explore
+
             <WordStack>
               <AnimatePresence mode="wait" initial={false}>
                 <AnimatedWord
@@ -126,7 +119,7 @@ const Hero = () => {
                     y: "0%",
                     opacity: 1,
                     transition: {
-                      duration: 0.8,
+                      duration: 0.3,
                       ease: [0.25, 0, 0.35, 1],
                     },
                   }}
@@ -134,7 +127,7 @@ const Hero = () => {
                     y: "-40%",
                     opacity: 0,
                     transition: {
-                      duration: 0.8,
+                      duration: 0.3,
                       ease: [0.25, 0, 0.35, 1],
                     },
                   }}
@@ -145,9 +138,8 @@ const Hero = () => {
             </WordStack>
           </Line>
 
-          <Spacer />
+          <Break />
 
-          {/* Line 2 */}
           <Line>through code</Line>
         </h2>
 
