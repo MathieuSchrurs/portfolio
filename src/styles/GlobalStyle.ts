@@ -19,8 +19,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::selection {
-    background-color: var(--lightest-navy); // Or use theme-aware variable
-    color: var(--lightest-slate); // Or use theme-aware variable
+    background-color: var(--selection-bg-color);
+    color: var(--selection-text-color);
   }
 
   :focus {
@@ -38,20 +38,19 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     scrollbar-width: thin;
-    scrollbar-color: var(--dark-slate) var(--navy); // Adjust for theme if needed
+    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
   }
   body::-webkit-scrollbar {
     width: 12px;
   }
   body::-webkit-scrollbar-track {
-    background: var(--bg-color);
+    background: var(--scrollbar-track-color);
   }
   body::-webkit-scrollbar-thumb {
-    background-color: var(--dark-slate);
+    background-color: var(--scrollbar-thumb-color);
     border: 3px solid var(--bg-color);
     border-radius: 10px;
   }
-
 
   body {
     margin: 0;
@@ -209,7 +208,6 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-
   img, svg {
     max-width: 100%;
     height: auto;
@@ -288,23 +286,23 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     list-style: none;
   }
-  ul.fancy-list { 
+  ul.fancy-list {
      ${({ theme }) => theme.mixins.fancyList};
   }
 
   p {
-    margin: 0 0 15px 0; /* Changed from 1rem */
-    line-height: 1.5; /* Changed from 1.6 */
+    margin: 0 0 15px 0;
+    line-height: 1.5;
     &:last-child,
     &:last-of-type {
       margin-bottom: 0;
     }
-    & > a { 
+    & > a {
       ${({ theme }) => theme.mixins.inlineLink};
     }
     & > code {
-      background-color: var(--light-navy);
-      color: var(--lightest-slate);
+      background-color: var(--code-inline-bg-color);
+      color: var(--code-inline-text-color);
       font-size: var(--fz-sm);
       border-radius: var(--border-radius);
       padding: 0.3em 0.5em;
@@ -331,11 +329,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: var(--font-mono);
     font-size: var(--fz-md);
   }
-  pre code { /* Added */
+  pre code {
     background-color: transparent;
     padding: 0;
   }
-
 
   .skip-to-content {
     ${({ theme }) => theme.mixins.button};

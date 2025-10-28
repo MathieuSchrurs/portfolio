@@ -19,7 +19,7 @@ const StyledSocialList = styled.ul`
     width: 1px;
     height: 90px;
     margin: 0 auto;
-    background-color: var(--light-slate);
+    background-color: var(--border-color);
   }
 
   li {
@@ -30,7 +30,7 @@ const StyledSocialList = styled.ul`
   }
 `;
 
-type Platform = 'github' | 'linkedin' | 'twitter' | 'instagram'; // Define Platform type if SocialIcon needs it strictly
+type Platform = 'github' | 'linkedin' | 'twitter' | 'instagram';
 
 const Social: React.FC = () => {
   const { socialMedia } = config;
@@ -43,7 +43,7 @@ const Social: React.FC = () => {
           socialMedia.map(({ url, name }, i) => (
             <li key={i}>
               <SocialIcon
-                platform={name.toLowerCase() as Platform} // Use defined type or keep 'as any'
+                platform={name.toLowerCase() as Platform}
                 url={url}
                 prefersReducedMotion={prefersReducedMotion}
               />

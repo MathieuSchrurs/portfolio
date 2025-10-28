@@ -9,6 +9,7 @@ import {
   SiTypescript, SiTailwindcss, SiDotnet, SiPostgresql, SiAmazon, SiVite, SiBlazor,
 } from 'react-icons/si';
 import { TbBrandNextjs } from 'react-icons/tb';
+import ChromeCard from '../ui/ChromeCard';
 
 interface Skill {
   name: string;
@@ -30,28 +31,12 @@ const SkillsGrid = styled.div`
   margin-top: 3rem;
 `;
 
-const CategoryCard = styled.div`
-  backdrop-filter: blur(8px);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 2rem 1.75rem;
-  transition: background 0.3s ease, transform 0.25s ease, border-color 0.3s ease;
-  position: relative;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.06);
-    transform: translateY(-2px);
-    border-color: var(--accent-color);
-  }
-
-  @media (prefers-color-scheme: light) {
-    background: rgba(245, 245, 245, 0.5);
-    &:hover {
-      background: rgba(245, 245, 245, 0.7);
-    }
-  }
-`;
+/* Inherit shell + enable popout if you want parity with Experience */
+const CategoryCard = styled(ChromeCard).attrs({
+  padding: '2rem 1.75rem',
+  radius: '0.5rem',
+  popoutOnHover: true, // set to false to keep flat hover
+})``;
 
 const CategoryTitle = styled.h3`
   font-family: var(--font-mono);
@@ -92,9 +77,7 @@ const SkillItem = styled.li<{ color?: string }>`
     flex-shrink: 0;
   }
 
-  &:hover {
-    opacity: 1;
-  }
+  &:hover { opacity: 1; }
 `;
 
 const Skills = () => {

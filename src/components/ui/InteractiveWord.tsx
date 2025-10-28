@@ -22,12 +22,12 @@ const TerminalWrapper = styled.div`
   flex-direction: column;
   width: 300px;
   height: 200px;
-  background-color: var(--dark-navy);
-  border: 1px solid var(--lightest-navy);
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   padding: 10px;
   font-family: 'Fira Code', monospace;
-  color: var(--light-slate);
+  color: var(--text-secondary-color);
   overflow: hidden;
 `;
 
@@ -42,13 +42,14 @@ const TerminalInput = styled.input`
   width: 100%;
   background-color: transparent;
   border: none;
-  color: var(--light-slate);
+  color: var(--text-secondary-color);
   font-family: 'Fira Code', monospace;
   font-size: var(--fz-sm);
   outline: none;
 
   &::placeholder {
-    color: var(--slate);
+    color: var(--text-secondary-color);
+    opacity: 0.6;
   }
 `;
 

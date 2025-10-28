@@ -3,46 +3,11 @@ import { css } from 'styled-components';
 const variables = css`
   :root {
     /******************************
-     * COLORS — DARK BASE
-     ******************************/
-    --dark-navy: #020c1b;
-    --navy: #0a192f;
-    --light-navy: #112240;
-    --lightest-navy: #2f3b52;
-    --navy-shadow: rgba(2, 12, 27, 0.7);
-
-    --dark-slate: #495670;
-    --slate: #8892b0;
-    --light-slate: #a8b2d1;
-    --lightest-slate: #ccd6f6;
-    --white: #e6f1ff;
-
-    --green: #64ffda;
-    --green-tint: rgba(100, 255, 218, 0.1);
-
-    /******************************
-     * COLORS — LIGHT BASE
-     ******************************/
-    --light-theme-background: #f5f5f5;
-    --light-theme-text-primary: #171717;
-    --light-theme-text-secondary: #737373;
-    --light-theme-card: #ffffff;
-    --light-theme-border: #bfbfbf;
-    --light-theme-accent: #8b5cf6;
-    --light-theme-accent-active: #7c3aed;
-    --light-theme-accent-text: #ffffff;
-    --light-theme-header-bg: rgba(245, 245, 245, 0.85);
-    --light-theme-shadow: rgba(100, 100, 100, 0.1);
-    --light-theme-accent-tint: rgba(139, 92, 246, 0.1);
-
-    /******************************
      * TYPOGRAPHY
      ******************************/
     --font-sans: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text',
       -apple-system, system-ui, sans-serif;
-
-    --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono',
-      monospace;
+    --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
 
     --fz-xxs: 12px;
     --fz-xs: 13px;
@@ -80,7 +45,7 @@ const variables = css`
     --hamburger-width: 30px;
 
     /******************************
-     * TIMELINE
+     * TIMELINE DEFAULTS
      ******************************/
     --timeline-mid-w: 140px;
     --timeline-trunk-w: 1px;
@@ -116,62 +81,75 @@ const variables = css`
 
   /* Dark Mode */
   body.dark {
-    --bg-color: var(--navy);
-    --text-primary-color: var(--lightest-slate);
-    --text-secondary-color: var(--slate);
+    --bg-color: #0a192f; 
+    --text-primary-color: #ccd6f6;  
+    --text-secondary-color: #8892b0; 
 
-    --card-bg-color: var(--light-navy);
-    --border-color: var(--lightest-navy);
-    --header-bg-color: rgba(10, 25, 47, 0.85);
-    --shadow-color: var(--navy-shadow);
+    --card-bg-color: #112240;
+    --border-color: #2f3b52;
+    --header-bg-color: rgba(10,25,47,0.85);
+    --shadow-color: rgba(2, 12, 27, 0.7);
 
-    --accent-color: var(--green);
-    --accent-active-color: var(--green);
-    --accent-text-color: var(--dark-navy);
-    --accent-tint-color: var(--green-tint);
+    --accent-color: #64ffda;
+    --accent-active-color: #64ffda;
+    --accent-text-color: #020c1b;
+    --accent-tint-color: rgba(100, 255, 218, 0.1);
 
+    /* selection & scrollbars */
+    --selection-bg-color: #2f3b52;
+    --selection-text-color: #ccd6f6;
+    --scrollbar-thumb-color: #495670;
+    --scrollbar-track-color: var(--bg-color);
+
+    /* inline code */
+    --code-inline-bg-color: #112240;
+    --code-inline-text-color: #ccd6f6;
+
+    /* icons / theming */
     --logo-hover-color: #64ffda;
     --logo-default-color: #ffffff;
-
     --sun-color: #64ffda;
     --moon-color: #64ffda;
 
+    /* gradients (used elsewhere) */
     --gradient-middle-color: #64ffda;
     --gradient-end-color: #005f43;
-
-    --skill-item-hover-bg: var(--light-navy);
-    --project-card-bg: var(--light-navy);
-    --toggle-bg: #303030;
   }
 
   /* Light Mode */
   body.light {
-    --bg-color: var(--light-theme-background);
-    --text-primary-color: var(--light-theme-text-primary);
-    --text-secondary-color: var(--light-theme-text-secondary);
+    --bg-color: #f5f5f5;
+    --text-primary-color: #171717;
+    --text-secondary-color: #737373;
 
-    --card-bg-color: var(--light-theme-card);
-    --border-color: var(--light-theme-border);
-    --header-bg-color: var(--light-theme-header-bg);
-    --shadow-color: var(--light-theme-shadow);
+    --card-bg-color: #ffffff;
+    --border-color: #bfbfbf;
+    --header-bg-color: rgba(245,245,245,0.85);
+    --shadow-color: rgba(100,100,100,0.1);
 
-    --accent-color: var(--light-theme-accent);
-    --accent-active-color: var(--light-theme-accent-active);
-    --accent-text-color: var(--light-theme-accent-text);
-    --accent-tint-color: var(--light-theme-accent-tint);
+    --accent-color: #8b5cf6;
+    --accent-active-color: #7c3aed;
+    --accent-text-color: #ffffff;
+    --accent-tint-color: rgba(139, 92, 246, 0.1);
 
+    /* selection & scrollbars */
+    --selection-bg-color: rgba(139, 92, 246, 0.18);
+    --selection-text-color: var(--text-primary-color);
+    --scrollbar-thumb-color: #bfbfbf;
+    --scrollbar-track-color: var(--bg-color);
+
+    /* inline code */
+    --code-inline-bg-color: #f0f0f0;
+    --code-inline-text-color: var(--text-primary-color);
+
+    /* icons / theming */
     --logo-hover-color: #8b5cf6;
     --logo-default-color: #000000;
-
-    --sun-color: #fbbf24;     /* golden sun */
-    --moon-color: #262626;    /* deep grey */
+    --sun-color: #fbbf24;
+    --moon-color: #262626;
 
     --gradient-middle-color: #a78bfa;
-    --gradient-end-color: var(--slate);
-
-    --skill-item-hover-bg: var(--toggle-background-light);
-    --project-card-bg: var(--light-theme-card);
-    --toggle-bg: #ebebeb;
+    --gradient-end-color: #737373;
   }
 `;
 

@@ -9,13 +9,18 @@ export type TimelineVars = Partial<{
   rowMin: string;
   cardMax: string;
   rowOverlap: string;
-
   cardW: string;
   cardStub: string;
 }>;
 
+export interface TimelineItem {
+  id: string;
+  content: React.ReactNode;
+  dateLabel?: React.ReactNode; // ✅ new
+}
+
 export interface TimelineProps {
-  items: Array<{ id: string; content: React.ReactNode }>;
+  items: TimelineItem[];
   vars?: TimelineVars;
 }
 
@@ -27,7 +32,6 @@ const TimelineWrap = styled.ol<{ $vars?: TimelineVars }>`
   list-style: none;
   box-sizing: border-box;
 
-  /* Defaults */
   --timeline-mid-w: 140px;
   --timeline-trunk-w: 1px;
   --timeline-node-size: 15px;
@@ -44,8 +48,7 @@ const TimelineWrap = styled.ol<{ $vars?: TimelineVars }>`
         const cssVar = `--timeline-${key.replace(/[A-Z]/g, x => `-${x.toLowerCase()}`)}`;
         return `${cssVar}: ${value};`;
       })
-      .join('\n')
-  }
+      .join('\n')}
 
   &::before {
     content: '';
@@ -54,16 +57,13 @@ const TimelineWrap = styled.ol<{ $vars?: TimelineVars }>`
     left: 50%;
     transform: translateX(-50%);
     width: var(--timeline-trunk-w);
-    background: var(--light-slate);
+    background: var(--border-color);
     z-index: 0;
   }
 
   @media (max-width: 900px) {
     padding: 2rem 1rem;
-    &::before {
-      width: 1px;
-      opacity: 0.5;
-    }
+    &::before { width: 1px; opacity: 0.5; }
   }
 `;
 
@@ -75,6 +75,7 @@ export default function Timeline({ items, vars }: TimelineProps) {
           key={item.id}
           id={item.id}
           side={i % 2 === 0 ? 'left' : 'right'}
+          dateLabel={item.dateLabel} // ✅ pass through
         >
           {item.content}
         </TimelineRow>

@@ -13,10 +13,18 @@ const Section = styled.section`
 export default function Experience() {
   const { jobs } = config;
 
-  const items = jobs?.map((job, idx) => ({
-    id: `${idx}-${job.company}-${job.title}`,
-    content: <ExperienceCard {...job} />,
-  })) ?? [];
+  const items =
+    jobs?.map((job, idx) => ({
+      id: `${idx}-${job.company}-${job.title}`,
+      content: (
+        <ExperienceCard
+          title={job.title}
+          company={job.company}
+          description={job.description}
+        />
+      ),
+      dateLabel: job.range,
+    })) ?? [];
 
   return (
     <Section id="experience">
@@ -24,10 +32,11 @@ export default function Experience() {
       <Timeline
         items={items}
         vars={{
-          midW: '180px',      
-          rowMin: '64px',
+          midW: '180px',
+          rowMin: '72px',      // slightly taller rows
+          rowOverlap: '56px',  // less overlap than 80px -> more space between rows
           cardW: '42%',
-          cardMax: '420px', 
+          cardMax: '420px',
           cardStub: '10px',
           trunkW: '2px',
           nodeSize: '15px',

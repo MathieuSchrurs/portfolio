@@ -16,7 +16,7 @@ const StyledLinkWrapper = styled.div<{ prefersReducedMotion: boolean }>`
     width: 1px;
     height: 90px;
     margin: 0 auto;
-    background-color: var(--light-slate);
+    background-color: var(--border-color);
   }
 
   a {
@@ -27,7 +27,7 @@ const StyledLinkWrapper = styled.div<{ prefersReducedMotion: boolean }>`
     line-height: var(--fz-lg);
     letter-spacing: 0.1em;
     writing-mode: vertical-rl;
-    color: var(--light-slate);
+    color: var(--text-secondary-color);
     text-decoration: none;
     transition: ${(props) => props.prefersReducedMotion ? 'none' : 'var(--transition)'};
 

@@ -4,7 +4,7 @@ import { FaGithub } from 'react-icons/fa';
 import { FiExternalLink } from 'react-icons/fi';
 
 const StyledProjectCard = styled.div`
-  background-color: var(--project-card-bg);
+  background-color: var(--card-bg-color);
   color: var(--text-secondary-color);
   border-radius: var(--border-radius);
   padding: 1.75rem;
