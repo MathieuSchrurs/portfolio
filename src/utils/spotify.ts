@@ -25,6 +25,16 @@ export const fetchSpotifyAccessToken = async (): Promise<string> => {
   return data.access_token;
 };
 
+interface SpotifyTrack {
+  track: {
+    name: string;
+    artists: { name: string }[];
+    external_urls: {
+      spotify: string;
+    };
+  };
+}
+
 export const fetchSpotifySongs = async (): Promise<
   { title: string; artist: string; url: string }[]
 > => {
@@ -38,9 +48,9 @@ export const fetchSpotifySongs = async (): Promise<
 
   const data = await response.json();
 
-  return data.items.map((item: any) => ({
+  return data.items.map((item: SpotifyTrack) => ({
     title: item.track.name,
-    artist: item.track.artists.map((artist: any) => artist.name).join(', '),
+    artist: item.track.artists.map(artist => artist.name).join(', '),
     url: item.track.external_urls.spotify,
   }));
 };

@@ -22,10 +22,20 @@ const Row = styled.li`
     min-height: auto;
     margin-top: 0;
     padding: 1.5rem 0;
+  }
+`;
 
-    & + & {
-      margin-top: 1rem;
-    }
+const DesktopRow = styled.div`
+  display: contents;
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
+
+const MobileRow = styled.div`
+  display: none;
+  @media (max-width: 900px) {
+    display: contents;
   }
 `;
 
@@ -35,11 +45,6 @@ const CardCol = styled.div<{ $side: Side }>`
   justify-content: ${({ $side }) => ($side === 'left' ? 'flex-end' : 'flex-start')};
   align-items: center;
   z-index: 2;
-
-  @media (max-width: 900px) {
-    justify-content: center;
-    width: 100%;
-  }
 `;
 
 const CardWrapper = styled.div<{ $side: Side }>`
@@ -58,10 +63,6 @@ const MiddleCol = styled.div`
   position: relative;
   height: 100%;
   min-height: var(--timeline-row-min);
-
-  @media (max-width: 900px) {
-    display: none;
-  }
 `;
 
 const DateCol = styled.div<{ $cardSide: Side }>`
@@ -70,13 +71,7 @@ const DateCol = styled.div<{ $cardSide: Side }>`
   align-items: center;
   justify-content: ${({ $cardSide }) => ($cardSide === 'left' ? 'flex-start' : 'flex-end')};
   z-index: 2;
-
-  /* a little horizontal padding from the trunk so it doesn’t “kiss” the line */
   padding: 0 12px;
-
-  @media (max-width: 900px) {
-    display: none;
-  }
 `;
 
 const DateText = styled.time<{ $cardSide: Side }>`
@@ -85,21 +80,19 @@ const DateText = styled.time<{ $cardSide: Side }>`
   color: var(--text-secondary-color);
   line-height: 1;
   white-space: nowrap;
-
-  /* Nudge each side slightly up/down to avoid crowding the next row’s card */
   transform: translateY(${({ $cardSide }) => ($cardSide === 'left' ? '-4px' : '4px')});
 `;
 
-const DateMobile = styled.time`
-  display: none;
+const DateChip = styled.time`
   font-family: var(--font-mono);
   font-size: var(--fz-xs);
   color: var(--text-secondary-color);
-  margin-bottom: 0.5rem;
-
-  @media (max-width: 900px) {
-    display: inline-block;
-  }
+  background-color: var(--bg-color);
+  padding: 4px 12px;
+  border-radius: 20px;
+  z-index: 2;
+  position: relative;
+  margin-bottom: 30px;
 `;
 
 const Node = styled.div`
@@ -113,10 +106,6 @@ const Node = styled.div`
   border: 2px solid var(--border-color);
   transform: translate(-50%, -50%);
   z-index: 3;
-
-  @media (max-width: 900px) {
-    display: none;
-  }
 `;
 
 const ConnectorSVG = styled.svg<{ $side: Side }>`
@@ -128,10 +117,6 @@ const ConnectorSVG = styled.svg<{ $side: Side }>`
   pointer-events: none;
   overflow: hidden;
   z-index: 1;
-
-  @media (max-width: 900px) {
-    display: none;
-  }
 `;
 
 export function TimelineRow({
@@ -149,43 +134,47 @@ export function TimelineRow({
 
   return (
     <Row data-timeline-row data-id={id}>
-      <Node />
+      <MobileRow>
+        {dateLabel && <DateChip>{dateLabel}</DateChip>}
+        <CardWrapper $side={side}>{children}</CardWrapper>
+      </MobileRow>
 
-      <ConnectorSVG $side={side} viewBox="0 0 100 100" preserveAspectRatio="none">
-        <line
-          x1={isLeft ? 100 : 0}
-          y1="50"
-          x2={50}
-          y2="50"
-          stroke="var(--border-color)"
-          strokeWidth="1"
-          vectorEffect="non-scaling-stroke"
-        />
-      </ConnectorSVG>
+      <DesktopRow>
+        <Node />
+        <ConnectorSVG $side={side} viewBox="0 0 100 100" preserveAspectRatio="none">
+          <line
+            x1={isLeft ? 100 : 0}
+            y1="50"
+            x2={50}
+            y2="50"
+            stroke="var(--border-color)"
+            strokeWidth="1"
+            vectorEffect="non-scaling-stroke"
+          />
+        </ConnectorSVG>
 
-      {isLeft ? (
-        <>
-          <CardCol $side="left">
-            {dateLabel && <DateMobile>{dateLabel}</DateMobile>}
-            <CardWrapper $side="left">{children}</CardWrapper>
-          </CardCol>
-          <MiddleCol />
-          <DateCol $cardSide="left">
-            {dateLabel && <DateText $cardSide="left">{dateLabel}</DateText>}
-          </DateCol>
-        </>
-      ) : (
-        <>
-          <DateCol $cardSide="right">
-            {dateLabel && <DateText $cardSide="right">{dateLabel}</DateText>}
-          </DateCol>
-          <MiddleCol />
-          <CardCol $side="right">
-            {dateLabel && <DateMobile>{dateLabel}</DateMobile>}
-            <CardWrapper $side="right">{children}</CardWrapper>
-          </CardCol>
-        </>
-      )}
+        {isLeft ? (
+          <>
+            <CardCol $side="left">
+              <CardWrapper $side="left">{children}</CardWrapper>
+            </CardCol>
+            <MiddleCol />
+            <DateCol $cardSide="left">
+              {dateLabel && <DateText $cardSide="left">{dateLabel}</DateText>}
+            </DateCol>
+          </>
+        ) : (
+          <>
+            <DateCol $cardSide="right">
+              {dateLabel && <DateText $cardSide="right">{dateLabel}</DateText>}
+            </DateCol>
+            <MiddleCol />
+            <CardCol $side="right">
+              <CardWrapper $side="right">{children}</CardWrapper>
+            </CardCol>
+          </>
+        )}
+      </DesktopRow>
     </Row>
   );
 }

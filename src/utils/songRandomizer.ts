@@ -1,4 +1,5 @@
 import { fetchSpotifySongs } from '@utils/spotify';
+import { getRandomElement } from './arrayUtils';
 
 let songs: { title: string; artist: string; url: string }[] = [];
 
@@ -17,6 +18,5 @@ export const getRandomSong = (): { title: string; artist: string; url: string } 
     return null;
   }
 
-  const randomIndex = Math.floor(Math.random() * songs.length);
-  return songs[randomIndex];
+  return getRandomElement(songs);
 };

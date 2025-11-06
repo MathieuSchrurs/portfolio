@@ -69,7 +69,7 @@ const Hero = () => {
       2000
     );
     return () => clearInterval(interval);
-  }, []);
+  }, [words.length]);
 
   return (
     <StyledHero id="hero">

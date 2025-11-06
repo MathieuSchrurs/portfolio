@@ -16,13 +16,9 @@ export default function Experience() {
   const items =
     jobs?.map((job, idx) => ({
       id: `${idx}-${job.company}-${job.title}`,
-      content: (
-        <ExperienceCard
-          title={job.title}
-          company={job.company}
-          description={job.description}
-        />
-      ),
+      title: job.title,
+      company: job.company,
+      description: job.description,
       dateLabel: job.range,
     })) ?? [];
 
@@ -31,9 +27,16 @@ export default function Experience() {
       <SectionHeading sectionNumber="2">Where I've Worked</SectionHeading>
       <Timeline
         items={items}
+        renderItem={item => (
+          <ExperienceCard
+            title={item.title}
+            company={item.company}
+            description={item.description}
+          />
+        )}
         vars={{
           midW: '180px',
-          rowMin: '72px', 
+          rowMin: '72px',
           rowOverlap: '56px',
           cardW: '42%',
           cardMax: '420px',

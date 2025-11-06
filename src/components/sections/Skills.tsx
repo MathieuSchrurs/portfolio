@@ -13,7 +13,7 @@ import ChromeCard from '../ui/ChromeCard';
 
 interface Skill {
   name: string;
-  Icon: React.ComponentType<any>;
+  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   color?: string;
 }
 

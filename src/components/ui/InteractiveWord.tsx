@@ -77,7 +77,7 @@ const InteractiveWord: React.FC = () => {
         case 'help':
           newOutput.push('Available commands: help, song, clear');
           break;
-        case 'song':
+        case 'song': {
           const randomSong = getRandomSong();
           if (randomSong) {
             newOutput.push(
@@ -88,6 +88,7 @@ const InteractiveWord: React.FC = () => {
             newOutput.push('No songs available.');
           }
           break;
+        }
         case 'clear':
           setTerminalOutput([]);
           setCommand('');

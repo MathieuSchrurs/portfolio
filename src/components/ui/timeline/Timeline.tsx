@@ -15,12 +15,12 @@ export type TimelineVars = Partial<{
 
 export interface TimelineItem {
   id: string;
-  content: React.ReactNode;
   dateLabel?: React.ReactNode;
 }
 
-export interface TimelineProps {
-  items: TimelineItem[];
+export interface TimelineProps<T extends TimelineItem> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
   vars?: TimelineVars;
 }
 
@@ -45,7 +45,10 @@ const TimelineWrap = styled.ol<{ $vars?: TimelineVars }>`
     $vars &&
     Object.entries($vars)
       .map(([key, value]) => {
-        const cssVar = `--timeline-${key.replace(/[A-Z]/g, x => `-${x.toLowerCase()}`)}`;
+        const cssVar = `--timeline-${key.replace(
+          /[A-Z]/g,
+          x => `-${x.toLowerCase()}`
+        )}`;
         return `${cssVar}: ${value};`;
       })
       .join('\n')}
@@ -63,11 +66,18 @@ const TimelineWrap = styled.ol<{ $vars?: TimelineVars }>`
 
   @media (max-width: 900px) {
     padding: 2rem 1rem;
-    &::before { width: 1px; opacity: 0.5; }
+    &::before {
+      width: 1px;
+      opacity: 0.5;
+    }
   }
 `;
 
-export default function Timeline({ items, vars }: TimelineProps) {
+export default function Timeline<T extends TimelineItem>({
+  items,
+  renderItem,
+  vars,
+}: TimelineProps<T>) {
   return (
     <TimelineWrap $vars={vars}>
       {items.map((item, i) => (
@@ -77,7 +87,7 @@ export default function Timeline({ items, vars }: TimelineProps) {
           side={i % 2 === 0 ? 'left' : 'right'}
           dateLabel={item.dateLabel}
         >
-          {item.content}
+          {renderItem(item)}
         </TimelineRow>
       ))}
     </TimelineWrap>

@@ -13,7 +13,7 @@ import { generateColorVariants } from "../../utils/colorUtils";
 
 interface Skill {
   name: string;
-  Icon: React.ComponentType<any>;
+  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   color: string;
 }
 
@@ -32,6 +32,14 @@ const StyledAboutSection = styled.section`
 
 const StyledAboutContent = styled.div`
   display: flow-root;
+  
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 15px;
+  }
 `;
 
 const StyledText = styled.div`
@@ -53,6 +61,18 @@ const StyledText = styled.div`
         text-decoration: none;
       }
     }
+
+    @media (max-width: 768px) {
+      margin: 0 0 20px;
+      font-size: 20px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 480px) {
+      margin: 0 0 25px;
+      font-size: 18px;
+      line-height: 1.6;
+    }
   }
 `;
 
@@ -63,6 +83,16 @@ const StyledTechStackSubtitle = styled.h4`
   font-size: var(--fz-lg);
   font-weight: 500;
   color: var(--text-primary-color);
+
+  @media (max-width: 768px) {
+    margin: 60px 0;
+    font-size: 18px;
+  }
+
+  @media (max-width: 480px) {
+    margin: 50px 0;
+    font-size: 16px;
+  }
 `;
 
 const skillsListItemStyles = `
@@ -190,6 +220,16 @@ const StyledSkillsGrid = styled.ul`
       }
     }
   }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+  }
 `;
 
 const StyledPic = styled.div`
@@ -245,12 +285,12 @@ const currentSkills: Skill[] = [
         <StyledText>
           <div>
             <p>
-              Hi, I'm Mathieu — a software engineer based in Ghent, Belgium. I
-              love building digital products that are robust, user-friendly, and
-              genuinely helpful.
+              Hi, I’m Mathieu, a builder at heart and software engineer by trade. 
+              I love exploring how things work, hacking on ideas, 
+              and shaping them into products that feel friendly and dependable.
             </p>
             <p>
-              My journey began with C# and .NET, and has since grown to include
+              My journey started out with C# and .NET, and has since grown to include
               modern frontend tools like React and Next.js. I enjoy working
               across the stack, turning ideas into real, impactful solutions.
             </p>
@@ -261,8 +301,8 @@ const currentSkills: Skill[] = [
               real-world needs.
             </p>
             <p>
-              Outside of coding, I’m always learning, refining, and looking for
-              new ways to grow <br></br> as a developer, a basketbalcoach, a partner, a friend, or simply
+              Outside of coding, I'm always learning, refining, and looking for
+              new ways to grow as a developer, a basketbalcoach, a partner, a friend, or simply
               as a human.
             </p>
 
@@ -276,9 +316,9 @@ const currentSkills: Skill[] = [
                     key={skill.name}
                     style={
                       {
-                        ["--skill-base" as any]: variants.base,
-                        ["--skill-light" as any]: variants.light,
-                        ["--skill-dark" as any]: variants.dark,
+                        '--skill-base': variants.base,
+                        '--skill-light': variants.light,
+                        '--skill-dark': variants.dark,
                       } as React.CSSProperties
                     }
                   >

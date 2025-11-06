@@ -163,7 +163,7 @@ const MobileMenu = styled.div<{ $open: boolean }>`
   top: 0;
   right: 0;
   height: 100vh;
-  width: 65%;
+  width: min(60vw, 300px);
   background-color: var(--bg-color);
   box-shadow: -2px 0 10px var(--shadow-color);
   transform: translateX(${(props) => (props.$open ? "0" : "100%")});
@@ -171,16 +171,16 @@ const MobileMenu = styled.div<{ $open: boolean }>`
   z-index: 15;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 100px 30px 40px; 
+  align-items: center;
+  justify-content: center;
+  padding: 50px 10px;
   overflow-y: auto;
 
   ol {
     list-style: none;
     padding: 0;
-    margin: 0;
-    text-align: right;
+    margin: 0 0 20px 0;
+    text-align: center;
 
     li {
       margin: 20px 0;
@@ -189,6 +189,7 @@ const MobileMenu = styled.div<{ $open: boolean }>`
       a {
         color: var(--text-primary-color);
         text-decoration: none;
+        padding: 10px;
         &:hover {
           color: var(--accent-color);
         }
@@ -224,6 +225,14 @@ const Nav: React.FC = () => {
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add('blur');
+    } else {
+      document.body.classList.remove('blur');
+    }
+  }, [isMenuOpen]);
 
   const { navLinks } = config;
 
@@ -275,6 +284,7 @@ const Nav: React.FC = () => {
             </li>
           ))}
         </ol>
+        <CVDownload />
       </MobileMenu>
     </StyledHeader>
   );
