@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import config from "@config";
-import StyledButtonLink from "../ui/StyledButtonLink"; // <-- import your shared button
+import StyledButtonLink from "../ui/StyledButtonLink";
 
 const StyledContactSection = styled.section`
   max-width: 600px;
@@ -40,25 +40,35 @@ const StyledTitle = styled.h2`
   margin: 0 0 20px 0;
 `;
 
+const StyledDescription = styled.p`
+  color: var(--text-secondary-color);
+`;
+
+const StyledCTA = styled.div`
+  margin-top: 3.5rem;
+`;
+
 const Contact = () => {
   return (
     <StyledContactSection id="contact">
       <StyledPreHeading>What's Next?</StyledPreHeading>
       <StyledTitle>Get In Touch</StyledTitle>
 
-      <p style={{ color: "var(--text-secondary-color)", marginBottom: "2.5rem" }}>
-        I'm always on the lookout for new opportunities experiences and welcome connections.
+      <StyledDescription>
+        I'm always on the lookout for new opportunities and welcome connections.
         Whether you have a specific question, or just want to connect,
         feel free to reach out!
-      </p>
+      </StyledDescription>
 
-      <StyledButtonLink
-        href={`mailto:${config.email}`}
-        showIcon={false}
-        className="email-link"
-      >
-        Say Hello
-      </StyledButtonLink>
+      <StyledCTA>
+        <StyledButtonLink
+          href={`mailto:${config.email}`}
+          showIcon={false}
+          className="email-link"
+        >
+          Say Hello
+        </StyledButtonLink>
+      </StyledCTA>
     </StyledContactSection>
   );
 };

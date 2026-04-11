@@ -60,7 +60,14 @@ const TimelineWrap = styled.ol<{ $vars?: TimelineVars }>`
     left: 50%;
     transform: translateX(-50%);
     width: var(--timeline-trunk-w);
-    background: var(--border-color);
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      var(--accent-color) 8%,
+      var(--accent-color) 92%,
+      transparent 100%
+    );
+    opacity: 0.3;
     z-index: 0;
   }
 

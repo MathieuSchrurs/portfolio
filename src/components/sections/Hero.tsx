@@ -16,51 +16,70 @@ const StyledHero = styled.section`
   padding-bottom: 5rem;
 `;
 
-const Line = styled.div`
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.5em;
+const StyledOverline = styled.p`
+  color: var(--text-primary-color);
+  font-family: var(--font-mono);
+  font-size: var(--fz-md);
+  margin-bottom: 1rem;
 `;
 
-const StaticWord = styled.span`
-  margin-right: 0.005em;
+const StyledBigName = styled.h1`
+  color: var(--text-primary-color);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 0.75rem;
 `;
 
-const WordStack = styled.span`
-  display: inline-flex;
-  align-items: baseline;
-  min-width: 5ch;
+const StyledTagline = styled.h2`
+  color: var(--text-secondary-color);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
 `;
 
+const StyledBio = styled.p`
+  color: var(--text-secondary-color);
+  font-family: var(--font-mono);
+  font-size: var(--fz-lg);
+  line-height: 1.5;
+`;
+
+/* Fixed-height clipping window — the slot machine drum */
+const WordSlot = styled.span`
+  display: block;
+  overflow: hidden;
+  height: 1.2em;
+  position: relative;
+`;
+
+/* Each word lives absolutely inside the slot so the container never resizes */
 const AnimatedWord = styled(motion.span)`
-  display: inline-flex;
-  align-items: flex-end;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
   font-weight: 700;
   color: var(--accent-color);
-  line-height: 1.55;
-`;
-
-const Break = styled.div`
-  height: 0.4em;
-  width: 100%;
+  white-space: nowrap;
 `;
 
 const Hero = () => {
   const [index, setIndex] = useState(0);
 
   const words = [
-    "creation",
-    "curiosity",
-    "logic",
-    "systems",
-    "iteration",
+    "rhythm",
     "clarity",
-    "elegance",
+    "meaning",
+    "craft",
     "connection",
-    "understanding",
-    "resilience",
-    "craftsmanship",
+    "flow",
+    "purpose",
+    "nuance",
+    "structure",
+    "stories",
   ];
 
   useEffect(() => {
@@ -74,92 +93,48 @@ const Hero = () => {
   return (
     <StyledHero id="hero">
       <div>
-        <p
-          style={{
-            color: "var(--text-primary-color)",
-            fontFamily: '"Fira Code", monospace',
-            fontSize: "var(--fz-md)",
-            marginBottom: "1rem",
-          }}
-        >
-          Hi, my name is
-        </p>
+        <StyledOverline>Hi, my name is</StyledOverline>
 
-        <h1
-          style={{
-            color: "var(--text-primary-color)",
-            fontFamily: '"Fira Code", monospace',
-            fontWeight: 700,
-            fontSize: "clamp(2.5rem, 5vw, 4rem)",
-            marginBottom: "0.75rem",
-          }}
-        >
-          Mathieu Schrurs.
-        </h1>
+        <StyledBigName>Mathieu Schrurs.</StyledBigName>
 
-        <h2
-          style={{
-            color: "var(--text-secondary-color)",
-            fontFamily: '"Fira Code", monospace',
-            fontWeight: 700,
-            fontSize: "clamp(2rem, 5vw, 3.5rem)",
-            marginBottom: "1.5rem",
-          }}
-        >
-          <Line>
-            <StaticWord>I</StaticWord>
-            explore
+        <StyledTagline>
+          I explore
+          <WordSlot>
+            <AnimatePresence initial={false}>
+              <AnimatedWord
+                key={words[index]}
+                initial={{ y: "105%" }}
+                animate={{
+                  y: "0%",
+                  transition: {
+                    duration: 0.45,
+                    ease: [0.22, 1, 0.36, 1],
+                  },
+                }}
+                exit={{
+                  y: "-105%",
+                  transition: {
+                    duration: 0.3,
+                    ease: [0.645, 0.045, 0.355, 1],
+                  },
+                }}
+              >
+                {words[index]}
+              </AnimatedWord>
+            </AnimatePresence>
+          </WordSlot>
+          through code
+        </StyledTagline>
 
-            <WordStack>
-              <AnimatePresence mode="wait" initial={false}>
-                <AnimatedWord
-                  key={words[index]}
-                  initial={{ y: "20%", opacity: 0 }}
-                  animate={{
-                    y: "0%",
-                    opacity: 1,
-                    transition: {
-                      duration: 0.3,
-                      ease: [0.25, 0, 0.35, 1],
-                    },
-                  }}
-                  exit={{
-                    y: "-40%",
-                    opacity: 0,
-                    transition: {
-                      duration: 0.3,
-                      ease: [0.25, 0, 0.35, 1],
-                    },
-                  }}
-                >
-                  {words[index]}
-                </AnimatedWord>
-              </AnimatePresence>
-            </WordStack>
-          </Line>
-
-          <Break />
-
-          <Line>through code</Line>
-        </h2>
-
-        <p
-          style={{
-            color: "var(--text-secondary-color)",
-            fontFamily: '"Fira Code", monospace',
-            fontSize: "var(--fz-lg)",
-            lineHeight: 1.5,
-            marginBottom: "3rem",
-          }}
-        >
-          Building digital solutions that bridge technology and human needs.
+        <StyledBio>
+          I build with care, curiosity, and intent.
           <br />
-          Using .NET, React, and Next.js.
+          Music publisher, language teacher, and now software developer —
           <br />
-          Always growing, always learning.
-        </p>
+          same instinct for craft, different medium.
+        </StyledBio>
 
-        <div style={{ display: "flex", gap: "1rem" }}>
+        <div style={{ display: "flex", gap: "1rem", marginTop: "3rem" }}>
           <StyledButtonLink href="#contact">Get In Touch</StyledButtonLink>
           <CVDownload />
         </div>

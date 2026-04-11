@@ -32,18 +32,18 @@ const SkillsGrid = styled.div`
 `;
 
 const CategoryCard = styled(ChromeCard).attrs({
-  padding: '2rem 1.75rem',
-  radius: '0.5rem',
+  padding: '1.5rem 1.75rem',
+  radius: 'var(--border-radius)',
   popoutOnHover: true,
 })``;
 
 const CategoryTitle = styled.h3`
   font-family: var(--font-mono);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: var(--fz-sm);
-  color: var(--text-primary-color);
-  opacity: 0.9;
+  letter-spacing: 0.08em;
+  font-size: var(--fz-xs);
+  font-weight: 600;
+  color: var(--accent-color);
   padding-bottom: 0.8rem;
   border-bottom: 1px solid var(--border-color);
   margin-bottom: 1.2rem;
@@ -55,7 +55,7 @@ const SkillList = styled.ul`
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.6rem;
 `;
 
 const SkillItem = styled.li<{ color?: string }>`
@@ -65,18 +65,19 @@ const SkillItem = styled.li<{ color?: string }>`
   color: var(--text-secondary-color);
   font-family: var(--font-mono);
   font-size: var(--fz-sm);
-  opacity: 0.95;
-  transition: opacity 0.2s ease;
+  transition: var(--transition);
 
   svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     color: ${({ color }) => color || 'var(--text-secondary-color)'};
-    opacity: 0.9;
     flex-shrink: 0;
+    transition: var(--transition);
   }
 
-  &:hover { opacity: 1; }
+  &:hover {
+    color: var(--text-primary-color);
+  }
 `;
 
 const Skills = () => {

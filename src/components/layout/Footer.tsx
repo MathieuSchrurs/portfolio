@@ -8,7 +8,7 @@ const StyledFooter = styled.footer`
   min-height: 70px;
   padding: 15px;
   text-align: center;
-  color: var(--light-slate);
+  color: var(--text-secondary-color);
   font-family: var(--font-mono);
   font-size: var(--fz-xxs);
 `;

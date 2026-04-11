@@ -40,8 +40,8 @@ const Social: React.FC = () => {
     <Side orientation="left">
       <StyledSocialList>
         {socialMedia &&
-          socialMedia.map(({ url, name }, i) => (
-            <li key={i}>
+          socialMedia.map(({ url, name }) => (
+            <li key={url}>
               <SocialIcon
                 platform={name.toLowerCase() as Platform}
                 url={url}

@@ -40,9 +40,10 @@ export default {
   ],
 
   colors: {
-    green: "#64ffda",
-    navy: "#0a192f",
-    darkNavy: "#020c1b",
+    accent: "#a78bfa",
+    accentLight: "#c4b5fd",
+    dark: "#111111",
+    darkElevated: "#1a1a1a",
     lightAccent: "#8b5cf6",
   },
 
@@ -66,43 +67,44 @@ export default {
     {
       company: "Twikey",
       title: "Customer Onboarding Specialist",
-      range: "2025 - Now",
-      description: "I turn complex fintech onboarding processes into seamless, automated client journeys. My focus is on clarity, compliance, and creating experiences that scale with every customer.",
+      range: "2025 — present",
+      description:
+        "Designing and optimising onboarding flows for fintech clients — turning compliance requirements and API integrations into seamless client journeys. Bridges technical teams and end users, translating requirements clearly on both sides.",
     },
     {
       company: "Batt Mobility @ Wintercircus",
       title: "Software Engineer Intern",
-      range: "2024 - 2024",
+      range: "2024",
       description:
-        "Worked with Blazor, Azure, Web APIs, and Entity Framework to develop, debug, and optimize software features while ensuring maintainable code and functionality.",
+        "Built and shipped features across a Blazor / .NET stack at an EV mobility startup. Worked with Azure, Web APIs, and Entity Framework — contributing to feature development, debugging, and code quality in a fast-moving team.",
     },
     {
-      company: "Sint-Janscollege/HTISA/Campus Saint-Jean",
-      title: "English / Dutch Teacher",
-      range: "2019-2023",
+      company: "Sint-Janscollege · HTISA · Campus Saint-Jean",
+      title: "English & Dutch Teacher",
+      range: "2019 — 2023",
       description:
-        "Facilitated language learning through engaging lessons and interactive activities. Managed diverse classroom environments to ensure optimal learning experiences. Employed effective communication skills and teaching techniques to foster a collaborative learning environment.",
+        "Taught English and Dutch across secondary and higher education for four years. Running a classroom sharpens systems thinking, clear communication, and the ability to break down complexity — skills that carry directly into engineering.",
     },
     {
       company: "The Right People / Hans Kusters Music",
       title: "Music Publishing Assistant",
-      range: "2017-2019",
+      range: "2017 — 2019",
       description:
-        "Assisted in music licensing and rights management, organizing catalogs, clearing copyrights, and tracking royalties. Collaborated with artists, composers, and internal teams to ensure compliance with licensing agreements.",
+        "Handled licensing, rights clearance, and royalty tracking for a catalog of independent artists. Precision-heavy work at the intersection of legal compliance, data management, and artist relations.",
     },
     {
-      company: "PIAS UK London head office",
-      title: "[PIAS] Intern",
-      range: "2017-2017",
+      company: "PIAS UK — London",
+      title: "Intern",
+      range: "2017",
       description:
-        "Assisted in day-to-day operations of the PIAS UK London office, gaining insight into music distribution and label management. Supported the team in various administrative tasks, including organizing promotional materials and maintaining databases.",
+        "Inside look at international music distribution at one of Europe's leading independent groups. Supported A&R, release logistics, and cross-market coordination from the London head office.",
     },
     {
       company: "Pepperminds",
-      title: "Sales Captain (Student Job)",
-      range: "2012-2017",
+      title: "Sales Captain",
+      range: "2012 — 2017",
       description:
-        "As Sales Captain at Pepperminds, I led training sessions for large groups and participated in face-to-face marketing campaigns for NGOs, driving sales performance and achieving campaign objectives",
+        "Led teams and coached new hires in face-to-face marketing campaigns for NGOs. Developed persuasion, team management, and performance under pressure — long before code was in the picture.",
     },
   ],
 

@@ -103,9 +103,12 @@ const Node = styled.div`
   height: var(--timeline-node-size);
   border-radius: 50%;
   background-color: var(--accent-color);
-  border: 2px solid var(--border-color);
   transform: translate(-50%, -50%);
   z-index: 3;
+  box-shadow:
+    0 0 0 3px var(--bg-color),
+    0 0 0 5px var(--accent-color),
+    0 0 12px 2px color-mix(in srgb, var(--accent-color) 40%, transparent);
 `;
 
 const ConnectorSVG = styled.svg<{ $side: Side }>`
@@ -147,8 +150,9 @@ export function TimelineRow({
             y1="50"
             x2={50}
             y2="50"
-            stroke="var(--border-color)"
+            stroke="var(--accent-color)"
             strokeWidth="1"
+            strokeOpacity="0.3"
             vectorEffect="non-scaling-stroke"
           />
         </ConnectorSVG>

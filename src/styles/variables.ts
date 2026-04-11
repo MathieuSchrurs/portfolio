@@ -41,7 +41,6 @@ const variables = css`
     /******************************
      * MOBILE NAV
      ******************************/
-    --nav-mobile-bg: rgba(10, 10, 25, 0.9);
     --hamburger-width: 30px;
 
     /******************************
@@ -81,51 +80,54 @@ const variables = css`
 
   /* Dark Mode */
   body.dark {
-    --bg-color: #0a192f; 
-    --text-primary-color: #ccd6f6;  
-    --text-secondary-color: #8892b0; 
+    --bg-color: #111111;
+    --text-primary-color: #ededed;
+    --text-secondary-color: #909090;
 
-    --card-bg-color: #112240;
-    --border-color: #2f3b52;
-    --header-bg-color: rgba(10,25,47,0.85);
-    --shadow-color: rgba(2, 12, 27, 0.7);
+    --card-bg-color: #1a1a1a;
+    --border-color: #2e2e2e;
+    --header-bg-color: rgba(17, 17, 17, 0.85);
+    --shadow-color: rgba(0, 0, 0, 0.5);
 
-    --accent-color: #64ffda;
-    --accent-active-color: #64ffda;
-    --accent-text-color: #020c1b;
-    --accent-tint-color: rgba(100, 255, 218, 0.1);
+    --accent-color: #a78bfa;
+    --accent-active-color: #c4b5fd;
+    --accent-text-color: #111111;
+    --accent-tint-color: rgba(167, 139, 250, 0.1);
 
     /* selection & scrollbars */
-    --selection-bg-color: #2f3b52;
-    --selection-text-color: #ccd6f6;
-    --scrollbar-thumb-color: #495670;
+    --selection-bg-color: rgba(167, 139, 250, 0.2);
+    --selection-text-color: #ededed;
+    --scrollbar-thumb-color: #3d3d3d;
     --scrollbar-track-color: var(--bg-color);
 
     /* inline code */
-    --code-inline-bg-color: #112240;
-    --code-inline-text-color: #ccd6f6;
+    --code-inline-bg-color: #1f1f1f;
+    --code-inline-text-color: #ededed;
 
     /* icons / theming */
-    --logo-hover-color: #64ffda;
-    --logo-default-color: #ffffff;
-    --sun-color: #64ffda;
-    --moon-color: #64ffda;
+    --logo-hover-color: #a78bfa;
+    --logo-default-color: #ededed;
+    --sun-color: #a78bfa;
+    --moon-color: #a78bfa;
+
+    /* mobile nav */
+    --nav-mobile-bg: rgba(17, 17, 17, 0.97);
 
     /* gradients (used elsewhere) */
-    --gradient-middle-color: #64ffda;
-    --gradient-end-color: #005f43;
+    --gradient-middle-color: #a78bfa;
+    --gradient-end-color: #5b4b8a;
   }
 
   /* Light Mode */
   body.light {
     --bg-color: #f5f5f5;
     --text-primary-color: #171717;
-    --text-secondary-color: #737373;
+    --text-secondary-color: #606060;
 
     --card-bg-color: #ffffff;
-    --border-color: #bfbfbf;
-    --header-bg-color: rgba(245,245,245,0.85);
-    --shadow-color: rgba(100,100,100,0.1);
+    --border-color: #e0e0e0;
+    --header-bg-color: rgba(245, 245, 245, 0.85);
+    --shadow-color: rgba(0, 0, 0, 0.08);
 
     --accent-color: #8b5cf6;
     --accent-active-color: #7c3aed;
@@ -133,23 +135,27 @@ const variables = css`
     --accent-tint-color: rgba(139, 92, 246, 0.1);
 
     /* selection & scrollbars */
-    --selection-bg-color: rgba(139, 92, 246, 0.18);
+    --selection-bg-color: rgba(139, 92, 246, 0.15);
     --selection-text-color: var(--text-primary-color);
-    --scrollbar-thumb-color: #bfbfbf;
+    --scrollbar-thumb-color: #c0c0c0;
     --scrollbar-track-color: var(--bg-color);
 
     /* inline code */
-    --code-inline-bg-color: #f0f0f0;
+    --code-inline-bg-color: #efefef;
     --code-inline-text-color: var(--text-primary-color);
 
     /* icons / theming */
     --logo-hover-color: #8b5cf6;
-    --logo-default-color: #000000;
-    --sun-color: #fbbf24;
+    --logo-default-color: #171717;
+    --sun-color: #f59e0b;
     --moon-color: #262626;
 
+    /* mobile nav */
+    --nav-mobile-bg: rgba(245, 245, 245, 0.97);
+
+    /* gradients (used elsewhere) */
     --gradient-middle-color: #a78bfa;
-    --gradient-end-color: #737373;
+    --gradient-end-color: #606060;
   }
 `;
 

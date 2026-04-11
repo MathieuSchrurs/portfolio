@@ -23,7 +23,6 @@ const StyledProjectsGrid = styled.div`
   gap: 15px;
   position: relative;
   margin-top: 50px;
-      font-family: var(--font-mono);
 
 
   @media (max-width: 1080px) {
@@ -40,8 +39,8 @@ const Work = () => {
 
       <StyledProjectsGrid>
         {projects &&
-          projects.map((project, index) => (
-            <WorkCard key={index} {...project} />
+          projects.map((project) => (
+            <WorkCard key={project.title} {...project} />
           ))}
       </StyledProjectsGrid>
     </StyledProjectsSection>

@@ -93,10 +93,9 @@ const mixins = {
     border: 1px solid var(--accent-color);
     border-radius: var(--border-radius);
     padding: 0.85rem 1.2rem;
-    margin: 0.2rem;
     font-size: var(--fz-xs);
     font-family: var(--font-mono);
-    line-height: 0.8;
+    line-height: 1;
     text-decoration: none;
     cursor: pointer;
     transition: var(--transition);

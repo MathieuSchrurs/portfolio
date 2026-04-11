@@ -7,18 +7,20 @@ const StyledProjectCard = styled.div`
   background-color: var(--card-bg-color);
   color: var(--text-secondary-color);
   border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
   padding: 1.75rem;
   transition: var(--transition);
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 180px;
+  min-height: 200px;
 
   &:hover,
   &:focus-within {
     outline: none;
-    box-shadow: 0 4px 12px var(--shadow-color);
+    border-color: var(--accent-color);
+    box-shadow: 0 8px 24px -8px var(--accent-color);
     transform: translateY(-5px);
   }
 `;
@@ -58,12 +60,14 @@ const StyledTitle = styled.h3`
   margin: 0;
   margin-right: 10px;
   color: var(--text-primary-color);
-  font-size: var(--fz-xxl);
+  font-size: var(--fz-xl);
   font-weight: 600;
 `;
 
 const StyledDescription = styled.div`
-  font-size: var(--fz-md);
+  font-family: var(--font-mono);
+  font-size: var(--fz-sm);
+  line-height: 1.6;
   color: var(--text-secondary-color);
   margin-bottom: 1rem;
 `;
@@ -80,12 +84,12 @@ const StyledTagList = styled.ul`
   li {
     font-family: var(--font-mono);
     font-size: var(--fz-xxs);
-    color: var(--text-secondary-color);
-    margin-right: 10px;
+    color: var(--accent-color);
+    margin-right: 8px;
     margin-bottom: 5px;
     line-height: 1.5;
     background-color: var(--accent-tint-color);
-    padding: 0.15rem 0.5rem;
+    padding: 0.2rem 0.55rem;
     border-radius: var(--border-radius);
 
     &:last-of-type {

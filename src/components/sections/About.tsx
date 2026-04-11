@@ -9,7 +9,6 @@ import {
 } from "react-icons/fa";
 import { SiTypescript, SiTailwindcss, SiDotnet } from "react-icons/si";
 import SectionHeading from "../ui/SectionHeading";
-import { generateColorVariants } from "../../utils/colorUtils";
 
 interface Skill {
   name: string;
@@ -50,6 +49,7 @@ const StyledText = styled.div`
     font-size: var(--fz-lg);
     line-height: 1.5;
     text-align: left;
+    text-wrap: pretty;
     &:last-of-type {
       margin-bottom: 0;
     }
@@ -64,13 +64,13 @@ const StyledText = styled.div`
 
     @media (max-width: 768px) {
       margin: 0 0 20px;
-      font-size: 20px;
+      font-size: var(--fz-xl);
       line-height: 1.7;
     }
 
     @media (max-width: 480px) {
       margin: 0 0 25px;
-      font-size: 18px;
+      font-size: var(--fz-lg);
       line-height: 1.6;
     }
   }
@@ -86,149 +86,83 @@ const StyledTechStackSubtitle = styled.h4`
 
   @media (max-width: 768px) {
     margin: 60px 0;
-    font-size: 18px;
+    font-size: var(--fz-lg);
   }
 
   @media (max-width: 480px) {
     margin: 50px 0;
-    font-size: 16px;
-  }
-`;
-
-const skillsListItemStyles = `
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 5px;
-  font-family: var(--font-mono);
-  font-size: var(--fz-sm);
-  cursor: default;
-  border-radius: 10px;
-  padding: 0.75rem 0.8rem;
-  width: 100%;
-  overflow: hidden;
-  transition: transform 0.3s ease, filter 0.3s ease;
-
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 15px;
-    background: linear-gradient(
-      180deg,
-      var(--skill-dark),
-      var(--skill-base),
-      var(--skill-light),
-      var(--skill-base)
-    );
-    background-size: 400% 400%;
-    z-index: -1;
-    opacity: 0.3;
-    transition: opacity 0.4s ease, filter 0.4s ease;
-  }
-
-  &::before {
-    padding: 2.5px;
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    filter: none;
-  }
-
-  &::after {
-    top: -4px;
-    left: -4px;
-    width: calc(100% + 8px);
-    height: calc(100% + 8px);
-    border-radius: 16px;
-    filter: blur(20px);
-    opacity: 0.12;
-    pointer-events: none;
-  }
-
-  &:hover {
-    transform: translateY(-3px);
-  }
-
-  &:hover::before {
-    opacity: 1;
-    filter: none;
-    animation: gradientShift 6s linear infinite;
-  }
-
-  &:hover::after {
-    opacity: 0.2;
-    filter: blur(16px);
-    animation: gradientShift 6s linear infinite;
-  }
-
-  svg {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover svg {
-    transform: scale(1.1);
-  }
-
-  span {
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  @keyframes gradientShift {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+    font-size: var(--fz-md);
   }
 `;
 
 const StyledSkillsGrid = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
   padding: 0;
   margin: 0 auto;
   list-style: none;
   max-width: 700px;
-  justify-content: center;
 
   li {
-    ${skillsListItemStyles}
-    text-align: left;
-    justify-content: flex-start;
+    flex: 0 0 160px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: var(--fz-sm);
+    cursor: default;
+    border-radius: var(--border-radius);
+    padding: 0.95rem 1.1rem;
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-top: 2px solid var(--skill-base);
+    color: var(--text-secondary-color);
+    transition: var(--transition);
+
+    &:hover {
+      transform: translateY(-3px);
+      border-color: var(--skill-base);
+      border-top-width: 2px;
+      background-color: var(--skill-tint);
+      color: var(--text-primary-color);
+      box-shadow: 0 8px 24px -8px var(--skill-base);
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    &:hover svg {
+      transform: scale(1.15);
+    }
+
+    span {
+      font-weight: 500;
+      white-space: nowrap;
+    }
 
     @media (min-width: 800px) {
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
       text-align: center;
-      flex-direction: column;
+      padding: 1.25rem 1rem;
 
       svg {
-        margin: 0 0 6px 0;
+        width: 24px;
+        height: 24px;
+        margin-bottom: 6px;
       }
     }
-  }
 
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
-  }
-
-  @media (max-width: 480px) {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 12px;
+    @media (max-width: 799px) {
+      flex: 0 0 calc(50% - 6px);
+    }
   }
 `;
 
@@ -285,48 +219,44 @@ const currentSkills: Skill[] = [
         <StyledText>
           <div>
             <p>
-              Hi, I’m Mathieu, a builder at heart and software engineer by trade. 
-              I love exploring how things work, hacking on ideas, 
-              and shaping them into products that feel friendly and dependable.
+              My path into software wasn’t a straight line — and that’s exactly what makes
+              it interesting. Before writing code professionally, I spent years in music
+              publishing in London, then teaching English and Dutch in Belgium. Those worlds
+              trained me to communicate clearly, think in systems, and put the human
+              experience at the center of everything I build.
             </p>
             <p>
-              My journey started out with C# and .NET, and has since grown to include
-              modern frontend tools like React and Next.js. I enjoy working
-              across the stack, turning ideas into real, impactful solutions.
+              Today, I work across the full stack — .NET and C# on the back end, React and
+              TypeScript on the front. Good software, to me, is the kind that does its job
+              quietly: well-structured, easy to reason about, and built to last beyond the
+              first release.
             </p>
             <p>
-              As many coders, I care deeply about clean code, thoughtful design,
-              and clear communication. Whether I'm collaborating with others or
-              working solo, I strive to bridge the gap between technology and
-              real-world needs.
+              What drives me isn’t just shipping features — it’s understanding a problem well
+              enough to solve it properly. Whether collaborating with a team or working
+              through something solo, the goal is always the same: something that genuinely
+              works for the people using it.
             </p>
             <p>
-              Outside of coding, I'm always learning, refining, and looking for
-              new ways to grow as a developer, a basketbalcoach, a partner, a friend, or simply
-              as a human.
+              Outside of code, you’ll find me courtside coaching my basketball team, exploring
+              new music albums, or hunting down the next thing worth understanding.
             </p>
 
             <StyledTechStackSubtitle>Current Tech Stack</StyledTechStackSubtitle>
 
             <StyledSkillsGrid aria-label="Current Tech Stack">
-              {currentSkills.map((skill) => {
-                const variants = generateColorVariants(skill.color);
-                return (
-                  <li
-                    key={skill.name}
-                    style={
-                      {
-                        '--skill-base': variants.base,
-                        '--skill-light': variants.light,
-                        '--skill-dark': variants.dark,
-                      } as React.CSSProperties
-                    }
-                  >
-                    <skill.Icon aria-hidden="true" color={skill.color} />
-                    <span>{skill.name}</span>
-                  </li>
-                );
-              })}
+              {currentSkills.map((skill) => (
+                <li
+                  key={skill.name}
+                  style={{
+                    '--skill-base': skill.color,
+                    '--skill-tint': `${skill.color}18`,
+                  } as React.CSSProperties}
+                >
+                  <skill.Icon aria-hidden="true" color={skill.color} />
+                  <span>{skill.name}</span>
+                </li>
+              ))}
             </StyledSkillsGrid>
           </div>
         </StyledText>

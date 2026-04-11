@@ -158,43 +158,84 @@ const StyledLinks = styled.div`
   }
 `;
 
-const MobileMenu = styled.div<{ $open: boolean }>`
+const MobileMenuOverlay = styled.div<{ $open: boolean }>`
+  display: ${({ $open }) => ($open ? 'block' : 'none')};
   position: fixed;
-  top: 0;
+  top: var(--nav-height);
+  left: 0;
   right: 0;
-  height: 100vh;
-  width: min(60vw, 300px);
+  bottom: 0;
+  z-index: 14;
+`;
+
+const MobileMenu = styled.aside<{ $open: boolean }>`
+  position: fixed;
+  top: var(--nav-height);
+  right: 0;
+  height: calc(100vh - var(--nav-height));
+  width: min(75vw, 340px);
   background-color: var(--bg-color);
-  box-shadow: -2px 0 10px var(--shadow-color);
-  transform: translateX(${(props) => (props.$open ? "0" : "100%")});
-  transition: transform 0.3s ease-in-out;
+  border-left: 1px solid var(--border-color);
+  box-shadow: -10px 0 40px var(--shadow-color);
+  transform: translateX(${({ $open }) => ($open ? '0' : '100%')});
+  transition: transform 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
   z-index: 15;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 50px 10px;
-  overflow-y: auto;
+  padding: 0 40px;
 
   ol {
     list-style: none;
     padding: 0;
-    margin: 0 0 20px 0;
+    margin: 0;
     text-align: center;
+    width: 100%;
+    counter-reset: item;
 
     li {
-      margin: 20px 0;
-      font-size: var(--fz-lg);
+      counter-increment: item;
 
       a {
-        color: var(--text-primary-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 14px 0;
+        font-family: var(--font-mono);
+        color: var(--text-secondary-color);
         text-decoration: none;
-        padding: 10px;
-        &:hover {
+        transition: var(--transition);
+        border-bottom: 1px solid var(--border-color);
+
+        &::before {
+          content: '0' counter(item) '.';
+          color: var(--accent-color);
+          font-size: var(--fz-xs);
+          margin-bottom: 4px;
+        }
+
+        .link-name {
+          font-size: var(--fz-lg);
+          font-weight: 600;
+          color: var(--text-primary-color);
+          transition: var(--transition);
+        }
+
+        &:hover .link-name,
+        &:focus .link-name {
           color: var(--accent-color);
         }
       }
+
+      &:first-child a {
+        border-top: 1px solid var(--border-color);
+      }
     }
+  }
+
+  .mobile-cta {
+    margin-top: 2rem;
   }
 `;
 
@@ -256,8 +297,8 @@ const Nav: React.FC = () => {
 
       <StyledLinks>
         <ol>
-          {navLinks.map(({ url, name }, i) => (
-            <li key={i}>
+          {navLinks.map(({ url, name }) => (
+            <li key={url}>
               <a href={url}>{name}</a>
             </li>
           ))}
@@ -274,17 +315,19 @@ const Nav: React.FC = () => {
 
       </StyledNav>
 
+      <MobileMenuOverlay $open={isMenuOpen} onClick={() => setIsMenuOpen(false)} />
+
       <MobileMenu $open={isMenuOpen}>
         <ol>
-          {navLinks.map(({ url, name }, i) => (
-            <li key={i}>
+          {navLinks.map(({ url, name }) => (
+            <li key={url}>
               <a href={url} onClick={() => setIsMenuOpen(false)}>
-                {name}
+                <span className="link-name">{name}</span>
               </a>
             </li>
           ))}
         </ol>
-        <CVDownload />
+        <CVDownload className="mobile-cta" />
       </MobileMenu>
     </StyledHeader>
   );
