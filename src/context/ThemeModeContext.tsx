@@ -36,6 +36,10 @@ export const ThemeModeProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// Provider + hook + context are one cohesive module; co-locating them here
+// is intentional, so the fast-refresh "only export components" rule doesn't
+// apply. Splitting the hook out would fragment the unit for no real gain.
+// eslint-disable-next-line react-refresh/only-export-components
 export const useThemeMode = () => {
   const ctx = useContext(ThemeModeContext);
   if (!ctx) throw new Error('useThemeMode must be used within a ThemeModeProvider');
