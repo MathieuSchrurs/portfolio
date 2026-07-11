@@ -1,8 +1,7 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
-import { useIgniteBinaryReveal } from '../../hooks';
-import { toBinaryIndex } from '../../hooks/useIgniteBinaryReveal';
+import { useIgniteBinaryReveal, toBinaryIndex } from '../../hooks';
 import type { Job } from './ExperienceTimeline';
 
 /*
@@ -95,7 +94,7 @@ const Range = styled.time<{ $current: boolean }>`
 `;
 
 /* Entry index ("01" … "06") — extends the site's numbered-heading motif
-   down to individual entries. Ghost grey until the ink reaches it; fills
+   down to individual entries. Ghost gray until the ink reaches it; fills
    with accent ink on hover as the quiet interactive response. */
 const Numeral = styled.span`
   grid-area: numeral;
@@ -128,9 +127,9 @@ const Numeral = styled.span`
 `;
 
 /* Clipping window for the company-name slide-up reveal. The h3's layout
-   box (line-height * lines) is shorter than its actual ink extent — a
-   tight line-height doesn't fully contain a descender's rendered pixels,
-   it only budgets less room around it — so padding-bottom has to cover
+   box (line-height * lines) is shorter than its actual ink extent. A
+   tight line-height doesn't fully contain a descender's rendered pixels;
+   it only budgets less room around them. So padding-bottom has to cover
    the real overshoot, not just a nominal fraction of an em. */
 const CompanyClip = styled.div`
   overflow: hidden;
@@ -207,10 +206,10 @@ const Role = styled.p`
 /* Outer layer owns ONLY the Framer Motion scroll drift (applied via the
    `style` prop, written straight to this node's `transform` outside
    React's render cycle). The ghost <-> lit CSS transition lives on the
-   inner DescriptionText instead — putting both on the same element means
-   Framer's imperative transform writes and styled-components' CSS
-   transition fight over the same `transform` property, which is what
-   caused the description to visibly jump on ignite/un-ignite. */
+   inner DescriptionText instead. Putting both on one element would let
+   Framer's imperative transform writes and the styled-components CSS
+   transition fight over the same `transform` property. That fight is
+   what made the description visibly jump on ignite/un-ignite. */
 const Description = styled(motion.p)`
   grid-area: desc;
   align-self: start;

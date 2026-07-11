@@ -9,5 +9,12 @@
   // These are matched by exact name (globs like `@fonts/*` are not honoured),
   // so a new font family under src/fonts needs its `@fonts/<Family>` entry
   // added here too.
-  "ignoreDependencies": ["@fonts/Calibre", "@fonts/SFMono"]
+  "ignoreDependencies": ["@fonts/Calibre", "@fonts/SFMono"],
+
+  // Vitest's setup file is referenced only from vite.config.ts's
+  // `setupFiles`, a config string fallow doesn't follow, so it looks
+  // unreachable. Declare it as an entry point (additive — the app's real
+  // entry is still auto-detected). *.test.ts files are recognised as test
+  // entries automatically and don't need listing.
+  "entry": ["src/test/setup.ts"]
 }
