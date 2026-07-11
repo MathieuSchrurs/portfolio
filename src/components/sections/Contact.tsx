@@ -1,20 +1,12 @@
 import styled from "styled-components";
 import config from "@config";
 import StyledButtonLink from "../ui/StyledButtonLink";
+import SectionWrapper from "../layout/SectionWrapper";
 
-const StyledContactSection = styled.section`
+const StyledContactSection = styled(SectionWrapper)`
   max-width: 600px;
-  margin: 0 auto;
   text-align: center;
   font-family: var(--font-mono);
-
-  @media (max-width: 768px) {
-    padding: 80px 0;
-  }
-
-  @media (max-width: 480px) {
-    padding: 60px 0;
-  }
 `;
 
 const StyledPreHeading = styled.h2`

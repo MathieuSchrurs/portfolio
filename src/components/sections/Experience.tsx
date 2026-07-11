@@ -1,50 +1,15 @@
-import styled from 'styled-components';
 import SectionHeading from '../ui/SectionHeading';
-import ExperienceCard from '../ui/ExperienceCard';
+import ExperienceTimeline from '../ui/ExperienceTimeline';
 import config from '@config';
-import Timeline from '../ui/timeline/Timeline';
-
-const Section = styled.section`
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 80px 0;
-`;
+import SectionWrapper from '../layout/SectionWrapper';
 
 export default function Experience() {
   const { jobs } = config;
 
-  const items =
-    jobs?.map((job, idx) => ({
-      id: `${idx}-${job.company}-${job.title}`,
-      title: job.title,
-      company: job.company,
-      description: job.description,
-      dateLabel: job.range,
-    })) ?? [];
-
   return (
-    <Section id="experience">
+    <SectionWrapper id="experience">
       <SectionHeading sectionNumber="2">Where I've Worked</SectionHeading>
-      <Timeline
-        items={items}
-        renderItem={item => (
-          <ExperienceCard
-            title={item.title}
-            company={item.company}
-            description={item.description}
-          />
-        )}
-        vars={{
-          midW: '180px',
-          rowMin: '72px',
-          rowOverlap: '56px',
-          cardW: '42%',
-          cardMax: '420px',
-          cardStub: '10px',
-          trunkW: '2px',
-          nodeSize: '15px',
-        }}
-      />
-    </Section>
+      <ExperienceTimeline jobs={jobs} />
+    </SectionWrapper>
   );
 }

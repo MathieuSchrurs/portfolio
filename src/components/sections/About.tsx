@@ -1,32 +1,34 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  FaHtml5,
-  FaReact,
-  FaNodeJs,
-  FaDocker,
-  FaGitAlt,
-} from "react-icons/fa";
-import { SiTypescript, SiTailwindcss, SiDotnet } from "react-icons/si";
 import SectionHeading from "../ui/SectionHeading";
+import SectionWrapper from "../layout/SectionWrapper";
+import { skills } from "../../data/skills";
 
-interface Skill {
-  name: string;
-  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  color: string;
-}
+// About's "Current Tech Stack" strip is a curated subset of the shared skill
+// data, picked by name. A couple of entries are relabelled here to the
+// broader, combined phrasing this strip has always used (e.g. pairing C#
+// with .NET, since the shared data lists them as separate categorised
+// entries but they render with the same icon/color here).
+const featuredSkillNames = [
+  "HTML5",
+  "C#",
+  "Docker",
+  "Git / GitHub",
+  "TypeScript",
+  "Tailwind CSS",
+  "Node.js",
+  "React",
+];
 
-const StyledAboutSection = styled.section`
-  margin: 0 auto;
+const featuredSkillLabels: Record<string, string> = {
+  "HTML5": "HTML & (S)CSS",
+  "C#": "C# /.NET",
+  "Git / GitHub": "Git & GitHub",
+  "React": "React/Next.js",
+};
+
+const StyledAboutSection = styled(SectionWrapper)`
   max-width: 1000px;
-
-  @media (max-width: 768px) {
-    padding: 80px 0;
-  }
-
-  @media (max-width: 480px) {
-    padding: 60px 0;
-  }
 `;
 
 const StyledAboutContent = styled.div`
@@ -196,17 +198,13 @@ const StyledPic = styled.div`
 `;
 
 const About = () => {
-const currentSkills: Skill[] = [
-  { name: "HTML & (S)CSS", Icon: FaHtml5, color: "#E34F26" },
-  { name: "C# /.NET", Icon: SiDotnet, color: "#512BD4" },
-  { name: "Docker", Icon: FaDocker, color: "#2496ED" },
-  { name: "Git & GitHub", Icon: FaGitAlt, color: "#F05032" },
-  { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
-  { name: "Tailwind CSS", Icon: SiTailwindcss, color: "#06B6D4" },
-  { name: "Node.js", Icon: FaNodeJs, color: "#339933" },
-  { name: "React/Next.js", Icon: FaReact, color: "#61DAFB" },
-];
-
+  const currentSkills = featuredSkillNames
+    .map((name) => skills.find((skill) => skill.name === name))
+    .filter((skill): skill is (typeof skills)[number] => Boolean(skill))
+    .map((skill) => ({
+      ...skill,
+      name: featuredSkillLabels[skill.name] ?? skill.name,
+    }));
 
   return (
     <StyledAboutSection id="about">

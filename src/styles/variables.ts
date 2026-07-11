@@ -42,36 +42,6 @@ const variables = css`
      * MOBILE NAV
      ******************************/
     --hamburger-width: 30px;
-
-    /******************************
-     * TIMELINE DEFAULTS
-     ******************************/
-    --timeline-mid-w: 140px;
-    --timeline-trunk-w: 1px;
-    --timeline-node-size: 12px;
-    --timeline-connector-w: 1px;
-    --timeline-row-min: 120px;
-    --timeline-card-max: 450px;
-    --timeline-row-overlap: 80px;
-  }
-
-  /******************************
-   * RESPONSIVE OVERRIDES
-   ******************************/
-  @media (max-width: 1200px) {
-    :root {
-      --timeline-mid-w: 100px;
-      --timeline-row-overlap: 60px;
-    }
-  }
-
-  @media (max-width: 900px) {
-    :root {
-      --timeline-mid-w: 0px;
-      --timeline-row-overlap: 0px;
-      --timeline-row-min: auto;
-      --timeline-trunk-w: 1px;
-    }
   }
 
   /******************************
@@ -93,6 +63,11 @@ const variables = css`
     --accent-active-color: #c4b5fd;
     --accent-text-color: #111111;
     --accent-tint-color: rgba(167, 139, 250, 0.1);
+    /* Accent as "ink": for accent-colored text and drawn strokes sitting on
+       dark surfaces. Chroma is cut (~0.18 -> 0.105) and lightness nudged up
+       relative to --accent-color so small type doesn't halate on near-black
+       while keeping ~7:1 contrast on var(--card-bg-color). */
+    --accent-ink: oklch(74% 0.105 294);
 
     /* selection & scrollbars */
     --selection-bg-color: rgba(167, 139, 250, 0.2);
@@ -133,6 +108,10 @@ const variables = css`
     --accent-active-color: #7c3aed;
     --accent-text-color: #ffffff;
     --accent-tint-color: rgba(139, 92, 246, 0.1);
+    /* Accent as "ink" on light surfaces: deeper and slightly desaturated
+       relative to --accent-color so small type clears 4.5:1 on white
+       (base #8b5cf6 only just passes at ~4.6:1). */
+    --accent-ink: oklch(46.5% 0.19 293);
 
     /* selection & scrollbars */
     --selection-bg-color: rgba(139, 92, 246, 0.15);

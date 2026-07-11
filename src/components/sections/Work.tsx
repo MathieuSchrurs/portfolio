@@ -2,18 +2,10 @@ import styled from 'styled-components';
 import WorkCard from '../ui/WorkCard';
 import config from '@config';
 import SectionHeading from '../ui/SectionHeading';
+import SectionWrapper from '../layout/SectionWrapper';
 
-const StyledProjectsSection = styled.section`
-  margin: 0 auto;
+const StyledProjectsSection = styled(SectionWrapper)`
   max-width: 1200px;
-
-  @media (max-width: 768px) {
-    padding: 80px 0;
-  }
-
-  @media (max-width: 480px) {
-    padding: 60px 0;
-  }
 `;
 
 

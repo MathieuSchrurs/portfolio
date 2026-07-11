@@ -7,7 +7,7 @@ export default {
       url: "https://github.com/MathieuSchrurs",
     },
     {
-      name: "Linkedin",
+      name: "LinkedIn",
       url: "https://linkedin.com/in/mathieuschrurs",
     },
     {
@@ -67,34 +67,39 @@ export default {
     {
       company: "Twikey",
       title: "Customer Onboarding Specialist",
+      location: "Sint-Denijs-Westrem",
       range: "2025 — present",
       description:
-        "Designing and optimising onboarding flows for fintech clients — turning compliance requirements and API integrations into seamless client journeys. Bridges technical teams and end users, translating requirements clearly on both sides.",
+        "Essential and custom technical onboardings for a fintech scale-up, turning compliance requirements and API integrations into seamless client journeys. Bridges technical teams and end users, translating requirements clearly on both sides.",
     },
     {
       company: "Batt Mobility @ Wintercircus",
       title: "Software Engineer Intern",
+      location: "Ghent",
       range: "2024",
       description:
-        "Built and shipped features across a Blazor / .NET stack at an EV mobility startup. Worked with Azure, Web APIs, and Entity Framework — contributing to feature development, debugging, and code quality in a fast-moving team.",
+        "Built and shipped features across a Blazor/.NET stack at an EV mobility startup. Worked with Azure, Web APIs, and Entity Framework. Contributing to feature development, debugging, and code quality in a fast-moving team.",
     },
     {
       company: "Sint-Janscollege · HTISA · Campus Saint-Jean",
       title: "English & Dutch Teacher",
+      location: "Ghent",
       range: "2019 — 2023",
       description:
-        "Taught English and Dutch across secondary and higher education for four years. Running a classroom sharpens systems thinking, clear communication, and the ability to break down complexity — skills that carry directly into engineering.",
+        "Taught English and Dutch across secondary and higher education for four years. Running a classroom sharpens systems thinking, clear communication, and the ability to break down complexity. Developing skills that carry directly into my people .",
     },
     {
-      company: "The Right People / Hans Kusters Music",
+      company: "The Right People · Hans Kusters Music",
       title: "Music Publishing Assistant",
+      location: "Ghent / Asse",
       range: "2017 — 2019",
       description:
         "Handled licensing, rights clearance, and royalty tracking for a catalog of independent artists. Precision-heavy work at the intersection of legal compliance, data management, and artist relations.",
     },
     {
-      company: "PIAS UK — London",
+      company: "PIAS UK",
       title: "Intern",
+      location: "London",
       range: "2017",
       description:
         "Inside look at international music distribution at one of Europe's leading independent groups. Supported A&R, release logistics, and cross-market coordination from the London head office.",
@@ -102,6 +107,7 @@ export default {
     {
       company: "Pepperminds",
       title: "Sales Captain",
+      location: "Ghent",
       range: "2012 — 2017",
       description:
         "Led teams and coached new hires in face-to-face marketing campaigns for NGOs. Developed persuasion, team management, and performance under pressure — long before code was in the picture.",

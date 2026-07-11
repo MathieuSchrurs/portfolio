@@ -2,27 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaGithub } from 'react-icons/fa';
 import { FiExternalLink } from 'react-icons/fi';
+import ChromeCard from './ChromeCard';
 
-const StyledProjectCard = styled.div`
-  background-color: var(--card-bg-color);
+const StyledProjectCard = styled(ChromeCard).attrs({
+  padding: '1.75rem',
+  radius: 'var(--border-radius)',
+  accentGlowOnHover: true,
+})`
   color: var(--text-secondary-color);
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-  padding: 1.75rem;
-  transition: var(--transition);
-  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   min-height: 200px;
-
-  &:hover,
-  &:focus-within {
-    outline: none;
-    border-color: var(--accent-color);
-    box-shadow: 0 8px 24px -8px var(--accent-color);
-    transform: translateY(-5px);
-  }
 `;
 
 const StyledCardHeader = styled.div`
@@ -72,13 +62,16 @@ const StyledDescription = styled.div`
   margin-bottom: 1rem;
 `;
 
+const StyledCardFooter = styled.footer`
+  margin-top: auto;
+`;
+
 const StyledTagList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 0;
   margin: 0;
   list-style: none;
-  margin-top: auto;
   padding-top: 1rem;
 
   li {
@@ -143,7 +136,7 @@ const WorkCard: React.FC<WorkCardProps> = ({
 
       <StyledDescription>{description}</StyledDescription>
 
-      <footer>
+      <StyledCardFooter>
         {tags && tags.length > 0 && (
           <StyledTagList>
             {tags.map((tag, i) => (
@@ -151,7 +144,7 @@ const WorkCard: React.FC<WorkCardProps> = ({
             ))}
           </StyledTagList>
         )}
-      </footer>
+      </StyledCardFooter>
     </StyledProjectCard>
   );
 };

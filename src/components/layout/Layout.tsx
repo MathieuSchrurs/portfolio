@@ -16,22 +16,6 @@ const StyledContent = styled.div`
 `;
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-    useEffect(() => {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            document.body.className = savedTheme;
-        } else if (
-            window.matchMedia &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches
-        ) {
-            document.body.className = 'dark';
-            localStorage.setItem('theme', 'dark');
-        } else {
-            document.body.className = 'light';
-            localStorage.setItem('theme', 'light');
-        }
-    }, []);
-
     const handleExternalLinks = () => {
         const allLinks = Array.from(document.querySelectorAll('a'));
         if (allLinks.length > 0) {

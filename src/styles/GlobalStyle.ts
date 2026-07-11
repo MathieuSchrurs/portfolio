@@ -107,21 +107,6 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  section {
-    margin: 0 auto;
-    max-width: 1000px;
-    counter-increment: section;
-    padding: var(--section-padding-desktop) 0;
-
-    @media (max-width: 768px) {
-      padding: var(--section-padding-tablet) 0;
-    }
-
-    @media (max-width: 480px) {
-      padding: var(--section-padding-mobile) 0;
-    }
-  }
-
   h1, h2, h3, h4, h5, h6 {
     margin: 0 0 10px 0;
     font-weight: 600;
