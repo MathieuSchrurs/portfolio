@@ -1,5 +1,27 @@
 import { useEffect, useState } from 'react';
 
+/* Format a 1-based entry ordinal as a zero-padded 4-bit binary string
+   ("1" -> "0001", "6" -> "0110"). Four digits comfortably covers the entry
+   count; values that overflow 4 bits just render wider. */
+export const toBinaryIndex = (n: number) => n.toString(2).padStart(4, '0');
+
+/* One frame of the decode reveal. Digits left of `progress`'s lock point show
+   their final value; the rest flicker to a random bit. At progress 1 every
+   digit is locked, so the result equals `finalValue` regardless of `rng`.
+   `rng` is injected (defaults to Math.random) so the flicker is testable. */
+export function decodeBinaryFrame(
+  progress: number,
+  finalValue: string,
+  rng: () => number = Math.random,
+): string {
+  const locked = Math.floor(progress * finalValue.length);
+  let next = '';
+  for (let i = 0; i < finalValue.length; i += 1) {
+    next += i < locked ? finalValue[i] : rng() < 0.5 ? '0' : '1';
+  }
+  return next;
+}
+
 /* Binary "decode" reveal: every time the owning <li>'s `data-lit` attribute
    flips to true (ignition is bidirectional — this can refire after scrolling
    up and back down), the digits rapidly flicker through random 0/1 values
@@ -28,12 +50,7 @@ export default function useIgniteBinaryReveal(
       const startTime = performance.now();
       const step = (now: number) => {
         const progress = Math.min((now - startTime) / duration, 1);
-        const locked = Math.floor(progress * finalValue.length);
-        let next = '';
-        for (let i = 0; i < finalValue.length; i += 1) {
-          next += i < locked ? finalValue[i] : Math.random() < 0.5 ? '0' : '1';
-        }
-        setDisplayValue(next);
+        setDisplayValue(decodeBinaryFrame(progress, finalValue));
         if (progress < 1) {
           rafId = requestAnimationFrame(step);
         } else {

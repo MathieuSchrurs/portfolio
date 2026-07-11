@@ -148,6 +148,20 @@ const cardStyle = (skill: Skill) =>
     '--skill-tint': `${skill.color}18`,
   }) as React.CSSProperties;
 
+/* The track's x sweep, from entry to exit, given the viewport and full track
+   widths. `from` is a fractional container-width of entrance pre-roll (a full
+   container-width left a stretch where the reel was on screen but empty before
+   the first card entered; 0.35 gets the first card sliding in almost as soon
+   as the reel appears). `to` slides the whole track fully off the left edge.
+   Pure so the sweep-timing math — which has regressed before — is testable. */
+export const REEL_PREROLL = 0.35;
+export function computeReelRange(
+  containerWidth: number,
+  trackWidth: number,
+): { from: number; to: number } {
+  return { from: containerWidth * REEL_PREROLL, to: -trackWidth };
+}
+
 export interface TechStackReelProps {
   skills: Skill[];
 }
@@ -163,14 +177,7 @@ export default function TechStackReel({ skills }: TechStackReelProps) {
     const measure = () => {
       const containerWidth = viewportRef.current?.offsetWidth ?? 0;
       const trackWidth = trackRef.current?.scrollWidth ?? 0;
-      /* A full container-width of entrance pre-roll meant a stretch of
-         scroll where the reel was already fully visible but showed
-         nothing yet, before the first card even started entering. A
-         smaller pre-roll gets the first card sliding in almost as soon
-         as the reel is on screen. The exit side doesn't need the same
-         trim — the reel is leaving the viewport by the time the track
-         fully clears, so that travel isn't felt as dead time. */
-      setRange({ from: containerWidth * 0.35, to: -trackWidth });
+      setRange(computeReelRange(containerWidth, trackWidth));
     };
     measure();
     window.addEventListener('resize', measure);

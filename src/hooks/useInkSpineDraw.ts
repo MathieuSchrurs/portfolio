@@ -9,6 +9,30 @@ interface UseInkSpineDrawOptions {
   markerAnchor: number;
 }
 
+/* How far the ink is drawn (0..1) given the wrapper's top offset from the
+   viewport top, the viewport height, the pen line, and the wrapper's own
+   height. Clamped: 0 before the pen reaches the wrapper, 1 once the pen has
+   passed its full height. Pure so the scroll math is unit-testable. */
+export function computeInkProgress(
+  wrapTop: number,
+  viewportHeight: number,
+  penPosition: number,
+  wrapHeight: number,
+): number {
+  const penY = viewportHeight * penPosition;
+  return Math.min(Math.max((penY - wrapTop) / wrapHeight, 0), 1);
+}
+
+/* Which entries should be lit given the ink tip's pixel position within the
+   wrapper and each entry's marker offset. An entry lights the moment the tip
+   reaches its marker (>=), and un-lights again if the tip retreats above it. */
+export function computeLitFlags(
+  inkTipY: number,
+  markerOffsets: number[],
+): boolean[] {
+  return markerOffsets.map((offset) => inkTipY >= offset);
+}
+
 /* Self-drawing ink line: a passive scroll listener (attached only while the
    wrapper is near the viewport, gated by an IntersectionObserver) batches
    work into requestAnimationFrame. Each frame writes a single composited
@@ -50,12 +74,16 @@ export default function useInkSpineDraw(
     const update = () => {
       rafId = null;
       const { top } = wrap.getBoundingClientRect();
-      const penY = window.innerHeight * penPosition;
-      const progress = Math.min(Math.max((penY - top) / wrapHeight, 0), 1);
+      const progress = computeInkProgress(
+        top,
+        window.innerHeight,
+        penPosition,
+        wrapHeight,
+      );
       ink.style.transform = `scaleY(${progress})`;
-      const inkTipY = progress * wrapHeight;
+      const litFlags = computeLitFlags(progress * wrapHeight, markerOffsets);
       entries.forEach((entry, i) => {
-        const shouldBeLit = inkTipY >= markerOffsets[i];
+        const shouldBeLit = litFlags[i];
         const isLit = entry.dataset.lit === 'true';
         if (shouldBeLit !== isLit) {
           entry.dataset.lit = shouldBeLit ? 'true' : 'false';

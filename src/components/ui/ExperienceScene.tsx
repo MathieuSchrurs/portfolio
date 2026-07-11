@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
 import { useIgniteBinaryReveal } from '../../hooks';
+import { toBinaryIndex } from '../../hooks/useIgniteBinaryReveal';
 import type { Job } from './ExperienceTimeline';
 
 /*
@@ -28,9 +29,6 @@ import type { Job } from './ExperienceTimeline';
  */
 
 const easeOutQuint = 'cubic-bezier(0.22, 1, 0.36, 1)';
-
-/* Entry index as 4-bit binary ("01" -> "0001", "02" -> "0010", …). */
-const toBinaryIndex = (n: number) => n.toString(2).padStart(4, '0');
 
 const Scene = styled.div`
   position: relative;
