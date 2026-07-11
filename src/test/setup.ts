@@ -10,6 +10,10 @@
  * window.matchMedia themselves.
  */
 
+// `export {}` marks this as a module so its declarations stay module-scoped
+// rather than leaking into (and lingering unused in) the global namespace.
+export {};
+
 if (typeof window !== 'undefined') {
   if (!window.matchMedia) {
     window.matchMedia = (query: string) =>
@@ -19,10 +23,8 @@ if (typeof window !== 'undefined') {
         onchange: null,
         addEventListener: () => {},
         removeEventListener: () => {},
-        addListener: () => {},
-        removeListener: () => {},
         dispatchEvent: () => false,
-      }) as MediaQueryList;
+      }) as unknown as MediaQueryList;
   }
 
   class InertObserver {

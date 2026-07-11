@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
 import type { Skill } from '../../data/skills';
+import { computeReelRange } from './techStackReel.logic';
 
 /*
  * A horizontal "conveyor" of tech-stack cards. The track's x position is
@@ -147,20 +148,6 @@ const cardStyle = (skill: Skill) =>
     '--skill-base': skill.color,
     '--skill-tint': `${skill.color}18`,
   }) as CSSProperties;
-
-/* The track's x sweep, from entry to exit, given the viewport and full track
-   widths. `from` is a fractional container-width of entrance pre-roll (a full
-   container-width left a stretch where the reel was on screen but empty before
-   the first card entered; 0.35 gets the first card sliding in almost as soon
-   as the reel appears). `to` slides the whole track fully off the left edge.
-   Pure so the sweep-timing math — which has regressed before — is testable. */
-export const REEL_PREROLL = 0.35;
-export function computeReelRange(
-  containerWidth: number,
-  trackWidth: number,
-): { from: number; to: number } {
-  return { from: containerWidth * REEL_PREROLL, to: -trackWidth };
-}
 
 export interface TechStackReelProps {
   skills: Skill[];

@@ -2,7 +2,8 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
 import type { SVGProps } from 'react';
-import TechStackReel, { computeReelRange, REEL_PREROLL } from './TechStackReel';
+import TechStackReel from './TechStackReel';
+import { computeReelRange, REEL_PREROLL } from './techStackReel.logic';
 import type { Skill } from '../../data/skills';
 
 const DummyIcon = (props: SVGProps<SVGSVGElement>) => <svg {...props} />;
@@ -23,10 +24,8 @@ function setReducedMotion(reduce: boolean) {
       onchange: null,
       addEventListener: () => {},
       removeEventListener: () => {},
-      addListener: () => {},
-      removeListener: () => {},
       dispatchEvent: () => false,
-    }) as MediaQueryList;
+    }) as unknown as MediaQueryList;
 }
 
 afterEach(cleanup);
