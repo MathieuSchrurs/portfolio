@@ -250,15 +250,71 @@ const MobileControls = styled.div`
 `;
 
 
+type NavLink = { name: string; url: string };
+
+/* Signature logo with its own hover state driving the stroke-draw reveal. */
+const NavLogo: React.FC<{ prefersReducedMotion: boolean }> = ({
+  prefersReducedMotion,
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+  return (
+    <StyledLogoWrapper
+      isHovered={isHovered}
+      prefersReducedMotion={prefersReducedMotion}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <a href="/#hero" aria-label="home">
+        <AnimatedLogo />
+      </a>
+    </StyledLogoWrapper>
+  );
+};
+
+/* Desktop-only inline nav: numbered links, CV button, theme toggle. */
+const DesktopNavLinks: React.FC<{ navLinks: NavLink[] }> = ({ navLinks }) => (
+  <StyledLinks>
+    <ol>
+      {navLinks.map(({ url, name }) => (
+        <li key={url}>
+          <a href={url}>{name}</a>
+        </li>
+      ))}
+    </ol>
+    <CVDownload />
+    <ThemeToggle className="theme-toggle" />
+  </StyledLinks>
+);
+
+/* Slide-in mobile menu plus its click-catching backdrop. */
+const MobileNavMenu: React.FC<{
+  open: boolean;
+  navLinks: NavLink[];
+  onClose: () => void;
+}> = ({ open, navLinks, onClose }) => (
+  <>
+    <MobileMenuOverlay $open={open} onClick={onClose} />
+    <MobileMenu $open={open}>
+      <ol>
+        {navLinks.map(({ url, name }) => (
+          <li key={url}>
+            <a href={url} onClick={onClose}>
+              <span className="link-name">{name}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+      <CVDownload className="mobile-cta" />
+    </MobileMenu>
+  </>
+);
+
 const Nav: React.FC = () => {
   const scrollDirection = useScrollDirection({ initialDirection: "down" });
   const [scrolledToTop, setScrolledToTop] = useState(true);
   const prefersReducedMotion = usePrefersReducedMotion();
-  const [isLogoHovered, setIsLogoHovered] = useState(false);
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-
   const handleScroll = () => setScrolledToTop(window.scrollY < 50);
 
   useEffect(() => {
@@ -268,11 +324,7 @@ const Nav: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.classList.add('blur');
-    } else {
-      document.body.classList.remove('blur');
-    }
+    document.body.classList.toggle('blur', isMenuOpen);
   }, [isMenuOpen]);
 
   const { navLinks } = config;
@@ -284,51 +336,19 @@ const Nav: React.FC = () => {
       prefersReducedMotion={prefersReducedMotion}
     >
       <StyledNav>
-        <StyledLogoWrapper
-          isHovered={isLogoHovered}
-          prefersReducedMotion={prefersReducedMotion}
-          onMouseEnter={() => setIsLogoHovered(true)}
-          onMouseLeave={() => setIsLogoHovered(false)}
-        >
-          <a href="/#hero" aria-label="home">
-            <AnimatedLogo />
-          </a>
-        </StyledLogoWrapper>
-
-      <StyledLinks>
-        <ol>
-          {navLinks.map(({ url, name }) => (
-            <li key={url}>
-              <a href={url}>{name}</a>
-            </li>
-          ))}
-        </ol>
-        <CVDownload />
-        <ThemeToggle className="theme-toggle" />
-      </StyledLinks>
-
-
-      <MobileControls>
-        <ThemeToggle className="theme-toggle" />
-        <HamburgerButton isOpen={isMenuOpen} toggle={toggleMenu} />
-      </MobileControls>
-
+        <NavLogo prefersReducedMotion={prefersReducedMotion} />
+        <DesktopNavLinks navLinks={navLinks} />
+        <MobileControls>
+          <ThemeToggle className="theme-toggle" />
+          <HamburgerButton isOpen={isMenuOpen} toggle={toggleMenu} />
+        </MobileControls>
       </StyledNav>
 
-      <MobileMenuOverlay $open={isMenuOpen} onClick={() => setIsMenuOpen(false)} />
-
-      <MobileMenu $open={isMenuOpen}>
-        <ol>
-          {navLinks.map(({ url, name }) => (
-            <li key={url}>
-              <a href={url} onClick={() => setIsMenuOpen(false)}>
-                <span className="link-name">{name}</span>
-              </a>
-            </li>
-          ))}
-        </ol>
-        <CVDownload className="mobile-cta" />
-      </MobileMenu>
+      <MobileNavMenu
+        open={isMenuOpen}
+        navLinks={navLinks}
+        onClose={() => setIsMenuOpen(false)}
+      />
     </StyledHeader>
   );
 };

@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { motion, AnimatePresence } from "motion/react";
 import CVDownload from "../ui/CVDownload";
 import StyledButtonLink from "../ui/StyledButtonLink";
+import RotatingWord from "../ui/RotatingWord";
 
 const StyledHero = styled.section`
   min-height: calc(100vh - var(--nav-height));
@@ -47,49 +46,7 @@ const StyledBio = styled.p`
   line-height: 1.5;
 `;
 
-/* Fixed-height clipping window — the slot machine drum */
-const WordSlot = styled.span`
-  display: block;
-  overflow: hidden;
-  height: 1.2em;
-  position: relative;
-`;
-
-/* Each word lives absolutely inside the slot so the container never resizes */
-const AnimatedWord = styled(motion.span)`
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-weight: 700;
-  color: var(--accent-color);
-  white-space: nowrap;
-`;
-
 const Hero = () => {
-  const [index, setIndex] = useState(0);
-
-  const words = [
-    "rhythm",
-    "clarity",
-    "meaning",
-    "craft",
-    "connection",
-    "flow",
-    "purpose",
-    "nuance",
-    "structure",
-    "stories",
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(
-      () => setIndex((prev) => (prev + 1) % words.length),
-      2000
-    );
-    return () => clearInterval(interval);
-  }, [words.length]);
-
   return (
     <StyledHero id="hero">
       <div>
@@ -99,30 +56,7 @@ const Hero = () => {
 
         <StyledTagline>
           I explore
-          <WordSlot>
-            <AnimatePresence initial={false}>
-              <AnimatedWord
-                key={words[index]}
-                initial={{ y: "105%" }}
-                animate={{
-                  y: "0%",
-                  transition: {
-                    duration: 0.45,
-                    ease: [0.22, 1, 0.36, 1],
-                  },
-                }}
-                exit={{
-                  y: "-105%",
-                  transition: {
-                    duration: 0.3,
-                    ease: [0.645, 0.045, 0.355, 1],
-                  },
-                }}
-              >
-                {words[index]}
-              </AnimatedWord>
-            </AnimatePresence>
-          </WordSlot>
+          <RotatingWord />
           through code
         </StyledTagline>
 
