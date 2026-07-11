@@ -1,0 +1,10 @@
+#!/bin/sh
+# Quality gate: typecheck + lint + tests must pass before a commit lands.
+# Runs the same `npm run verify` you can invoke by hand. Skip in a pinch with
+# `git commit --no-verify`.
+#
+# Activated via `core.hooksPath .githooks`, set by the package.json "prepare"
+# script on `npm install` (so it travels with the repo, no Husky dependency).
+
+set -e
+npm run --silent verify
