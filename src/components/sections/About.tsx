@@ -1,7 +1,7 @@
-import React from "react";
 import styled from "styled-components";
 import SectionHeading from "../ui/SectionHeading";
 import SectionWrapper from "../layout/SectionWrapper";
+import TechStackReel from "../ui/TechStackReel";
 import { skills } from "../../data/skills";
 
 // About's "Current Tech Stack" strip is a curated subset of the shared skill
@@ -97,77 +97,6 @@ const StyledTechStackSubtitle = styled.h4`
   }
 `;
 
-const StyledSkillsGrid = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  padding: 0;
-  margin: 0 auto;
-  list-style: none;
-  max-width: 700px;
-
-  li {
-    flex: 0 0 160px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-mono);
-    font-size: var(--fz-sm);
-    cursor: default;
-    border-radius: var(--border-radius);
-    padding: 0.95rem 1.1rem;
-    background-color: var(--card-bg-color);
-    border: 1px solid var(--border-color);
-    border-top: 2px solid var(--skill-base);
-    color: var(--text-secondary-color);
-    transition: var(--transition);
-
-    &:hover {
-      transform: translateY(-3px);
-      border-color: var(--skill-base);
-      border-top-width: 2px;
-      background-color: var(--skill-tint);
-      color: var(--text-primary-color);
-      box-shadow: 0 8px 24px -8px var(--skill-base);
-    }
-
-    svg {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
-      transition: var(--transition);
-    }
-
-    &:hover svg {
-      transform: scale(1.15);
-    }
-
-    span {
-      font-weight: 500;
-      white-space: nowrap;
-    }
-
-    @media (min-width: 800px) {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 1.25rem 1rem;
-
-      svg {
-        width: 24px;
-        height: 24px;
-        margin-bottom: 6px;
-      }
-    }
-
-    @media (max-width: 799px) {
-      flex: 0 0 calc(50% - 6px);
-    }
-  }
-`;
-
 const StyledPic = styled.div`
   position: relative;
   max-width: 300px;
@@ -242,20 +171,7 @@ const About = () => {
 
             <StyledTechStackSubtitle>Current Tech Stack</StyledTechStackSubtitle>
 
-            <StyledSkillsGrid aria-label="Current Tech Stack">
-              {currentSkills.map((skill) => (
-                <li
-                  key={skill.name}
-                  style={{
-                    '--skill-base': skill.color,
-                    '--skill-tint': `${skill.color}18`,
-                  } as React.CSSProperties}
-                >
-                  <skill.Icon aria-hidden="true" color={skill.color} />
-                  <span>{skill.name}</span>
-                </li>
-              ))}
-            </StyledSkillsGrid>
+            <TechStackReel skills={currentSkills} />
           </div>
         </StyledText>
       </StyledAboutContent>

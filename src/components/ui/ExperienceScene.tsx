@@ -32,6 +32,7 @@ const easeOutQuint = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const toBinaryIndex = (n: number) => n.toString(2).padStart(4, '0');
 
 const Scene = styled.div`
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 58ch);
   grid-template-areas:
