@@ -25,10 +25,10 @@ import { computeReelRange } from './techStackReel.logic';
 const Viewport = styled.div<{ $static: boolean }>`
   position: relative;
   width: 100%;
-  /* Headroom for the hover lift (translateY(-4px) scale(1.015) on Card) —
-     without this, the overflow:hidden clip box has no slack above the
-     track's natural height and shaves off the top of any hovered card.
-     The extra top padding also nudges the whole band down a touch. */
+  /* Headroom for the hover tilt on Card — without this, the overflow:hidden
+     clip box has no slack above the track's natural height and shaves off
+     the top of any hovered card. The extra top padding also nudges the
+     whole band down a touch. */
   padding: 10px 0 6px;
 
   ${({ $static }) =>
@@ -82,7 +82,17 @@ const Track = styled(motion.ul)<{ $static: boolean }>`
    fixed 0.25s for a slightly more deliberate, weighted hover response. */
 const easeStandard = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
 
-const Card = styled.li`
+/* Three "geeky" hover tilt variants, each slightly different. Assigned
+   round-robin by card index so every card feels personality-edged but the
+   set stays balanced. Motion handles transform; CSS still handles colour
+   and shadow transitions for smooth crossfade with the base styles. */
+const cardHoverVariants = [
+  { rotateZ: -3, y: -2, x: 0 },
+  { rotateZ: 1.5, y: -1, x: 2 },
+  { rotateZ: -1.5, y: -3, x: -1 },
+];
+
+const Card = styled(motion.li)`
   flex: 0 0 auto;
   width: 174px;
   display: flex;
@@ -98,14 +108,12 @@ const Card = styled.li`
   transition:
     border-color 320ms ${easeStandard},
     background-color 320ms ${easeStandard},
-    box-shadow 320ms ${easeStandard},
-    transform 320ms ${easeStandard};
+    box-shadow 320ms ${easeStandard};
 
   &:hover {
     border-color: color-mix(in srgb, var(--skill-base) 55%, var(--border-color) 45%);
     background-color: var(--skill-tint);
     box-shadow: 0 16px 32px -12px var(--shadow-color);
-    transform: translateY(-4px) scale(1.015);
   }
 
   svg {
@@ -191,8 +199,20 @@ export default function TechStackReel({ skills }: TechStackReelProps) {
         $static={shouldReduceMotion}
         style={shouldReduceMotion ? undefined : { x }}
       >
-        {skills.map((skill) => (
-          <Card key={skill.name} style={cardStyle(skill)}>
+        {skills.map((skill, index) => (
+          <Card
+            key={skill.name}
+            style={cardStyle(skill)}
+            initial={{ rotateZ: 0, y: 0, x: 0 }}
+            whileHover={
+              shouldReduceMotion
+                ? undefined
+                : {
+                    ...cardHoverVariants[index % cardHoverVariants.length],
+                    transition: { type: 'spring', stiffness: 300, damping: 20 },
+                  }
+            }
+          >
             <skill.Icon aria-hidden="true" color={skill.color} />
             <span>{skill.name}</span>
           </Card>
