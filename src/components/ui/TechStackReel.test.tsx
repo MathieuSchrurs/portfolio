@@ -1,10 +1,11 @@
 // @vitest-environment jsdom
 import { describe, it, expect, afterEach } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
+import type { SVGProps } from 'react';
 import TechStackReel, { computeReelRange, REEL_PREROLL } from './TechStackReel';
 import type { Skill } from '../../data/skills';
 
-const DummyIcon = (props: React.SVGProps<SVGSVGElement>) => <svg {...props} />;
+const DummyIcon = (props: SVGProps<SVGSVGElement>) => <svg {...props} />;
 const skills: Skill[] = [
   { name: 'React', Icon: DummyIcon, color: '#61DAFB' },
   { name: 'TypeScript', Icon: DummyIcon, color: '#3178C6' },

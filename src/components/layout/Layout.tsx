@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, type FC, type ReactNode } from 'react';
 import styled from 'styled-components';
 import Nav from './Nav';
 import Social from './Social';
@@ -6,7 +6,7 @@ import Email from './Email';
 import Footer from './Footer';
 
 interface LayoutProps {
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 const StyledContent = styled.div`
@@ -15,7 +15,7 @@ const StyledContent = styled.div`
   min-height: 100vh;
 `;
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: FC<LayoutProps> = ({ children }) => {
     const handleExternalLinks = () => {
         const allLinks = Array.from(document.querySelectorAll('a'));
         if (allLinks.length > 0) {

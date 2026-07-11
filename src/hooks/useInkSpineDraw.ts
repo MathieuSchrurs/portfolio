@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, type RefObject } from 'react';
 
 interface UseInkSpineDrawOptions {
   prefersReducedMotion: boolean;
@@ -41,8 +41,8 @@ export function computeLitFlags(
    bidirectional, so scrolling back up retracts the ink and un-ignites
    entries again. */
 export default function useInkSpineDraw(
-  wrapRef: React.RefObject<HTMLElement | null>,
-  inkRef: React.RefObject<HTMLElement | null>,
+  wrapRef: RefObject<HTMLElement | null>,
+  inkRef: RefObject<HTMLElement | null>,
   { prefersReducedMotion, penPosition, markerAnchor }: UseInkSpineDrawOptions,
 ) {
   useEffect(() => {

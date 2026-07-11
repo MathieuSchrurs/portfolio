@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type RefObject } from 'react';
 
 /* Format a 1-based entry ordinal as a zero-padded 4-bit binary string
    ("1" -> "0001", "6" -> "0110"). Four digits comfortably covers the entry
@@ -28,7 +28,7 @@ export function decodeBinaryFrame(
    and lock in left-to-right over ~420ms, landing on the real value in sync
    with the ghost -> lit fade. Skipped entirely under reduced motion. */
 export default function useIgniteBinaryReveal(
-  ref: React.RefObject<HTMLElement | null>,
+  ref: RefObject<HTMLElement | null>,
   finalValue: string,
   shouldReduceMotion: boolean,
 ) {

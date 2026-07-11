@@ -19,11 +19,11 @@ const useScrollDirection = ({
   const [scrollDir, setScrollDir] = useState<ScrollDirection>(initialDirection);
 
   useEffect(() => {
-    let lastScrollY = window.pageYOffset;
+    let lastScrollY = window.scrollY;
     let ticking = false;
 
     const updateScrollDir = () => {
-      const scrollY = window.pageYOffset;
+      const scrollY = window.scrollY;
 
       if (Math.abs(scrollY - lastScrollY) < thresholdPixels) {
         ticking = false;

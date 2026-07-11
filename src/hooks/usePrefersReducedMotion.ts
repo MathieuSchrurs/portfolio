@@ -18,19 +18,10 @@ function usePrefersReducedMotion(): boolean {
       setPrefersReducedMotion(!event.matches);
     };
 
-    if (mediaQueryList.addEventListener) {
-      mediaQueryList.addEventListener('change', listener);
-    } else {
-      mediaQueryList.addListener(listener);
-    }
-
-    return () => {
-      if (mediaQueryList.removeEventListener) {
-        mediaQueryList.removeEventListener('change', listener);
-      } else {
-        mediaQueryList.removeListener(listener);
-      }
-    };
+    // MediaQueryList.addEventListener is supported everywhere we target
+    // (Safari 14+, 2020), so no legacy addListener fallback is needed.
+    mediaQueryList.addEventListener('change', listener);
+    return () => mediaQueryList.removeEventListener('change', listener);
   }, []);
 
   return prefersReducedMotion;

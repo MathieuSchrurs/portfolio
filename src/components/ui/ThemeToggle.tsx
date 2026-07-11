@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { useThemeMode } from '@context/ThemeModeContext';
 import AnimatedThemeToggleIcon from './AnimatedThemeToggleIcon';
 
@@ -5,7 +6,7 @@ interface ThemeToggleProps {
   className?: string;
 }
 
-const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
+const ThemeToggle: FC<ThemeToggleProps> = ({ className }) => {
   const { themeMode, toggleThemeMode } = useThemeMode();
 
   const iconSize = '20px';

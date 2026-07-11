@@ -259,7 +259,7 @@ const Nav: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
-  const handleScroll = () => setScrolledToTop(window.pageYOffset < 50);
+  const handleScroll = () => setScrolledToTop(window.scrollY < 50);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
 import type { Skill } from '../../data/skills';
@@ -146,7 +146,7 @@ const cardStyle = (skill: Skill) =>
   ({
     '--skill-base': skill.color,
     '--skill-tint': `${skill.color}18`,
-  }) as React.CSSProperties;
+  }) as CSSProperties;
 
 /* The track's x sweep, from entry to exit, given the viewport and full track
    widths. `from` is a fractional container-width of entrance pre-roll (a full
