@@ -1,0 +1,13 @@
+{
+  // `@fonts` is a Vite / tsconfig path alias to ./src/fonts, not an npm
+  // package. fallow resolves the .ts/.tsx path aliases fine, but the .woff /
+  // .woff2 asset imports under @fonts don't resolve to code modules, so it
+  // falls back to treating `@fonts/Calibre` and `@fonts/SFMono` as external
+  // packages and reports them as unlisted dependencies. Ignore them here so
+  // the dependency report stays actionable.
+  //
+  // These are matched by exact name (globs like `@fonts/*` are not honoured),
+  // so a new font family under src/fonts needs its `@fonts/<Family>` entry
+  // added here too.
+  "ignoreDependencies": ["@fonts/Calibre", "@fonts/SFMono"]
+}
