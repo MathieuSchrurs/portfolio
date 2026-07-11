@@ -110,6 +110,14 @@ export default {
 
   projects: [
     {
+      title: "CommonGround",
+      description:
+        "A collaborative house-hunting app that helps a group of buyers converge on one property. Each participant sets a commute constraint, and the app intersects everyone's isochrones in real time to surface listings that work for the whole group.",
+      tags: ["Next.js", "React", "TypeScript", "Supabase", "Tailwind CSS", "Mapbox"],
+      liveUrl: "https://commonground-gamma.vercel.app/",
+      codeUrl: "https://github.com/MathieuSchrurs/commonground",
+    },
+    {
       title: "Personal Portfolio Website",
       description:
         "The site you are currently viewing! Built with React, TypeScript, and styled-components, featuring theme switching and responsive design.",
