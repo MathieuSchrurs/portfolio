@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import styled from 'styled-components';
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
+import { useIgniteBinaryReveal } from '../../hooks';
 import type { Job } from './ExperienceTimeline';
 
 /*
@@ -261,62 +262,7 @@ export default function ExperienceScene({
   const ref = useRef<HTMLDivElement | null>(null);
   const shouldReduceMotion = useReducedMotion();
   const finalBinary = toBinaryIndex(number);
-  const [displayBinary, setDisplayBinary] = useState(finalBinary);
-
-  /* Binary "decode" reveal: every time the ink tip (re-)ignites this entry
-     (the li's `data-lit` flips to true — ignition is now bidirectional, so
-     this can fire again after scrolling up and back down), the digits
-     rapidly flicker through random 0/1 values and lock in left-to-right
-     over ~420ms, landing on the real value in sync with the ghost -> lit
-     fade. Skipped entirely under reduced motion. */
-  useEffect(() => {
-    if (shouldReduceMotion) {
-      setDisplayBinary(finalBinary);
-      return undefined;
-    }
-    const li = ref.current?.parentElement as HTMLElement | null;
-    if (!li) return undefined;
-
-    let rafId: number | null = null;
-    const duration = 420;
-
-    const runDecode = () => {
-      if (rafId !== null) cancelAnimationFrame(rafId);
-      const startTime = performance.now();
-      const step = (now: number) => {
-        const progress = Math.min((now - startTime) / duration, 1);
-        const locked = Math.floor(progress * finalBinary.length);
-        let next = '';
-        for (let i = 0; i < finalBinary.length; i += 1) {
-          next += i < locked ? finalBinary[i] : Math.random() < 0.5 ? '0' : '1';
-        }
-        setDisplayBinary(next);
-        if (progress < 1) {
-          rafId = requestAnimationFrame(step);
-        } else {
-          setDisplayBinary(finalBinary);
-          rafId = null;
-        }
-      };
-      rafId = requestAnimationFrame(step);
-    };
-
-    if (li.dataset.lit === 'true') {
-      setDisplayBinary(finalBinary);
-    }
-
-    const observer = new MutationObserver(() => {
-      if (li.dataset.lit === 'true') {
-        runDecode();
-      }
-    });
-    observer.observe(li, { attributes: true, attributeFilter: ['data-lit'] });
-
-    return () => {
-      observer.disconnect();
-      if (rafId !== null) cancelAnimationFrame(rafId);
-    };
-  }, [finalBinary, shouldReduceMotion]);
+  const displayBinary = useIgniteBinaryReveal(ref, finalBinary, Boolean(shouldReduceMotion));
 
   /* Scroll-linked drift across the scene's full viewport traverse.
      Reversible by design (unlike ignition) — it's ambience, not state.

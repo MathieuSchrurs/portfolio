@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import ExperienceScene from './ExperienceScene';
-import { usePrefersReducedMotion } from '../../hooks';
+import { usePrefersReducedMotion, useInkSpineDraw } from '../../hooks';
 
 export interface Job {
   company: string;
@@ -191,86 +191,11 @@ export default function ExperienceTimeline({ jobs }: ExperienceTimelineProps) {
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const inkRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    if (prefersReducedMotion) return undefined;
-    const wrap = wrapRef.current;
-    const ink = inkRef.current;
-    if (!wrap || !ink) return undefined;
-
-    const entries = Array.from(
-      wrap.querySelectorAll<HTMLLIElement>('li[data-log-entry]'),
-    );
-    let markerOffsets: number[] = [];
-    let wrapHeight = 1;
-    let rafId: number | null = null;
-    let listening = false;
-
-    const measure = () => {
-      wrapHeight = Math.max(wrap.offsetHeight, 1);
-      markerOffsets = entries.map((entry) => entry.offsetTop + MARKER_ANCHOR);
-    };
-
-    const stopListening = () => {
-      if (listening) {
-        listening = false;
-        window.removeEventListener('scroll', schedule);
-      }
-    };
-
-    const update = () => {
-      rafId = null;
-      const { top } = wrap.getBoundingClientRect();
-      const penY = window.innerHeight * PEN_POSITION;
-      const progress = Math.min(Math.max((penY - top) / wrapHeight, 0), 1);
-      ink.style.transform = `scaleY(${progress})`;
-      const inkTipY = progress * wrapHeight;
-      entries.forEach((entry, i) => {
-        const shouldBeLit = inkTipY >= markerOffsets[i];
-        const isLit = entry.dataset.lit === 'true';
-        if (shouldBeLit !== isLit) {
-          entry.dataset.lit = shouldBeLit ? 'true' : 'false';
-        }
-      });
-    };
-
-    const schedule = () => {
-      if (rafId === null) rafId = requestAnimationFrame(update);
-    };
-
-    const onResize = () => {
-      measure();
-      schedule();
-    };
-
-    const startListening = () => {
-      if (!listening) {
-        listening = true;
-        window.addEventListener('scroll', schedule, { passive: true });
-      }
-    };
-
-    const io = new IntersectionObserver(
-      (ioEntries) => {
-        if (ioEntries.some((e) => e.isIntersecting)) {
-          measure();
-          startListening();
-          schedule();
-        } else {
-          stopListening();
-        }
-      },
-      { rootMargin: '25% 0px' },
-    );
-    io.observe(wrap);
-    window.addEventListener('resize', onResize);
-
-    return () => {
-      io.disconnect();
-      stopListening();
-      window.removeEventListener('resize', onResize);
-      if (rafId !== null) cancelAnimationFrame(rafId);
-    };
-  }, [prefersReducedMotion]);
+  useInkSpineDraw(wrapRef, inkRef, {
+    prefersReducedMotion,
+    penPosition: PEN_POSITION,
+    markerAnchor: MARKER_ANCHOR,
+  });
 
   return (
     <Wrap ref={wrapRef}>
