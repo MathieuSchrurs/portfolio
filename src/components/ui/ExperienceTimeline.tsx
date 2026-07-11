@@ -38,7 +38,7 @@ export interface Job {
    this line as the user scrolls. */
 const PEN_POSITION = 0.72;
 /* Vertical offset (px) from an entry's top to its marker center — tuned to
-   match the vertical center of the (now-static, undrifted, baseline-aligned
+   match the vertical center of the (now-static, non drifted, baseline-aligned
    with the numeral) date text in ExperienceScene's range/numeral row, so
    the tick stays flush with both at every scroll position. */
 const MARKER_ANCHOR = 19.5;
