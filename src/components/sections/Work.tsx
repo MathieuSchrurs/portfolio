@@ -12,7 +12,7 @@ const StyledProjectsSection = styled(SectionWrapper)`
 const StyledProjectsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 15px;
+  gap: 24px;
   position: relative;
   margin-top: 50px;
 
@@ -21,6 +21,15 @@ const StyledProjectsGrid = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
 `;
+
+const cardTilts = [
+  'rotate(-0.35deg)',
+  'rotate(0.3deg)',
+  'rotate(-0.25deg)',
+  'rotate(0.4deg)',
+  'rotate(-0.3deg)',
+  'rotate(0.25deg)',
+];
 
 const Work = () => {
   const { projects } = config;
@@ -31,8 +40,12 @@ const Work = () => {
 
       <StyledProjectsGrid>
         {projects &&
-          projects.map((project) => (
-            <WorkCard key={project.title} {...project} />
+          projects.map((project, index) => (
+            <WorkCard
+              key={project.title}
+              {...project}
+              $tilt={cardTilts[index % cardTilts.length]}
+            />
           ))}
       </StyledProjectsGrid>
     </StyledProjectsSection>

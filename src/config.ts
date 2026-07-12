@@ -101,6 +101,7 @@ export default {
     },
     {
       title: "Personal Portfolio Website",
+      filename: "portfolio.tsx",
       description:
         "The site you are currently viewing! Built with React, TypeScript, and styled-components, featuring theme switching and responsive design.",
       tags: ["React", "TypeScript", "Styled Components", "Vite"],
@@ -109,12 +110,14 @@ export default {
     },
     {
       title: "Internal Issue Tracking Dashboard",
+      filename: "issue-tracker.cs",
       description:
         "Developed an in-house Blazor application during an internship to provide clear visibility on issue status and priority, improving team workflow.",
       tags: ["Blazor", ".NET", "C#", "Web APIs", "Entity Framework", "Azure"],
     },
     {
       title: "Stock Management Web App",
+      filename: "stock-manager.cs",
       description:
         "Created a web application for a purchasing department to manage and view stock levels, utilizing a C# backend and JavaScript frontend.",
       tags: ["C#", ".NET", "JavaScript", "HTML", "CSS", "SQL Server"],
