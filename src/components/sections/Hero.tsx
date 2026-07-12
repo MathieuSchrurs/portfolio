@@ -51,7 +51,7 @@ const StyledBio = styled.p`
   font-family: var(--font-mono);
   font-size: var(--fz-lg);
   line-height: 1.6;
-  max-width: 36em;
+  max-width: 42em;
 `;
 
 const StyledActions = styled.div`
@@ -93,8 +93,11 @@ const Hero = () => {
 
         <motion.div variants={riseIn} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
           <StyledBio>
-            I used to publish music and teach languages. Both ran on structure,
-            timing, clarity and human connection. So does the software I now build.
+            I used to publish music and teach languages.
+            <br />
+            Both ran on structure, timing, clarity and human connection.
+            <br />
+            So does the software I now build.
           </StyledBio>
         </motion.div>
 
