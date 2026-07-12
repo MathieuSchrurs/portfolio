@@ -74,7 +74,7 @@ const variables = css`
     /* icons / theming */
     --logo-hover-color: #a78bfa;
     --logo-default-color: #ededed;
-    --sun-color: #a78bfa;
+    --sun-color: #f59e0b;
     --moon-color: #a78bfa;
   }
 

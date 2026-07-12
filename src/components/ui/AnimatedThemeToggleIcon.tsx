@@ -9,18 +9,6 @@ interface AnimatedThemeToggleIconProps {
   'aria-label'?: string;
 }
 
-const IconWrapper = styled.span<{ $visible: boolean; $from: number; $to: number }>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: ${(p) => (p.$visible ? 1 : 0)};
-  transform: rotate(${(p) => (p.$visible ? p.$to : p.$from)}deg)
-    scale(${(p) => (p.$visible ? 1 : 0.8)});
-  transition: opacity 0.4s, transform 0.4s cubic-bezier(0.4, 0.2, 0.2, 1);
-  will-change: opacity, transform;
-  pointer-events: ${(p) => (p.$visible ? 'auto' : 'none')};
-`;
-
 const ToggleButton = styled.button`
   position: relative;
   width: 32px;
@@ -42,7 +30,38 @@ const ToggleButton = styled.button`
   }
 `;
 
-const SunIcon = () => (
+const IconContainer = styled.span<{ $rotation: number }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(${(p) => p.$rotation}deg);
+  transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+`;
+
+const SunIcon = styled.span<{ $visible: boolean }>`
+  position: absolute;
+  opacity: ${(p) => (p.$visible ? 1 : 0)};
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const MoonIcon = styled.span<{ $visible: boolean }>`
+  position: absolute;
+  opacity: ${(p) => (p.$visible ? 1 : 0)};
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const SunSvg = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
     stroke="var(--sun-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="5" fill="var(--sun-color)" />
@@ -59,7 +78,7 @@ const SunIcon = () => (
   </svg>
 );
 
-const MoonIcon = () => (
+const MoonSvg = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
     stroke="var(--moon-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path
@@ -76,20 +95,29 @@ const AnimatedThemeToggleIcon: React.FC<AnimatedThemeToggleIconProps> = ({
   className,
   'aria-label': ariaLabel,
 }) => {
+  const [rotation, setRotation] = React.useState(0);
+
+  const handleClick = () => {
+    setRotation((prev) => prev + 180);
+    onClick?.();
+  };
+
   return (
     <ToggleButton
-      onClick={onClick}
+      onClick={handleClick}
       style={style}
       className={className}
       aria-label={ariaLabel}
       type="button"
     >
-      <IconWrapper $visible={theme === 'light'} $from={60} $to={0}>
-        <SunIcon />
-      </IconWrapper>
-      <IconWrapper $visible={theme === 'dark'} $from={-60} $to={0}>
-        <MoonIcon />
-      </IconWrapper>
+      <IconContainer $rotation={rotation}>
+        <SunIcon $visible={theme === 'light'}>
+          <SunSvg />
+        </SunIcon>
+        <MoonIcon $visible={theme === 'dark'}>
+          <MoonSvg />
+        </MoonIcon>
+      </IconContainer>
     </ToggleButton>
   );
 };
