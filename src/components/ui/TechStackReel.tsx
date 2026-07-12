@@ -38,6 +38,7 @@ const Viewport = styled.div<{ $static: boolean }>`
         `
       : css`
           overflow: hidden;
+          contain: layout style;
           -webkit-mask-image: linear-gradient(
             to right,
             transparent,
@@ -52,6 +53,15 @@ const Viewport = styled.div<{ $static: boolean }>`
             black 88%,
             transparent
           );
+
+          /* Drop the mask on mobile — only ~2 cards are visible at once so
+             the fade-to-edge is barely perceptible, and per-frame mask
+             compositing is the single biggest GPU bottleneck on touch
+             devices. */
+          @media (max-width: 768px) {
+            -webkit-mask-image: none;
+            mask-image: none;
+          }
         `}
 `;
 
@@ -73,6 +83,7 @@ const Track = styled(motion.ul)<{ $static: boolean }>`
         `
       : css`
           width: max-content;
+          will-change: transform;
         `}
 `;
 
@@ -175,8 +186,19 @@ export default function TechStackReel({ skills }: TechStackReelProps) {
       setRange(computeReelRange(containerWidth, trackWidth));
     };
     measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
+    /* Coalesce rapid resize events (e.g. mobile URL-bar show/hide) into a
+       single frame-safe measurement so mid-scroll re-renders don't cause
+       visible stuttering. */
+    let raf: number;
+    const onResize = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(measure);
+    };
+    window.addEventListener('resize', onResize);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', onResize);
+    };
   }, [skills, shouldReduceMotion]);
 
   /* ['start end', 'end start'] spans the reel's full off-screen-to-off-
