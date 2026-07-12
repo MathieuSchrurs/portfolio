@@ -4,11 +4,6 @@ import SectionWrapper from "../layout/SectionWrapper";
 import TechStackReel from "../ui/TechStackReel";
 import { skills } from "../../data/skills";
 
-// About's "Current Tech Stack" strip is a curated subset of the shared skill
-// data, picked by name. A couple of entries are relabelled here to the
-// broader, combined phrasing this strip has always used (e.g. pairing C#
-// with .NET, since the shared data lists them as separate categorised
-// entries but they render with the same icon/color here).
 const featuredSkillNames = [
   "HTML5",
   "C#",
@@ -146,27 +141,25 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              My path into software wasn’t a straight line, and that’s exactly what makes
-              it interesting. Before writing code professionally, I spent years in music
-              publishing in London, then teaching English and Dutch in Belgium. Those worlds
-              trained me to communicate clearly, think in systems, and put the human
+              My path into software hasn't been a straight line, and that’s exactly what makes
+              it interesting. Before writing any code professionally, I spent years in music
+              publishing in both London and Ghent, then I pivoted to teaching English and Dutch. Both those worlds
+              trained me to communicate clearly, think in a whole range of systems, and put the human
               experience at the center of everything I build.
             </p>
             <p>
-              Today, I work across the full stack: .NET and C# on the back end, React and
+              Today, I work across a broad and everchanging stack: most times I rock .NET and C# on the back end, React and
               TypeScript on the front. Good software, to me, is the kind that does its job
-              quietly: well-structured, easy to reason about, and built to last beyond the
-              first release.
+              quietly: well-structured, easy to reason about, and built to last beyond it's first release
             </p>
             <p>
-              What drives me isn’t just shipping features. It’s understanding a problem well
-              enough to solve it properly. Whether collaborating with a team or working
-              through something solo, the goal is always the same: something that genuinely
-              works for the people using it.
+              What drives me isn’t just shipping features. It’s understanding the scope and the problem profoundly
+              enough to solve it in the best way possible. Whether collaborating with a team or working
+              through something solo, my goal is always the same: something that genuinely works for the people whom will be using it.
             </p>
             <p>
-              Outside of code, you’ll find me courtside coaching my basketball team, exploring
-              new music albums, or hunting down the next thing worth understanding.
+              Outside of writing code, you’ll find me courtside coaching my basketball team, exploring
+              new music albums,chilling with my cat or hunched over a breadboard, soldering my next Arduino idea into existence.
             </p>
 
             <StyledTechStackSubtitle>Current Tech Stack</StyledTechStackSubtitle>

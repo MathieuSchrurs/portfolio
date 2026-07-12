@@ -100,7 +100,7 @@ const categoryIcons: Record<
 const Skills = () => {
   return (
     <StyledSkillsSection id="skills">
-      <SectionHeading sectionNumber="3">My Skill Set</SectionHeading>
+      <SectionHeading sectionNumber="3">Toolbox</SectionHeading>
       <SkillsGrid>
         {skillCategories.map(({ category, skills }) => {
           const Icon = categoryIcons[category] ?? FaCode;

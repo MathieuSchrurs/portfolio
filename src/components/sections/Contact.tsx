@@ -52,11 +52,12 @@ const Contact = () => {
   return (
     <StyledContactSection id="contact">
       <StyledPreHeading>Get In Touch</StyledPreHeading>
-      <StyledTitle>Let's build something that lasts.</StyledTitle>
+      <StyledTitle>Want to build together?</StyledTitle>
 
       <StyledDescription>
-        If you're hiring for a team that cares how things are built, or if
-        you just want to talk shop, I'd like to hear from you.
+          Whether you've got an exciting project that could use another brain or some extra firepower,
+          or you're building something cool and just want to team up, I would love to hear about it.
+          So don't hesitate to reach out.
       </StyledDescription>
 
       <StyledCTA>

@@ -16,10 +16,6 @@ const StyledHero = styled.section`
   padding-bottom: 5rem;
 `;
 
-/* Subtitle line hugging the big name's underside — the negative top margin
-   eats the name's descender room; the bottom margin separates the pair
-   from the tagline. && beats the global "p:last-child { margin-bottom: 0 }"
-   rule, which otherwise zeroes the gap (this p is alone in its wrapper). */
 const StyledOverline = styled.p`
   && {
     color: var(--accent-color);
@@ -31,8 +27,6 @@ const StyledOverline = styled.p`
   }
 `;
 
-/* The one oversized moment above the fold — same Calibre-600-against-mono
-   language as the Experience company names, scaled up for the opening. */
 const StyledBigName = styled.h1`
   color: var(--text-primary-color);
   font-family: var(--font-sans);
@@ -48,7 +42,7 @@ const StyledTagline = styled.h2`
   font-family: var(--font-mono);
   font-weight: 400;
   font-size: clamp(1.1rem, 0.9rem + 1vw, 1.5rem);
-  line-height: 1.4;
+  line-height: 1.5;
   margin-bottom: 2rem;
 `;
 

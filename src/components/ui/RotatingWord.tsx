@@ -7,7 +7,7 @@ import { usePrefersReducedMotion } from '../../hooks';
 const WordSlot = styled.span`
   display: block;
   overflow: hidden;
-  height: 1.2em;
+  height: 1.5em;
   position: relative;
 `;
 
