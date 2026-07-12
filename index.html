@@ -2,21 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mathieu Schrurs Portfolio website</title>
     <meta name="description" content="Portfolio website for Mathieu Schrurs, a Software Engineer based in Ghent, Belgium, showcasing skills and projects in .NET, React, Next.js, and more." />
+    <!-- Above-the-fold fonts; Vite rewrites these to the hashed asset URLs at build time -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/src/fonts/SFMono/SFMono-Regular.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/src/fonts/Calibre/Calibre-Semibold.woff2">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <!-- <meta property="og:title" content="Mathieu Schrurs | Software Developer" /> -->
-    <!-- <meta property="og:description" content="..." /> -->
-    <!-- <meta property="og:image" content="/path/to/your/preview-image.jpg" /> -->
-    <!-- <meta property="og:url" content="https://mathieuschrurs.com" /> -->
-    <!-- <meta property="og:type" content="website" /> -->
+    <meta property="og:title" content="Mathieu Schrurs — Software Engineer" />
+    <meta property="og:description" content="Software engineer in Ghent, Belgium working across .NET, C#, React, and TypeScript. An unconventional path from music publishing and teaching into code." />
+    <meta property="og:image" content="https://mathieuschrurs.com/images/og-image.jpg" />
+    <meta property="og:url" content="https://mathieuschrurs.com" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <div id="root"></div>

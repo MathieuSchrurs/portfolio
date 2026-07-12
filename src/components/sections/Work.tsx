@@ -9,17 +9,14 @@ const StyledProjectsSection = styled(SectionWrapper)`
 `;
 
 
+/* minmax(400px) caps the row at two columns inside the 1200px section, so
+   four projects sit as a balanced 2×2 instead of 3+1 with an orphan. */
 const StyledProjectsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
   gap: 24px;
   position: relative;
   margin-top: 50px;
-
-
-  @media (max-width: 1080px) {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
 `;
 
 const cardTilts = [

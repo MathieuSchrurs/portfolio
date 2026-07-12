@@ -26,14 +26,14 @@ const icons = {
 
 type Platform = keyof typeof icons;
 
-const StyledIconLink = styled.a<{ prefersReducedMotion: boolean }>`
+const StyledIconLink = styled.a<{ $prefersReducedMotion: boolean }>`
   color: var(--text-secondary-color);
-  transition: ${(props) => props.prefersReducedMotion ? 'none' : 'var(--transition)'};
+  transition: ${(props) => props.$prefersReducedMotion ? 'none' : 'var(--transition)'};
 
   &:hover,
   &:focus {
     color: var(--accent-color);
-    ${(props) => !props.prefersReducedMotion && css`
+    ${(props) => !props.$prefersReducedMotion && css`
       transform: translateY(-3px);
     `}
   }
@@ -63,7 +63,7 @@ const SocialIcon: React.FC<SocialIconProps> = ({
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Link to ${platform}`}
-            prefersReducedMotion={prefersReducedMotion}
+            $prefersReducedMotion={prefersReducedMotion}
         >
             {icons[platform]}
         </StyledIconLink>

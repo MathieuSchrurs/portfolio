@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
 import { useIgniteBinaryReveal, toBinaryIndex } from '../../hooks';
-import type { Job } from './ExperienceTimeline';
+import type { Job } from '../../types';
 
 /*
  * One full-width experience "scene".
@@ -84,7 +84,7 @@ const Range = styled.time<{ $current: boolean }>`
     transform 550ms ${easeOutQuint};
 
   li[data-lit='false'] & {
-    opacity: 0.25;
+    opacity: 0.45;
     transform: translateY(10px);
   }
 
@@ -117,7 +117,7 @@ const Numeral = styled.span`
   }
 
   li[data-lit='false'] & {
-    opacity: 0.18;
+    opacity: 0.35;
     transform: translateY(10px);
   }
 
@@ -173,7 +173,7 @@ const Location = styled.p`
     transform 550ms ${easeOutQuint} 90ms;
 
   li[data-lit='false'] & {
-    opacity: 0.25;
+    opacity: 0.45;
     transform: translateY(10px);
   }
 
@@ -194,7 +194,7 @@ const Role = styled.p`
     transform 550ms ${easeOutQuint} 140ms;
 
   li[data-lit='false'] & {
-    opacity: 0.25;
+    opacity: 0.45;
     transform: translateY(10px);
   }
 
@@ -232,7 +232,7 @@ const DescriptionText = styled.span`
     transform 600ms ${easeOutQuint} 220ms;
 
   li[data-lit='false'] & {
-    opacity: 0.25;
+    opacity: 0.45;
     transform: translateY(12px);
   }
 

@@ -9,7 +9,7 @@ import {
 } from 'react-icons/fa';
 import type { ComponentType, SVGProps } from 'react';
 import SectionHeading from '../ui/SectionHeading';
-import FlipCard from '../ui/FlipCard';
+import CornerMarks from '../ui/CornerMarks';
 import SectionWrapper from '../layout/SectionWrapper';
 import { skillCategories } from '../../data/skills';
 
@@ -20,9 +20,38 @@ const StyledSkillsSection = styled(SectionWrapper)`
 
 const SkillsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
   margin-top: 3rem;
+`;
+
+/* Borderless group with only the four accent corner marks — the site's
+   corner language without the card box, so all skills stay readable
+   at a glance. */
+const CategoryGroup = styled.div`
+  position: relative;
+  padding: 1.25rem 1.5rem;
+`;
+
+const CategoryHeading = styled.h3`
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 0.9rem;
+  font-family: var(--font-mono);
+  font-size: var(--fz-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-primary-color);
+
+  svg {
+    width: 16px;
+    height: 16px;
+    color: var(--accent-color);
+    opacity: 0.85;
+    flex-shrink: 0;
+  }
 `;
 
 const SkillList = styled.ul`
@@ -31,11 +60,10 @@ const SkillList = styled.ul`
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  width: 100%;
+  gap: 0.55rem;
 `;
 
-const SkillItem = styled.li<{ color?: string }>`
+const SkillItem = styled.li`
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -45,9 +73,10 @@ const SkillItem = styled.li<{ color?: string }>`
   transition: color 0.3s ease-out;
 
   svg {
-    width: 16px;
-    height: 16px;
-    color: ${({ color }) => color || 'var(--text-secondary-color)'};
+    width: 15px;
+    height: 15px;
+    color: currentColor;
+    opacity: 0.75;
     flex-shrink: 0;
   }
 
@@ -68,39 +97,31 @@ const categoryIcons: Record<
   Tools: FaWrench,
 };
 
-/* Subtle per-card tilts assigned round-robin so each card feels
-   slightly off-kilter without being distracting. */
-const cardTilts = [
-  'rotate(-0.4deg)',
-  'rotate(0.3deg)',
-  'rotate(-0.2deg)',
-  'rotate(0.5deg)',
-  'rotate(-0.3deg)',
-  'rotate(0.4deg)',
-];
-
 const Skills = () => {
   return (
     <StyledSkillsSection id="skills">
       <SectionHeading sectionNumber="3">My Skill Set</SectionHeading>
       <SkillsGrid>
-        {skillCategories.map(({ category, skills }, index) => (
-          <FlipCard
-            key={category}
-            title={category}
-            icon={categoryIcons[category] ?? FaCode}
-            $tilt={cardTilts[index % cardTilts.length]}
-          >
-            <SkillList>
-              {skills.map((skill) => (
-                <SkillItem key={skill.name} color={skill.color}>
-                  <skill.Icon />
-                  {skill.name}
-                </SkillItem>
-              ))}
-            </SkillList>
-          </FlipCard>
-        ))}
+        {skillCategories.map(({ category, skills }) => {
+          const Icon = categoryIcons[category] ?? FaCode;
+          return (
+            <CategoryGroup key={category}>
+              <CornerMarks />
+              <CategoryHeading>
+                <Icon aria-hidden="true" />
+                {category}
+              </CategoryHeading>
+              <SkillList>
+                {skills.map((skill) => (
+                  <SkillItem key={skill.name}>
+                    <skill.Icon aria-hidden="true" />
+                    {skill.name}
+                  </SkillItem>
+                ))}
+              </SkillList>
+            </CategoryGroup>
+          );
+        })}
       </SkillsGrid>
     </StyledSkillsSection>
   );

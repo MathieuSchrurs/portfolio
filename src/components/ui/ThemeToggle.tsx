@@ -24,15 +24,7 @@ const ThemeToggle: FC<ThemeToggleProps> = ({ className }) => {
           justifyContent: "center",
           transform: "translateY(1px)",
         }}
-      role="button"
-      tabIndex={0}
       aria-label={`Switch to ${themeMode === 'light' ? 'dark' : 'light'} theme`}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleThemeMode();
-        }
-      }}
     />
   );
 };

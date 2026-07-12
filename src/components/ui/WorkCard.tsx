@@ -9,6 +9,16 @@ const slugify = (title: string) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
 
+/* Tags whose natural slug is wrong or ugly ("C#" -> "c", ".NET" -> "net"),
+   mapped to a proper CLI-flag-friendly name before slugifying. */
+const tagDisplayNames: Record<string, string> = {
+  'C#': 'csharp',
+  '.NET': 'dotnet',
+  'Next.js': 'nextjs',
+};
+
+const tagToFlag = (tag: string) => slugify(tagDisplayNames[tag] ?? tag);
+
 const blink = keyframes`
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
@@ -84,6 +94,7 @@ const StyledDots = styled.span`
 const StyledFilename = styled.h3`
   margin: 0;
   min-width: 0;
+  flex: 1;
   font-family: var(--font-mono);
   font-size: var(--fz-xs);
   font-weight: 400;
@@ -129,10 +140,6 @@ const StyledCursor = styled.span`
 
 const StyledCardFooter = styled.footer`
   margin-top: auto;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1rem;
   padding: 1rem 1.25rem 1.1rem;
 `;
 
@@ -150,20 +157,32 @@ const StyledFlagList = styled.ul`
     font-size: var(--fz-xxs);
     line-height: 1.5;
     color: var(--accent-color);
+    white-space: nowrap;
   }
 `;
 
+/* Pinned to the title bar's right edge, opposite the dots. */
 const StyledProjectLinks = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.35rem;
   flex-shrink: 0;
+  margin-left: auto;
+`;
+
+const StyledInternalNote = styled.span`
+  font-family: var(--font-mono);
+  font-size: var(--fz-xxs);
+  color: var(--text-secondary-color);
+  opacity: 0.75;
+  white-space: nowrap;
 `;
 
 const StyledIconLink = styled.a`
   color: var(--text-secondary-color);
-  padding: 5px;
+  padding: 4px;
   z-index: 1;
+  line-height: 0;
 
   &:hover,
   &:focus {
@@ -171,8 +190,8 @@ const StyledIconLink = styled.a`
   }
 
   svg {
-    width: 20px;
-    height: 20px;
+    width: 17px;
+    height: 17px;
     display: block;
   }
 `;
@@ -208,25 +227,10 @@ const WorkCard: React.FC<WorkCardProps> = ({
         <StyledFilename aria-label={title}>
           {filename ?? `${slugify(title)}.ts`}
         </StyledFilename>
-      </StyledTitleBar>
-
-      <StyledBody>
-        <StyledDescription>
-          <StyledPrompt aria-hidden="true">$</StyledPrompt>
-          {description}
-          <StyledCursor aria-hidden="true">▍</StyledCursor>
-        </StyledDescription>
-      </StyledBody>
-
-      <StyledCardFooter>
-        {tags && tags.length > 0 && (
-          <StyledFlagList>
-            {tags.map((tag, i) => (
-              <li key={i}>--{slugify(tag)}</li>
-            ))}
-          </StyledFlagList>
-        )}
         <StyledProjectLinks>
+          {!codeUrl && !liveUrl && (
+            <StyledInternalNote>internal · no public link</StyledInternalNote>
+          )}
           {codeUrl && (
             <StyledIconLink
               href={codeUrl}
@@ -248,6 +252,24 @@ const WorkCard: React.FC<WorkCardProps> = ({
             </StyledIconLink>
           )}
         </StyledProjectLinks>
+      </StyledTitleBar>
+
+      <StyledBody>
+        <StyledDescription>
+          <StyledPrompt aria-hidden="true">$</StyledPrompt>
+          {description}
+          <StyledCursor aria-hidden="true">▍</StyledCursor>
+        </StyledDescription>
+      </StyledBody>
+
+      <StyledCardFooter>
+        {tags && tags.length > 0 && (
+          <StyledFlagList>
+            {tags.map((tag, i) => (
+              <li key={i}>--{tagToFlag(tag)}</li>
+            ))}
+          </StyledFlagList>
+        )}
       </StyledCardFooter>
     </StyledTerminalCard>
   );

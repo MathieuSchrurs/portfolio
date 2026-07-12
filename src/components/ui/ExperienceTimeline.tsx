@@ -2,14 +2,7 @@ import { useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import ExperienceScene from './ExperienceScene';
 import { usePrefersReducedMotion, useInkSpineDraw } from '../../hooks';
-
-export interface Job {
-  company: string;
-  title: string;
-  location: string;
-  range: string;
-  description: string;
-}
+import type { Job } from '../../types';
 
 /*
  * "Self-drawing line log", second pass: full-width scenes.

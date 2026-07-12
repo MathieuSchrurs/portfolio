@@ -1,4 +1,4 @@
-import { useEffect, type FC, type ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 import Nav from './Nav';
 import Social from './Social';
@@ -16,22 +16,6 @@ const StyledContent = styled.div`
 `;
 
 const Layout: FC<LayoutProps> = ({ children }) => {
-    const handleExternalLinks = () => {
-        const allLinks = Array.from(document.querySelectorAll('a'));
-        if (allLinks.length > 0) {
-            allLinks.forEach((link) => {
-                if (link.host !== window.location.host) {
-                    link.setAttribute('rel', 'noopener noreferrer');
-                    link.setAttribute('target', '_blank');
-                }
-            });
-        }
-    };
-
-    useEffect(() => {
-        handleExternalLinks();
-    }, []);
-
     return (
         <StyledContent>
             <a className="skip-to-content" href="#content">

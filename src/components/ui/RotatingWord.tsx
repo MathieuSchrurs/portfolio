@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'motion/react';
+import { usePrefersReducedMotion } from '../../hooks';
 
 /* Fixed-height clipping window — the slot machine drum */
 const WordSlot = styled.span`
@@ -34,18 +35,29 @@ const WORDS = [
   'stories',
 ];
 
-/* The word that slides through the Hero tagline on a 2s loop, each entry
-   rising into a fixed-height slot and the previous one sliding out above. */
+/* The word that slides through the Hero tagline on a 3.5s loop, each entry
+   rising into a fixed-height slot and the previous one sliding out above.
+   Under prefers-reduced-motion the word stands still. */
 export default function RotatingWord() {
   const [index, setIndex] = useState(0);
+  const reduceMotion = usePrefersReducedMotion();
 
   useEffect(() => {
+    if (reduceMotion) return;
     const interval = setInterval(
       () => setIndex((prev) => (prev + 1) % WORDS.length),
-      2000,
+      3500,
     );
     return () => clearInterval(interval);
-  }, []);
+  }, [reduceMotion]);
+
+  if (reduceMotion) {
+    return (
+      <WordSlot>
+        <AnimatedWord as="span">{WORDS[index]}</AnimatedWord>
+      </WordSlot>
+    );
+  }
 
   return (
     <WordSlot>

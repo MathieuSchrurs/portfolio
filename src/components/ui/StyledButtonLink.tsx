@@ -9,10 +9,20 @@ interface StyledButtonLinkProps {
     target?: string;
     rel?: string;
     className?: string;
+    /** Filled accent variant for the page's one primary action; default is the ghost outline. */
+    primary?: boolean;
 }
 
-const StyledLink = styled.a`
+const StyledLink = styled.a<{ $primary?: boolean }>`
   ${({ theme }) => theme.mixins.smallButton};
+
+  /* Primary shares the exact ghost skeleton and hover of its sibling;
+     hierarchy comes from the heavier text alone. */
+  ${({ $primary }) =>
+    $primary &&
+    `
+    font-weight: 600;
+  `}
 
   svg {
     display: inline-block;
@@ -36,9 +46,11 @@ const StyledButtonLink: React.FC<StyledButtonLinkProps> = ({
     target,
     rel,
     className = '',
+    primary = false,
 }) => {
     return (
         <StyledLink
+            $primary={primary}
             href={href}
             download={typeof download === 'string' ? download : undefined}
             target={target}

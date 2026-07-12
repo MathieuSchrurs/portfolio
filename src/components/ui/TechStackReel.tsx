@@ -127,10 +127,20 @@ const Card = styled(motion.li)`
     box-shadow: 0 16px 32px -12px var(--shadow-color);
   }
 
+  /* Neutral icons at rest keep the two-hue palette intact; the brand
+     color is a hover reveal, matching the border/tint treatment. */
   svg {
     width: 32px;
     height: 32px;
     flex-shrink: 0;
+    color: var(--text-secondary-color);
+    opacity: 0.85;
+    transition: color 320ms ${easeStandard};
+  }
+
+  &:hover svg {
+    color: var(--skill-base, var(--accent-color));
+    opacity: 1;
   }
 
   span {
@@ -235,7 +245,7 @@ export default function TechStackReel({ skills }: TechStackReelProps) {
                   }
             }
           >
-            <skill.Icon aria-hidden="true" color={skill.color} />
+            <skill.Icon aria-hidden="true" />
             <span>{skill.name}</span>
           </Card>
         ))}

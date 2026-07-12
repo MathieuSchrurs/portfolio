@@ -6,22 +6,19 @@ interface AnimatedThemeToggleIconProps {
   onClick?: () => void;
   style?: React.CSSProperties;
   className?: string;
-  role?: string;
-  tabIndex?: number;
   'aria-label'?: string;
-  onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
 }
 
-const IconWrapper = styled.span<{ visible: boolean; from: number; to: number }>`
+const IconWrapper = styled.span<{ $visible: boolean; $from: number; $to: number }>`
   position: absolute;
   top: 0;
   left: 0;
-  opacity: ${(p) => (p.visible ? 1 : 0)};
-  transform: rotate(${(p) => (p.visible ? p.to : p.from)}deg)
-    scale(${(p) => (p.visible ? 1 : 0.8)});
+  opacity: ${(p) => (p.$visible ? 1 : 0)};
+  transform: rotate(${(p) => (p.$visible ? p.$to : p.$from)}deg)
+    scale(${(p) => (p.$visible ? 1 : 0.8)});
   transition: opacity 0.4s, transform 0.4s cubic-bezier(0.4, 0.2, 0.2, 1);
   will-change: opacity, transform;
-  pointer-events: ${(p) => (p.visible ? 'auto' : 'none')};
+  pointer-events: ${(p) => (p.$visible ? 'auto' : 'none')};
 `;
 
 const ToggleButton = styled.button`
@@ -77,26 +74,20 @@ const AnimatedThemeToggleIcon: React.FC<AnimatedThemeToggleIconProps> = ({
   onClick,
   style,
   className,
-  role,
-  tabIndex,
   'aria-label': ariaLabel,
-  onKeyDown,
 }) => {
   return (
     <ToggleButton
       onClick={onClick}
       style={style}
       className={className}
-      role={role}
-      tabIndex={tabIndex}
       aria-label={ariaLabel}
-      onKeyDown={onKeyDown}
       type="button"
     >
-      <IconWrapper visible={theme === 'light'} from={60} to={0}>
+      <IconWrapper $visible={theme === 'light'} $from={60} $to={0}>
         <SunIcon />
       </IconWrapper>
-      <IconWrapper visible={theme === 'dark'} from={-60} to={0}>
+      <IconWrapper $visible={theme === 'dark'} $from={-60} $to={0}>
         <MoonIcon />
       </IconWrapper>
     </ToggleButton>

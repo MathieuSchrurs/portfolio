@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import config from "@config";
+import type { NavLink } from "../../types";
 import { useScrollDirection, usePrefersReducedMotion } from "../../hooks";
 import AnimatedLogo from "../ui/AnimatedLogo";
 import ThemeToggle from "../ui/ThemeToggle";
@@ -8,9 +9,9 @@ import CVDownload from "../ui/CVDownload";
 import HamburgerButton from "../ui/HamburgerButton";
 
 interface StyledHeaderProps {
-  scrollDirection: "up" | "down" | null;
-  scrolledToTop: boolean;
-  prefersReducedMotion: boolean;
+  $scrollDirection: "up" | "down" | null;
+  $scrolledToTop: boolean;
+  $prefersReducedMotion: boolean;
 }
 
 const StyledHeader = styled.header<StyledHeaderProps>`
@@ -33,20 +34,20 @@ const StyledHeader = styled.header<StyledHeaderProps>`
   }
 
   ${(props) =>
-    !props.prefersReducedMotion &&
+    !props.$prefersReducedMotion &&
     css`
       transition: var(--transition);
       @media (prefers-reduced-motion: no-preference) {
-        ${props.scrollDirection === "up" &&
-        !props.scrolledToTop &&
+        ${props.$scrollDirection === "up" &&
+        !props.$scrolledToTop &&
         css`
           height: var(--nav-scroll-height);
           transform: translateY(0px);
           background-color: var(--header-bg-color);
           box-shadow: 0 10px 30px -10px var(--shadow-color);
         `}
-        ${props.scrollDirection === "down" &&
-        !props.scrolledToTop &&
+        ${props.$scrollDirection === "down" &&
+        !props.$scrolledToTop &&
         css`
           height: var(--nav-scroll-height);
           transform: translateY(calc(var(--nav-scroll-height) * -1));
@@ -57,8 +58,8 @@ const StyledHeader = styled.header<StyledHeaderProps>`
 `;
 
 const StyledLogoWrapper = styled.div<{
-  isHovered: boolean;
-  prefersReducedMotion: boolean;
+  $isHovered: boolean;
+  $prefersReducedMotion: boolean;
 }>`
    display: flex;
   align-items: center;
@@ -75,20 +76,20 @@ const StyledLogoWrapper = styled.div<{
 
     .logo-path-static {
       stroke: var(--logo-default-color);
-      opacity: ${(props) => (props.isHovered ? 0 : 1)};
+      opacity: ${(props) => (props.$isHovered ? 0 : 1)};
       transition: ${(props) =>
-        props.prefersReducedMotion
+        props.$prefersReducedMotion
           ? "none"
-          : `opacity 0.1s ease-in-out ${props.isHovered ? "0s" : "1.2s"}`};
+          : `opacity 0.1s ease-in-out ${props.$isHovered ? "0s" : "1.2s"}`};
     }
 
     .logo-path-animated {
       stroke-dasharray: 642.528076171875;
       stroke: var(--logo-hover-color);
       stroke-dashoffset: ${(props) =>
-        props.isHovered ? 0 : 642.528076171875};
+        props.$isHovered ? 0 : 642.528076171875};
       transition: ${(props) =>
-        props.prefersReducedMotion ? "none" : "stroke-dashoffset 1.3s linear"};
+        props.$prefersReducedMotion ? "none" : "stroke-dashoffset 1.3s linear"};
     }
   }
 `;
@@ -250,8 +251,6 @@ const MobileControls = styled.div`
 `;
 
 
-type NavLink = { name: string; url: string };
-
 /* Signature logo with its own hover state driving the stroke-draw reveal. */
 const NavLogo: React.FC<{ prefersReducedMotion: boolean }> = ({
   prefersReducedMotion,
@@ -259,8 +258,8 @@ const NavLogo: React.FC<{ prefersReducedMotion: boolean }> = ({
   const [isHovered, setIsHovered] = useState(false);
   return (
     <StyledLogoWrapper
-      isHovered={isHovered}
-      prefersReducedMotion={prefersReducedMotion}
+      $isHovered={isHovered}
+      $prefersReducedMotion={prefersReducedMotion}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -294,7 +293,9 @@ const MobileNavMenu: React.FC<{
 }> = ({ open, navLinks, onClose }) => (
   <>
     <MobileMenuOverlay $open={open} onClick={onClose} />
-    <MobileMenu $open={open}>
+    {/* inert keeps the off-screen menu's links out of the tab order — the
+        closed menu is only translated off-canvas, not display:none */}
+    <MobileMenu $open={open} inert={!open}>
       <ol>
         {navLinks.map(({ url, name }) => (
           <li key={url}>
@@ -331,9 +332,9 @@ const Nav: React.FC = () => {
 
   return (
     <StyledHeader
-      scrollDirection={scrollDirection}
-      scrolledToTop={scrolledToTop}
-      prefersReducedMotion={prefersReducedMotion}
+      $scrollDirection={scrollDirection}
+      $scrolledToTop={scrolledToTop}
+      $prefersReducedMotion={prefersReducedMotion}
     >
       <StyledNav>
         <NavLogo prefersReducedMotion={prefersReducedMotion} />

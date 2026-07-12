@@ -1,4 +1,6 @@
-export default {
+import type { SiteConfig } from "./types";
+
+const config: SiteConfig = {
   email: "mathieu@schrurs.be",
 
   socialMedia: [
@@ -62,7 +64,7 @@ export default {
       location: "Ghent",
       range: "2019 — 2023",
       description:
-        "Taught English and Dutch across secondary and higher education for four years. Running a classroom sharpens systems thinking, clear communication, and the ability to break down complexity. Developing skills that carry directly into my people .",
+        "Taught English and Dutch across secondary and higher education for four years. Running a classroom sharpens systems thinking, clear communication, and the ability to break down complexity. Developing skills that carry directly into how I work with people today.",
     },
     {
       company: "The Right People · Hans Kusters Music",
@@ -86,7 +88,7 @@ export default {
       location: "Ghent",
       range: "2012 — 2017",
       description:
-        "Led teams and coached new hires in face-to-face marketing campaigns for NGOs. Developed persuasion, team management, and performance under pressure — long before code was in the picture.",
+        "Led teams and coached new hires in face-to-face marketing campaigns for NGOs. Developed persuasion, team management, and performance under pressure, long before code was in the picture.",
     },
   ],
 
@@ -124,3 +126,5 @@ export default {
     },
   ],
 };
+
+export default config;

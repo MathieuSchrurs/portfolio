@@ -8,7 +8,7 @@ interface CVDownloadProps {
 const CVDownload: React.FC<CVDownloadProps> = ({ className = '' }) => {
     return (
         <StyledButtonLink
-            href="/CV Mathieu Schrurs.pdf"
+            href="/cv-mathieu-schrurs.pdf"
             download="Mathieu_Schrurs_CV.pdf"
             showIcon={true}
             className={className}

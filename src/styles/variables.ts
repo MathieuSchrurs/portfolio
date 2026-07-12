@@ -25,8 +25,6 @@ const variables = css`
 
     --nav-height: 100px;
     --nav-scroll-height: 70px;
-    --tab-height: 42px;
-    --tab-width: 120px;
 
     --section-padding-desktop: 100px;
     --section-padding-tablet: 80px;
@@ -37,11 +35,6 @@ const variables = css`
      ******************************/
     --easing: cubic-bezier(0.645, 0.045, 0.355, 1);
     --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-
-    /******************************
-     * MOBILE NAV
-     ******************************/
-    --hamburger-width: 30px;
   }
 
   /******************************
@@ -60,7 +53,6 @@ const variables = css`
     --shadow-color: rgba(0, 0, 0, 0.5);
 
     --accent-color: #a78bfa;
-    --accent-active-color: #c4b5fd;
     --accent-text-color: #111111;
     --accent-tint-color: rgba(167, 139, 250, 0.1);
     /* Accent as "ink": for accent-colored text and drawn strokes sitting on
@@ -84,13 +76,6 @@ const variables = css`
     --logo-default-color: #ededed;
     --sun-color: #a78bfa;
     --moon-color: #a78bfa;
-
-    /* mobile nav */
-    --nav-mobile-bg: rgba(17, 17, 17, 0.97);
-
-    /* gradients (used elsewhere) */
-    --gradient-middle-color: #a78bfa;
-    --gradient-end-color: #5b4b8a;
   }
 
   /* Light Mode */
@@ -105,7 +90,6 @@ const variables = css`
     --shadow-color: rgba(0, 0, 0, 0.08);
 
     --accent-color: #8b5cf6;
-    --accent-active-color: #7c3aed;
     --accent-text-color: #ffffff;
     --accent-tint-color: rgba(139, 92, 246, 0.1);
     /* Accent as "ink" on light surfaces: deeper and slightly desaturated
@@ -128,13 +112,6 @@ const variables = css`
     --logo-default-color: #171717;
     --sun-color: #f59e0b;
     --moon-color: #262626;
-
-    /* mobile nav */
-    --nav-mobile-bg: rgba(245, 245, 245, 0.97);
-
-    /* gradients (used elsewhere) */
-    --gradient-middle-color: #a78bfa;
-    --gradient-end-color: #606060;
   }
 `;
 

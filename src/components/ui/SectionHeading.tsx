@@ -7,7 +7,7 @@ interface SectionHeadingProps {
   className?: string;
 }
 
-const StyledHeading = styled.h2<Pick<SectionHeadingProps, 'sectionNumber'>>`
+const StyledHeading = styled.h2<{ $sectionNumber: string }>`
   display: flex;
   align-items: center;
   position: relative;
@@ -22,7 +22,7 @@ const StyledHeading = styled.h2<Pick<SectionHeadingProps, 'sectionNumber'>>`
     position: relative;
     bottom: 4px;
     /* Use the prop to generate the content dynamically */
-    content: '0${(props) => props.sectionNumber}.';
+    content: '0${(props) => props.$sectionNumber}.';
     margin-right: 10px;
     color: var(--accent-color);
     font-family: var(--font-mono);
@@ -63,7 +63,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
   className,
 }) => {
   return (
-    <StyledHeading sectionNumber={sectionNumber} className={className}>
+    <StyledHeading $sectionNumber={sectionNumber} className={className}>
       {children}
     </StyledHeading>
   );

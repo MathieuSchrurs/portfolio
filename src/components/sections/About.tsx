@@ -120,7 +120,7 @@ const StyledPic = styled.div`
     border-radius: var(--border-radius);
     overflow: hidden;
     aspect-ratio: 1 / 1;
-    background-image: url("/images/profile-picture.jpg");
+    background-image: url("/images/profile-picture.webp");
     background-size: cover;
     background-position: center;
   }
@@ -140,26 +140,26 @@ const About = () => {
       <SectionHeading sectionNumber="1">About Me</SectionHeading>
       <StyledAboutContent>
         <StyledPic>
-          <div className="wrapper" onContextMenu={(e) => e.preventDefault()} />
+          <div className="wrapper" />
         </StyledPic>
 
         <StyledText>
           <div>
             <p>
-              My path into software wasn’t a straight line — and that’s exactly what makes
+              My path into software wasn’t a straight line, and that’s exactly what makes
               it interesting. Before writing code professionally, I spent years in music
               publishing in London, then teaching English and Dutch in Belgium. Those worlds
               trained me to communicate clearly, think in systems, and put the human
               experience at the center of everything I build.
             </p>
             <p>
-              Today, I work across the full stack — .NET and C# on the back end, React and
+              Today, I work across the full stack: .NET and C# on the back end, React and
               TypeScript on the front. Good software, to me, is the kind that does its job
               quietly: well-structured, easy to reason about, and built to last beyond the
               first release.
             </p>
             <p>
-              What drives me isn’t just shipping features — it’s understanding a problem well
+              What drives me isn’t just shipping features. It’s understanding a problem well
               enough to solve it properly. Whether collaborating with a team or working
               through something solo, the goal is always the same: something that genuinely
               works for the people using it.

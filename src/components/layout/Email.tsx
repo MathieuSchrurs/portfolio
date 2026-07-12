@@ -4,7 +4,7 @@ import config from '@config';
 import Side from './Side';
 import { usePrefersReducedMotion } from '../../hooks';
 
-const StyledLinkWrapper = styled.div<{ prefersReducedMotion: boolean }>`
+const StyledLinkWrapper = styled.div<{ $prefersReducedMotion: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,12 +29,12 @@ const StyledLinkWrapper = styled.div<{ prefersReducedMotion: boolean }>`
     writing-mode: vertical-rl;
     color: var(--text-secondary-color);
     text-decoration: none;
-    transition: ${(props) => props.prefersReducedMotion ? 'none' : 'var(--transition)'};
+    transition: ${(props) => props.$prefersReducedMotion ? 'none' : 'var(--transition)'};
 
     &:hover,
     &:focus {
       color: var(--accent-color);
-      ${(props) => !props.prefersReducedMotion && css`
+      ${(props) => !props.$prefersReducedMotion && css`
         transform: translateY(-3px);
       `}
     }
@@ -46,7 +46,7 @@ const Email: React.FC = () => {
 
   return (
     <Side orientation="right">
-      <StyledLinkWrapper prefersReducedMotion={prefersReducedMotion}>
+      <StyledLinkWrapper $prefersReducedMotion={prefersReducedMotion}>
         <a href={`mailto:${config.email}`}>{config.email}</a>
       </StyledLinkWrapper>
     </Side>
