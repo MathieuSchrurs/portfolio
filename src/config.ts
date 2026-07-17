@@ -51,9 +51,9 @@ const config: SiteConfig = {
         "Essential and custom technical onboardings for a fintech scale-up, turning compliance requirements and API integrations into seamless client journeys. Bridges technical teams and end users, translating requirements clearly on both sides.",
     },
     {
-      company: "Batt Mobility @ Wintercircus",
+      company: "Batt Mobility",
       title: "Software Engineer Intern",
-      location: "Ghent",
+      location: "Ghent / Wintercircus",
       range: "2024",
       description:
         "Built and shipped features across a Blazor/.NET stack at an EV mobility startup. Worked with Azure, Web APIs, and Entity Framework. Contributing to feature development, debugging, and code quality in a fast-moving team.",

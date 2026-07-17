@@ -1,28 +1,21 @@
 import { css } from "styled-components";
 
-// --- Calibre ---
-import CalibreRegularWoff2 from "@fonts/Calibre/Calibre-Regular.woff2";
-import CalibreMediumWoff2 from "@fonts/Calibre/Calibre-Medium.woff2";
-import CalibreSemiboldWoff2 from "@fonts/Calibre/Calibre-Semibold.woff2";
+// --- IBM Plex Mono ---
+// The site's single typeface. Mono is the primary voice, not an accent: the
+// whole identity is a terminal/systems look, so headings, body, and UI all
+// share one monospaced family (see variables.ts, where --font-sans and
+// --font-mono both resolve here).
+import IBMPlexMonoRegularWoff2 from "@fonts/IBMPlexMono/IBMPlexMono-400.woff2";
+import IBMPlexMonoMediumWoff2 from "@fonts/IBMPlexMono/IBMPlexMono-500.woff2";
+import IBMPlexMonoSemiboldWoff2 from "@fonts/IBMPlexMono/IBMPlexMono-600.woff2";
 
-// --- SF Mono ---
-import SFMonoRegularWoff2 from "@fonts/SFMono/SFMono-Regular.woff2";
-import SFMonoMediumWoff2 from "@fonts/SFMono/SFMono-Medium.woff2";
-import SFMonoSemiboldWoff2 from "@fonts/SFMono/SFMono-Semibold.woff2";
-
-/* woff2-only: universal browser support since 2016, and the .woff duplicates
-   doubled the emitted font payload for nothing. Italic faces are not loaded —
-   no italic text is rendered anywhere on the site. */
+/* woff2-only: universal browser support since 2016. Italic faces are not
+   loaded — no italic text is rendered anywhere on the site. */
 const families: Record<string, Record<number, string>> = {
-  Calibre: {
-    400: CalibreRegularWoff2,
-    500: CalibreMediumWoff2,
-    600: CalibreSemiboldWoff2,
-  },
-  "SF Mono": {
-    400: SFMonoRegularWoff2,
-    500: SFMonoMediumWoff2,
-    600: SFMonoSemiboldWoff2,
+  "IBM Plex Mono": {
+    400: IBMPlexMonoRegularWoff2,
+    500: IBMPlexMonoMediumWoff2,
+    600: IBMPlexMonoSemiboldWoff2,
   },
 };
 

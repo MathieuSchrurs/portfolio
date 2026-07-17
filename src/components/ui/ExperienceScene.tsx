@@ -93,9 +93,9 @@ const Range = styled.time<{ $current: boolean }>`
   }
 `;
 
-/* Entry index ("01" … "06") — extends the site's numbered-heading motif
-   down to individual entries. Ghost gray until the ink reaches it; fills
-   with accent ink on hover as the quiet interactive response. */
+/* Entry index in binary ("0001".."0110"): extends the site's numbered motif
+   down to individual entries. Ghost gray until the ink reaches it, then it
+   ignites to accent ink in sync with the decode roll and holds. */
 const Numeral = styled.span`
   grid-area: numeral;
   justify-self: end;
@@ -112,7 +112,12 @@ const Numeral = styled.span`
     opacity 550ms ${easeOutQuint} 60ms,
     transform 550ms ${easeOutQuint} 60ms;
 
-  li[data-log-entry]:hover & {
+  /* Ignite to accent the moment the entry lights (in sync with the decode
+     roll) and hold it lit; scrolling back up flips data-lit to false and it
+     returns to ghost gray. Matches the spine tick's lit behaviour. Replaces
+     the old :hover accent, which flashed on then off as an entry scrolled
+     under a stationary pointer. */
+  li[data-lit='true'] & {
     color: var(--accent-ink);
   }
 
@@ -135,15 +140,21 @@ const CompanyClip = styled.div`
   overflow: hidden;
   padding-bottom: 0.45em;
   margin-bottom: -0.45em;
-  font-size: clamp(1.75rem, 1.1rem + 2.3vw, 3.15rem);
+  /* Lowered from a 3.15rem ceiling: mono is ~1.5x wider, so the old top end
+     blew long, dot-separated company names (the teaching entry) far past
+     the column. This size lets the longest names wrap to two tidy lines
+     instead of overflowing. */
+  font-size: clamp(1.4rem, 1rem + 1.5vw, 2.35rem);
 `;
 
 const CompanyName = styled.h3`
   font-family: var(--font-sans);
   font-size: inherit;
   font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.015em;
+  line-height: 1.2;
+  /* No negative tracking on mono: it cramps the dot separators. */
+  letter-spacing: 0;
+  overflow-wrap: break-word;
   color: var(--text-primary-color);
   margin: 0;
   transition:

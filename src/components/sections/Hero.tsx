@@ -22,7 +22,6 @@ const StyledContent = styled.div`
   align-items: center;
   gap: clamp(2rem, 5vw, 4.5rem);
 
-  /* Stack on tablet/mobile: text first (reading + DOM order), portrait below. */
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
@@ -34,8 +33,8 @@ const StyledOverline = styled.p`
     font-family: var(--font-mono);
     font-size: var(--fz-sm);
     letter-spacing: 0.08em;
-    margin-top: -0.75rem;
-    margin-bottom: 3.5rem;
+    margin-top: 0.75rem;
+    margin-bottom: 3rem;
   }
 `;
 

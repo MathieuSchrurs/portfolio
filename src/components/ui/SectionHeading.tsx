@@ -7,53 +7,56 @@ interface SectionHeadingProps {
   className?: string;
 }
 
-const StyledHeading = styled.h2<{ $sectionNumber: string }>`
+/*
+ * Terminal/systems section heading: a source-comment prefix (`//`) in the
+ * accent colour, the title in lowercase mono, a dashed ASCII-style rule, and
+ * the section index pinned right like a code-fold / line marker.
+ *
+ * Deliberately NOT the leading `01.` + solid hairline of the old design — the
+ * number moved to the far right and the rule is dashed so it reads as editor
+ * chrome, not an editorial underline.
+ */
+const StyledHeading = styled.h2`
   display: flex;
   align-items: center;
-  position: relative;
+  gap: 0.85rem;
   margin: 10px 0 40px;
   width: 100%;
-  font-size: clamp(26px, 5vw, var(--fz-heading));
+  font-family: var(--font-mono);
+  font-weight: 600;
+  /* Mono runs ~1.5x wider than the old sans at the same size, so the heading
+     is dialled back to keep the prefix, title, rule and index on one line
+     down to mobile. */
+  font-size: clamp(1.1rem, 0.9rem + 1vw, 1.4rem);
+  letter-spacing: 0;
+  text-transform: lowercase;
   color: var(--text-primary-color);
   white-space: nowrap;
-  font-family: var(--font-sans);
 
-  &:before {
-    position: relative;
-    bottom: 4px;
-    /* Use the prop to generate the content dynamically */
-    content: '0${(props) => props.$sectionNumber}.';
-    margin-right: 10px;
+  .comment {
     color: var(--accent-color);
-    font-family: var(--font-mono);
-    font-size: clamp(var(--fz-md), 3vw, var(--fz-xl));
     font-weight: 400;
-
-    @media (max-width: 480px) {
-      margin-bottom: -3px;
-      margin-right: 5px;
-    }
   }
 
-  &:after {
-    content: '';
-    display: block;
-    position: relative;
-    top: -5px;
-    width: 300px;
+  /* Dashed rule drawn with a gradient so the dashes stay crisp at any width —
+     an ASCII dashed-rule feel without hard-coding glyph counts. */
+  .rule {
+    flex: 1;
     height: 1px;
-    margin-left: 20px;
-    background-color: var(--border-color);
+    min-width: 24px;
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--border-color) 0 6px,
+      transparent 6px 12px
+    );
+  }
 
-    @media (max-width: 1080px) {
-      width: 200px;
-    }
-    @media (max-width: 768px) {
-      width: 100%;
-    }
-    @media (max-width: 600px) {
-      margin-left: 10px;
-    }
+  .index {
+    flex-shrink: 0;
+    font-weight: 400;
+    font-size: var(--fz-sm);
+    color: var(--text-secondary-color);
+    letter-spacing: 0.03em;
   }
 `;
 
@@ -63,8 +66,15 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
   className,
 }) => {
   return (
-    <StyledHeading $sectionNumber={sectionNumber} className={className}>
+    <StyledHeading className={className}>
+      <span className="comment" aria-hidden="true">
+        //
+      </span>
       {children}
+      <span className="rule" aria-hidden="true" />
+      <span className="index" aria-hidden="true">
+        {`0${sectionNumber}`}
+      </span>
     </StyledHeading>
   );
 };

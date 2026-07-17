@@ -21,8 +21,8 @@ const StyledPreHeading = styled.h2`
   }
 `;
 
-/* Same oversized Calibre-600 statement language as the Experience company
-   names — the site's sign-off gets the editorial treatment, not a
+/* Same oversized mono-600 statement language as the Experience company
+   names: the site's sign-off gets the editorial treatment, not a
    centered template card. */
 const StyledTitle = styled.p`
   font-family: var(--font-sans);

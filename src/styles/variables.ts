@@ -5,9 +5,12 @@ const variables = css`
     /******************************
      * TYPOGRAPHY
      ******************************/
-    --font-sans: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text',
-      -apple-system, system-ui, sans-serif;
-    --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+    /* One monospaced family for the whole site. --font-sans is kept as a name
+       for "the body/display voice" so existing call-sites don't churn, but it
+       resolves to the same mono stack as --font-mono: mono IS the identity. */
+    --font-mono: 'IBM Plex Mono', 'SF Mono', 'Fira Code', 'Roboto Mono',
+      ui-monospace, monospace;
+    --font-sans: var(--font-mono);
 
     --fz-xxs: 12px;
     --fz-xs: 13px;
