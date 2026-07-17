@@ -98,7 +98,7 @@ const AnimatedThemeToggleIcon: React.FC<AnimatedThemeToggleIconProps> = ({
   const [rotation, setRotation] = React.useState(0);
 
   const handleClick = () => {
-    setRotation((prev) => prev + 180);
+    setRotation((prev) => prev + 360);
     onClick?.();
   };
 
