@@ -1,97 +1,52 @@
-import { useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
-import styled, { css } from 'styled-components';
+import { useRef, type CSSProperties } from 'react';
+import styled from 'styled-components';
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
 import type { Skill } from '../../data/skills';
-import { computeReelRange } from './techStackReel.logic';
 
 /*
- * A horizontal "conveyor" of tech-stack cards. The track's x position is
- * driven by how far the viewport has scrolled through this component (not
- * autoplay), sweeping the whole card set from fully off-screen right to
- * fully off-screen left over that traverse. A mask on the viewport's edges
- * fades cards to transparent as they approach either edge, so they read as
- * dissolving into the page background rather than being hard-clipped.
+ * A grid of tech-stack cards in the About section. All cards are visible at
+ * rest in a centered, wrapped grid; the whole block gets a subtle vertical
+ * parallax tied to how far the section has scrolled through the viewport, so
+ * it feels alive without any horizontal movement. Under prefers-reduced-motion
+ * the parallax is dropped and the grid sits still.
  *
- * Under prefers-reduced-motion, the SAME Viewport/Track elements render —
- * just styled as a plain wrapped grid with no mask and no `x` motion value
- * applied. Two genuinely separate render trees (motion track vs. static
- * grid) sounds cleaner, but `useScroll`'s target ref would then never
- * attach to a DOM node on the reduced-motion path (that branch never
- * mounts Viewport), which Framer Motion throws on ("target ref is defined
- * but not hydrated") — a real crash, not just a lint nit. One tree with
- * conditional styling sidesteps that entirely.
+ * The parallax `y` is applied to the inner Grid while useScroll measures the
+ * outer Viewport — measuring the same element we transform would fold the
+ * transform back into its own scroll measurement.
+ *
+ * (Historically this was a horizontal, scroll-driven "reel"/"conveyor" that
+ * swept the whole card set across the viewport. That sweep read as too strong,
+ * so it was replaced by this calmer parallax grid.)
  */
 
-const Viewport = styled.div<{ $static: boolean }>`
-  position: relative;
-  width: 100%;
-  /* Headroom for the hover tilt on Card — without this, the overflow:hidden
-     clip box has no slack above the track's natural height and shaves off
-     the top of any hovered card. The extra top padding also nudges the
-     whole band down a touch. */
-  padding: 10px 0 6px;
-
-  ${({ $static }) =>
-    $static
-      ? css`
-          overflow: visible;
-        `
-      : css`
-          overflow: hidden;
-          contain: layout style;
-          -webkit-mask-image: linear-gradient(
-            to right,
-            transparent,
-            black 12%,
-            black 88%,
-            transparent
-          );
-          mask-image: linear-gradient(
-            to right,
-            transparent,
-            black 12%,
-            black 88%,
-            transparent
-          );
-
-          /* Drop the mask on mobile — only ~2 cards are visible at once so
-             the fade-to-edge is barely perceptible, and per-frame mask
-             compositing is the single biggest GPU bottleneck on touch
-             devices. */
-          @media (max-width: 768px) {
-            -webkit-mask-image: none;
-            mask-image: none;
-          }
-        `}
-`;
-
-const Track = styled(motion.ul)<{ $static: boolean }>`
-  display: flex;
-  gap: 1.1rem;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-
-  ${({ $static }) =>
-    $static
-      ? css`
-          flex-wrap: wrap;
-          justify-content: center;
-          width: auto;
-          max-width: 760px;
-          margin: 0 auto;
-        `
-      : css`
-          width: max-content;
-          will-change: transform;
-        `}
-`;
+/* Vertical parallax travel, in px, from section-entry to section-exit. Small
+   on purpose: enough to feel deliberate, not enough to read as motion. */
+const PARALLAX_Y = 24;
 
 /* Same easing the rest of the site uses for hover/interaction transitions
-   (see --transition in variables.ts) — kept explicit here rather than
-   reusing that var directly since this needs a longer duration than its
-   fixed 0.25s for a slightly more deliberate, weighted hover response. */
+   (see --transition in variables.ts) — kept explicit here since the card
+   hover wants a longer duration than its fixed 0.25s for a more deliberate,
+   weighted response. */
 const easeStandard = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
+
+const Viewport = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+const Grid = styled(motion.ul)`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.1rem;
+  width: auto;
+  max-width: 760px;
+  margin: 0 auto;
+  /* Headroom for the hover tilt on Card so a hovered card is never clipped. */
+  padding: 10px 0 6px;
+  list-style: none;
+  will-change: transform;
+`;
 
 /* Three "geeky" hover tilt variants, each slightly different. Assigned
    round-robin by card index so every card feels personality-edged but the
@@ -151,11 +106,8 @@ const Card = styled(motion.li)`
     white-space: nowrap;
   }
 
-  /* Below this, the reel's own container is narrow enough (~280px on a
-     390px phone, after the section's side padding) that the full-size
-     card only shows about one and a half cards at once — too cramped for
-     a "conveyor" to read as one. Scaling the card down keeps two full
-     cards comfortably in view, matching the desktop density. */
+  /* Scale cards down on narrow phones so two full cards still fit per row
+     rather than one and a half, matching the desktop density. */
   @media (max-width: 480px) {
     width: 132px;
     padding: 1.4rem 0.9rem;
@@ -185,52 +137,19 @@ export interface TechStackReelProps {
 export default function TechStackReel({ skills }: TechStackReelProps) {
   const shouldReduceMotion = Boolean(useReducedMotion());
   const viewportRef = useRef<HTMLDivElement | null>(null);
-  const trackRef = useRef<HTMLUListElement | null>(null);
-  const [range, setRange] = useState({ from: 0, to: 0 });
 
-  useLayoutEffect(() => {
-    if (shouldReduceMotion) return undefined;
-    const measure = () => {
-      const containerWidth = viewportRef.current?.offsetWidth ?? 0;
-      const trackWidth = trackRef.current?.scrollWidth ?? 0;
-      setRange(computeReelRange(containerWidth, trackWidth));
-    };
-    measure();
-    /* Coalesce rapid resize events (e.g. mobile URL-bar show/hide) into a
-       single frame-safe measurement so mid-scroll re-renders don't cause
-       visible stuttering. */
-    let raf: number;
-    const onResize = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(measure);
-    };
-    window.addEventListener('resize', onResize);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener('resize', onResize);
-    };
-  }, [skills, shouldReduceMotion]);
-
-  /* ['start end', 'end start'] spans the reel's full off-screen-to-off-
-     screen transit: progress 0 the instant the reel's top edge first
-     appears at the bottom of the viewport (barely in sight), progress 1
-     the instant its bottom edge exits the top (fully gone). The reveal
-     starts moving as soon as any part of the reel is visible, rather than
-     waiting for it to be fully on screen first. */
+  /* ['start end', 'end start'] spans the grid's full transit through the
+     viewport: progress 0 as its top edge enters the bottom, progress 1 as
+     its bottom edge exits the top. */
   const { scrollYProgress } = useScroll({
     target: viewportRef,
     offset: ['start end', 'end start'],
   });
-  const x = useTransform(scrollYProgress, [0, 1], [range.from, range.to]);
+  const y = useTransform(scrollYProgress, [0, 1], [PARALLAX_Y, -PARALLAX_Y]);
 
   return (
-    <Viewport ref={viewportRef} $static={shouldReduceMotion}>
-      <Track
-        ref={trackRef}
-        aria-label="Current Tech Stack"
-        $static={shouldReduceMotion}
-        style={shouldReduceMotion ? undefined : { x }}
-      >
+    <Viewport ref={viewportRef}>
+      <Grid aria-label="Current Tech Stack" style={shouldReduceMotion ? undefined : { y }}>
         {skills.map((skill, index) => (
           <Card
             key={skill.name}
@@ -249,7 +168,7 @@ export default function TechStackReel({ skills }: TechStackReelProps) {
             <span>{skill.name}</span>
           </Card>
         ))}
-      </Track>
+      </Grid>
     </Viewport>
   );
 }

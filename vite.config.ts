@@ -5,6 +5,16 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      input: {
+        // The main SPA and the standalone /cv document are separate entries
+        // (see docs/adr/0001-cv-as-web-document.md).
+        main: path.resolve(__dirname, 'index.html'),
+        cv: path.resolve(__dirname, 'cv/index.html'),
+      },
+    },
+  },
   resolve: {
     alias: {
       '@components': path.resolve(__dirname, './src/components'),

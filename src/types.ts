@@ -18,6 +18,22 @@ export interface Project {
   codeUrl?: string;
 }
 
+/** A schooling / formal-education entry. CV-only (see src/data/cv.ts). */
+export interface Education {
+  institution: string;
+  qualification: string;
+  location: string;
+  range: string;
+  note?: string;
+}
+
+/** A spoken language and proficiency. CV-only (see src/data/cv.ts). */
+export interface Language {
+  name: string;
+  /** e.g. "Native", "C1", "Professional". */
+  level: string;
+}
+
 export interface SocialLink {
   name: string;
   url: string;

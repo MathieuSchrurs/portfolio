@@ -92,35 +92,6 @@ const StyledTechStackSubtitle = styled.h4`
   }
 `;
 
-const StyledPic = styled.div`
-  position: relative;
-  max-width: 300px;
-  float: right;
-  margin-left: 30px;
-  margin-bottom: 15px;
-  @media (max-width: 768px) {
-    float: none;
-    display: block;
-    margin: 50px auto 40px;
-    max-width: 80%;
-  }
-  @media (max-width: 480px) {
-    max-width: 250px;
-  }
-  .wrapper {
-    position: relative;
-    display: block;
-    width: 100%;
-    min-height: 200px;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    aspect-ratio: 1 / 1;
-    background-image: url("/images/profile-picture.webp");
-    background-size: cover;
-    background-position: center;
-  }
-`;
-
 const About = () => {
   const currentSkills = featuredSkillNames
     .map((name) => skills.find((skill) => skill.name === name))
@@ -134,32 +105,41 @@ const About = () => {
     <StyledAboutSection id="about">
       <SectionHeading sectionNumber="1">About Me</SectionHeading>
       <StyledAboutContent>
-        <StyledPic>
-          <div className="wrapper" />
-        </StyledPic>
-
         <StyledText>
           <div>
             <p>
-              My path into software hasn't been a straight line, and that’s exactly what makes
-              it interesting. Before writing any code professionally, I spent years in music
-              publishing in both London and Ghent, then I pivoted to teaching English and Dutch. Both those worlds
-              trained me to communicate clearly, think in a whole range of systems, and put the human
-              experience at the center of everything I build.
+              I got into software sideways, through music. I spent years in music publishing,
+              in London and then Ghent, close enough to the royalty system to see how broken it
+              is: rights tangled into a spiderweb nobody could follow, and payments that took
+              years to reach the artists who earned them. The whole structure was built layer on
+              layer, each one serving whoever had leverage at the time, never the artist at the
+              centre. Beginning artists sign away half their copyright to a publisher by law and
+              can't even see where the money goes. When my brother started studying IT, I
+              realised the tools to untangle a mess like that already exist. That is what pulled
+              me in.
             </p>
             <p>
-              Today, I work across a broad and everchanging stack: most times I rock .NET and C# on the back end, React and
-              TypeScript on the front. Good software, to me, is the kind that does its job
-              quietly: well-structured, easy to reason about, and built to last beyond it's first release
+              Before I wrote software professionally, I taught English and Dutch for four years.
+              Teaching is mostly reading a room: catching the moment someone is lost, breaking an
+              idea down, then breaking it down further, adjusting the pace to the person in front
+              of you. There is a Dutch word for it, <em>differentiatie</em>. Sometimes it is a
+              joke to defuse tension, sometimes it is borrowing a word from a student's own
+              language so they know you are on their side. I do much the same thing now, sitting
+              between technical teams and the people who actually have to use what gets built.
             </p>
             <p>
-              What drives me isn’t just shipping features. It’s understanding the scope and the problem profoundly
-              enough to solve it in the best way possible. Whether collaborating with a team or working
-              through something solo, my goal is always the same: something that genuinely works for the people whom will be using it.
+              These days I work mostly with .NET and C# on the back end, React and TypeScript on
+              the front. What I chase is that aha moment, when something opaque suddenly makes
+              sense. Tokens and sessions the first time I wired up auth, JSON-RPC on an internship
+              project: in both cases the black box turned clear and it was genuinely exhilarating.
+              I try to build software that gives other people that same jolt of understanding
+              instead of taking it away, and I have little patience for complexity that serves
+              everyone except the person actually using the thing.
             </p>
             <p>
-              Outside of writing code, you’ll find me courtside coaching my basketball team, exploring
-              new music albums,chilling with my cat or hunched over a breadboard, soldering my next Arduino idea into existence.
+              Away from the keyboard you will find me coaching my basketball team, digging through
+              new albums, sharing a flat with my cat, or losing an evening soldering an Arduino
+              idea into existence on a breadboard.
             </p>
 
             <StyledTechStackSubtitle>Current Tech Stack</StyledTechStackSubtitle>

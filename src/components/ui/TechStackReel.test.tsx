@@ -3,7 +3,6 @@ import { describe, it, expect, afterEach } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
 import type { SVGProps } from 'react';
 import TechStackReel from './TechStackReel';
-import { computeReelRange, REEL_PREROLL } from './techStackReel.logic';
 import type { Skill } from '../../data/skills';
 
 const DummyIcon = (props: SVGProps<SVGSVGElement>) => <svg {...props} />;
@@ -30,35 +29,16 @@ function setReducedMotion(reduce: boolean) {
 
 afterEach(cleanup);
 
-describe('computeReelRange', () => {
-  it('starts a fractional-container-width pre-roll in from the right', () => {
-    expect(computeReelRange(1000, 4000).from).toBeCloseTo(1000 * REEL_PREROLL);
-  });
-
-  it('sweeps the whole track fully off the left edge', () => {
-    expect(computeReelRange(1000, 4000).to).toBe(-4000);
-  });
-
-  it('scales the pre-roll with the container, not the track', () => {
-    // Narrow mobile container -> proportionally smaller entrance offset, which
-    // is what keeps the sweep timing aligned across viewport widths.
-    expect(computeReelRange(282, 2400).from).toBeCloseTo(282 * REEL_PREROLL);
-  });
-});
-
 describe('<TechStackReel /> render', () => {
-  it('renders under prefers-reduced-motion without the target-ref crash', () => {
+  it('renders every skill as a card under prefers-reduced-motion', () => {
     setReducedMotion(true);
-    // The regression: the reduced-motion path once mounted a separate tree so
-    // useScroll's target ref never attached, throwing "Target ref is defined
-    // but not hydrated". This must not throw.
     const { container } = render(<TechStackReel skills={skills} />);
     const cards = container.querySelectorAll('li');
     expect(cards.length).toBe(skills.length);
     expect(container.querySelector('[aria-label="Current Tech Stack"]')).not.toBeNull();
   });
 
-  it('renders the motion path (no reduced motion) without throwing', () => {
+  it('renders the parallax path (no reduced motion) without throwing', () => {
     setReducedMotion(false);
     const { container } = render(<TechStackReel skills={skills} />);
     expect(container.querySelectorAll('li').length).toBe(skills.length);
