@@ -1,8 +1,7 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { motion, useReducedMotion } from "motion/react";
-import CVDownload from "../ui/CVDownload";
-import StyledButtonLink from "../ui/StyledButtonLink";
 import RotatingWord from "../ui/RotatingWord";
+import CommandLink from "../ui/CommandLink";
 
 const StyledHero = styled.section`
   min-height: calc(100vh - var(--nav-height));
@@ -27,25 +26,50 @@ const StyledContent = styled.div`
   }
 `;
 
+const blink = keyframes`
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+`;
+
 const StyledOverline = styled.p`
   && {
     color: var(--accent-color);
     font-family: var(--font-mono);
     font-size: var(--fz-sm);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     margin-top: 0.75rem;
     margin-bottom: 3rem;
   }
 `;
 
+/* The name as a shell prompt: an accent chevron, the handle, and a blinking
+   caret. Sized to keep the whole line on one row inside the left column at
+   desktop widths (mono runs wide, so the ceiling is well below the old sans
+   value). */
 const StyledBigName = styled.h1`
   color: var(--text-primary-color);
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: clamp(3rem, 2rem + 5.5vw, 5.75rem);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.2rem, 1rem + 4vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: 0;
   margin-bottom: 0;
+  overflow-wrap: break-word;
+
+  .prompt {
+    color: var(--accent-color);
+    margin-right: 0.35em;
+    user-select: none;
+  }
+
+  .cursor {
+    color: var(--accent-color);
+    font-weight: 400;
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: ${blink} 1.1s step-end infinite;
+    }
+  }
 `;
 
 const StyledTagline = styled.h2`
@@ -65,13 +89,17 @@ const StyledBio = styled.p`
   max-width: 42em;
 `;
 
+/* Actions as terminal commands (see CommandLink); font-size set here since
+   CommandLink inherits it from its context. */
 const StyledActions = styled.div`
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 1.75rem;
   margin-top: 3rem;
+  font-size: var(--fz-md);
 `;
 
-/* Portrait with an accent frame offset behind it — the classic framed-photo
+/* Portrait with an accent frame offset behind it: the classic framed-photo
    look. The frame sits diagonally behind the image and settles closer to it
    on hover, echoing the subtle shift the tech cards make on hover. */
 const StyledPortrait = styled(motion.div)`
@@ -134,11 +162,15 @@ const Hero = () => {
           transition={{ staggerChildren: 0.09, delayChildren: 0.1 }}
         >
           <motion.div variants={riseIn} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
-            <StyledBigName>Mathieu Schrurs.</StyledBigName>
+            <StyledBigName>
+              <span className="prompt" aria-hidden="true">&gt;</span>
+              mathieu.schrurs
+              <span className="cursor" aria-hidden="true">_</span>
+            </StyledBigName>
           </motion.div>
 
           <motion.div variants={riseIn} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
-            <StyledOverline>Software engineer · Ghent, Belgium</StyledOverline>
+            <StyledOverline>software_engineer @ ghent</StyledOverline>
           </motion.div>
 
           <motion.div variants={riseIn} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
@@ -161,10 +193,10 @@ const Hero = () => {
 
           <motion.div variants={riseIn} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
             <StyledActions>
-              <StyledButtonLink href="#contact" primary>
-                Get In Touch
-              </StyledButtonLink>
-              <CVDownload />
+              <CommandLink href="#contact">get in touch</CommandLink>
+              <CommandLink href="/cv-mathieu-schrurs.pdf" download="Mathieu_Schrurs_CV.pdf">
+                download cv
+              </CommandLink>
             </StyledActions>
           </motion.div>
         </motion.div>

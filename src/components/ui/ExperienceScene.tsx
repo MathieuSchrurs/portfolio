@@ -72,6 +72,7 @@ const Range = styled.time<{ $current: boolean }>`
   align-self: baseline;
   font-family: var(--font-mono);
   font-size: var(--fz-xs);
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   line-height: 1;

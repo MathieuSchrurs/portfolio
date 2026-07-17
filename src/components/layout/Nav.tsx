@@ -5,7 +5,7 @@ import type { NavLink } from "../../types";
 import { useScrollDirection, usePrefersReducedMotion } from "../../hooks";
 import AnimatedLogo from "../ui/AnimatedLogo";
 import ThemeToggle from "../ui/ThemeToggle";
-import CVDownload from "../ui/CVDownload";
+import CommandLink from "../ui/CommandLink";
 import HamburgerButton from "../ui/HamburgerButton";
 
 interface StyledHeaderProps {
@@ -112,14 +112,28 @@ const StyledNav = styled.nav`
 `;
 
 
+/* Every item spaces itself with the same symmetric 10px side padding the
+   nav links already carry, so each neighbour pair (link/link, link/cv,
+   cv/toggle) reads as the same 20px visual distance — no flex gap fighting
+   the padding. The old pill CV button carried its own chunky padding and
+   needed compensating ol/li margins; those went with it. */
 const StyledLinks = styled.div`
   display: flex;
   align-items: center;
-  gap: 1.25rem;
 
   .theme-toggle {
     display: flex;
     align-items: center;
+    margin-left: 12px;
+  }
+
+  /* CV as a bracketed command, same affordance as the Hero actions, sized
+     and padded to sit in the links' spacing rhythm. The 1px lift is optical:
+     mono brackets descend below the baseline, so a box-centred [ cv ] reads
+     slightly lower than the descender-less link labels beside it. */
+  .cv-command {
+    font-size: var(--fz-xs);
+    padding: 10px;
     transform: translateY(-1px);
   }
 
@@ -131,11 +145,11 @@ const StyledLinks = styled.div`
     display: flex;
     align-items: center;
     padding: 0;
-    margin: 0 10px 0 0;
+    margin: 0;
     list-style: none;
 
     li {
-      margin: 0 5px;
+      margin: 0;
       counter-increment: item 1;
       font-size: var(--fz-xs);
 
@@ -174,7 +188,7 @@ const MobileMenu = styled.aside<{ $open: boolean }>`
   top: var(--nav-height);
   right: 0;
   height: calc(100vh - var(--nav-height));
-  width: min(75vw, 340px);
+  width: min(84vw, 360px);
   background-color: var(--bg-color);
   border-left: 1px solid var(--border-color);
   box-shadow: -10px 0 40px var(--shadow-color);
@@ -183,60 +197,108 @@ const MobileMenu = styled.aside<{ $open: boolean }>`
   z-index: 15;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 40px;
+  padding: 2rem 1.75rem;
+  font-family: var(--font-mono);
+  overflow-y: auto;
+
+  /* Comment-style label, same idiom as the section headings. */
+  .menu-label {
+    font-size: var(--fz-sm);
+    text-transform: lowercase;
+    color: var(--text-primary-color);
+    margin-bottom: 1.5rem;
+
+    .comment {
+      color: var(--accent-color);
+      letter-spacing: -0.09em;
+      margin-right: 0.5em;
+    }
+  }
 
   ol {
     list-style: none;
     padding: 0;
-    margin: 0;
-    text-align: center;
+    /* margin-bottom auto pushes the actions and social row to the bottom. */
+    margin: 0 0 auto;
     width: 100%;
-    counter-reset: item;
 
-    li {
-      counter-increment: item;
+    li a {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-secondary-color);
+      text-decoration: none;
+      transition: var(--transition);
 
-      a {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 14px 0;
-        font-family: var(--font-mono);
-        color: var(--text-secondary-color);
-        text-decoration: none;
+      .glyph {
+        color: var(--accent-color);
+        font-size: var(--fz-sm);
+        transition: transform 0.25s var(--easing);
+      }
+
+      .link-name {
+        flex: 1;
+        font-size: var(--fz-lg);
+        text-transform: lowercase;
+        color: var(--text-primary-color);
         transition: var(--transition);
-        border-bottom: 1px solid var(--border-color);
+      }
 
-        &::before {
-          content: '0' counter(item) '.';
-          color: var(--accent-color);
-          font-size: var(--fz-xs);
-          margin-bottom: 4px;
-        }
+      .index {
+        font-size: var(--fz-xs);
+        font-variant-numeric: tabular-nums;
+        color: var(--text-secondary-color);
+      }
 
+      &:hover,
+      &:focus {
         .link-name {
-          font-size: var(--fz-lg);
-          font-weight: 600;
-          color: var(--text-primary-color);
-          transition: var(--transition);
-        }
-
-        &:hover .link-name,
-        &:focus .link-name {
           color: var(--accent-color);
         }
+        .glyph {
+          transform: translateX(3px);
+        }
       }
+    }
 
-      &:first-child a {
-        border-top: 1px solid var(--border-color);
-      }
+    li:first-child a {
+      border-top: 1px solid var(--border-color);
     }
   }
 
-  .mobile-cta {
+  /* Placement only — the command styling itself lives in CommandLink. */
+  .cv-command {
     margin-top: 2rem;
+    font-size: var(--fz-md);
+    align-self: flex-start;
+  }
+
+  .menu-social {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-color);
+    font-size: var(--fz-xs);
+    color: var(--text-secondary-color);
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      &:hover,
+      &:focus {
+        color: var(--accent-color);
+      }
+    }
+
+    .sep {
+      opacity: 0.45;
+      user-select: none;
+    }
   }
 `;
 
@@ -280,12 +342,22 @@ const DesktopNavLinks: React.FC<{ navLinks: NavLink[] }> = ({ navLinks }) => (
         </li>
       ))}
     </ol>
-    <CVDownload />
+    <CommandLink
+      className="cv-command"
+      href="/cv-mathieu-schrurs.pdf"
+      download="Mathieu_Schrurs_CV.pdf"
+    >
+      cv
+    </CommandLink>
     <ThemeToggle className="theme-toggle" />
   </StyledLinks>
 );
 
-/* Slide-in mobile menu plus its click-catching backdrop. */
+/* Slide-in mobile menu plus its click-catching backdrop. Mirrors the site's
+   terminal language: a `//` comment label, command-palette-style rows (accent
+   glyph + lowercase label + right-aligned section index), a bracketed CV
+   command, and a mono social/email row (the desktop-only status bar's links,
+   given back to mobile). */
 const MobileNavMenu: React.FC<{
   open: boolean;
   navLinks: NavLink[];
@@ -296,16 +368,44 @@ const MobileNavMenu: React.FC<{
     {/* inert keeps the off-screen menu's links out of the tab order — the
         closed menu is only translated off-canvas, not display:none */}
     <MobileMenu $open={open} inert={!open}>
+      <div className="menu-label">
+        <span className="comment" aria-hidden="true">//</span>
+        navigation
+      </div>
+
       <ol>
-        {navLinks.map(({ url, name }) => (
+        {navLinks.map(({ url, name }, i) => (
           <li key={url}>
             <a href={url} onClick={onClose}>
+              <span className="glyph" aria-hidden="true">→</span>
               <span className="link-name">{name}</span>
+              <span className="index" aria-hidden="true">{`0${i + 1}`}</span>
             </a>
           </li>
         ))}
       </ol>
-      <CVDownload className="mobile-cta" />
+
+      <CommandLink
+        className="cv-command"
+        href="/cv-mathieu-schrurs.pdf"
+        download="Mathieu_Schrurs_CV.pdf"
+        onClick={onClose}
+      >
+        download cv
+      </CommandLink>
+
+      <div className="menu-social">
+        {config.socialMedia.map((social, i) => (
+          <span key={social.url} style={{ display: 'flex', gap: '0.5rem' }}>
+            {i > 0 && <span className="sep">·</span>}
+            <a href={social.url} target="_blank" rel="noopener noreferrer">
+              {social.name.toLowerCase()}
+            </a>
+          </span>
+        ))}
+        <span className="sep">·</span>
+        <a href={`mailto:${config.email}`}>mail</a>
+      </div>
     </MobileMenu>
   </>
 );

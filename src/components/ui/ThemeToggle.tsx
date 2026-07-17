@@ -16,14 +16,15 @@ const ThemeToggle: FC<ThemeToggleProps> = ({ className }) => {
       theme={themeMode}
       onClick={toggleThemeMode}
       className={className}
-          style={{
-          width: iconSize,
-          height: iconSize,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transform: "translateY(1px)",
-        }}
+      /* No transform here: an inline transform would override both the
+         nav's alignment nudges and the button's own hover scale. */
+      style={{
+        width: iconSize,
+        height: iconSize,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
       aria-label={`Switch to ${themeMode === 'light' ? 'dark' : 'light'} theme`}
     />
   );

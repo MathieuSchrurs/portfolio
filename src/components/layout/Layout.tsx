@@ -1,9 +1,9 @@
-import type { FC, ReactNode } from 'react';
+import { useState, type FC, type ReactNode } from 'react';
 import styled from 'styled-components';
 import Nav from './Nav';
-import Social from './Social';
-import Email from './Email';
+import StatusBar from './StatusBar';
 import Footer from './Footer';
+import CommandPalette from '../ui/CommandPalette';
 
 interface LayoutProps {
     children: ReactNode;
@@ -16,16 +16,18 @@ const StyledContent = styled.div`
 `;
 
 const Layout: FC<LayoutProps> = ({ children }) => {
+    const [paletteOpen, setPaletteOpen] = useState(false);
+
     return (
         <StyledContent>
             <a className="skip-to-content" href="#content">
                 Skip to Content
             </a>
             <Nav />
-            <Social />
-            <Email />
             <div id="content">{children}</div>
             <Footer />
+            <StatusBar onOpenPalette={() => setPaletteOpen(true)} />
+            <CommandPalette open={paletteOpen} setOpen={setPaletteOpen} />
         </StyledContent>
     );
 };

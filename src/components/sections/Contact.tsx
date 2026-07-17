@@ -1,24 +1,20 @@
 import styled from "styled-components";
 import config from "@config";
 import StyledButtonLink from "../ui/StyledButtonLink";
+import SectionHeading from "../ui/SectionHeading";
 import SectionWrapper from "../layout/SectionWrapper";
 
+/* Full-height closing screen, mirroring the Hero's full-height opener. Without
+   the min-height the short Contact block can't scroll up to the top of the
+   viewport, so the tail of the Work section stays parked above it at the page
+   bottom. Filling the viewport pushes Work fully off the top, and centring the
+   content keeps the extra height from reading as dead space. */
 const StyledContactSection = styled(SectionWrapper)`
   max-width: 900px;
-`;
-
-const StyledPreHeading = styled.h2`
-  font-size: var(--fz-md);
-  font-family: var(--font-mono);
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  margin: 0 0 1.5rem 0;
-  color: var(--accent-color);
-
-  &:before {
-    content: "05.";
-    margin-right: 10px;
-  }
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 /* Same oversized mono-600 statement language as the Experience company
@@ -29,7 +25,8 @@ const StyledTitle = styled.p`
   font-size: clamp(2.2rem, 1.4rem + 3.5vw, 4rem);
   font-weight: 600;
   line-height: 1.1;
-  letter-spacing: -0.015em;
+  /* No negative tracking on mono: matches the Experience company names. */
+  letter-spacing: 0;
   color: var(--text-primary-color);
   margin: 0 0 2rem 0;
   max-width: 18ch;
@@ -51,7 +48,7 @@ const StyledCTA = styled.div`
 const Contact = () => {
   return (
     <StyledContactSection id="contact">
-      <StyledPreHeading>Get In Touch</StyledPreHeading>
+      <SectionHeading sectionNumber="5">Get In Touch</SectionHeading>
       <StyledTitle>Want to build together?</StyledTitle>
 
       <StyledDescription>

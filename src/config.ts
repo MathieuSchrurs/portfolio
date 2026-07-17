@@ -67,7 +67,7 @@ const config: SiteConfig = {
         "Taught English and Dutch across secondary and higher education for four years. Running a classroom sharpens systems thinking, clear communication, and the ability to break down complexity. Developing skills that carry directly into how I work with people today.",
     },
     {
-      company: "The Right People · Hans Kusters Music",
+      company: "The Right People · HKM",
       title: "Music Publishing Assistant",
       location: "Ghent / Asse",
       range: "2017 — 2019",

@@ -11,6 +11,13 @@ const StyledFooter = styled.footer`
   color: var(--text-secondary-color);
   font-family: var(--font-mono);
   font-size: var(--fz-xxs);
+
+  /* Clear the fixed bottom status bar (30px) so the credit never sits
+     underneath it. The bar is hidden below 768px, so no padding is needed
+     there. */
+  @media (min-width: 769px) {
+    padding-bottom: 3rem;
+  }
 `;
 
 const StyledCredit = styled.div`

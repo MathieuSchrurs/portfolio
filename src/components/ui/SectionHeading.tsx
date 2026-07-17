@@ -36,6 +36,9 @@ const StyledHeading = styled.h2`
   .comment {
     color: var(--accent-color);
     font-weight: 400;
+    /* Tuck the two slashes closer than mono's fixed pitch so the prefix
+       reads as one glyph pair, not two spaced characters. */
+    letter-spacing: -0.09em;
   }
 
   /* Dashed rule drawn with a gradient so the dashes stay crisp at any width —
