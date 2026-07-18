@@ -173,27 +173,39 @@ const StyledLinks = styled.div`
   }
 `;
 
-const MobileMenuOverlay = styled.div<{ $open: boolean }>`
+/* The header shrinks from --nav-height to --nav-scroll-height once the page
+   is scrolled, so the menu and its backdrop take the current header height
+   ($compact) and transition with the same easing — otherwise a gap opens
+   between the bar and the panel whenever the menu is used mid-page. */
+const MobileMenuOverlay = styled.div<{ $open: boolean; $compact: boolean }>`
   display: ${({ $open }) => ($open ? 'block' : 'none')};
   position: fixed;
-  top: var(--nav-height);
+  top: ${({ $compact }) =>
+    $compact ? 'var(--nav-scroll-height)' : 'var(--nav-height)'};
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 14;
 `;
 
-const MobileMenu = styled.aside<{ $open: boolean }>`
+const MobileMenu = styled.aside<{ $open: boolean; $compact: boolean }>`
   position: fixed;
-  top: var(--nav-height);
+  top: ${({ $compact }) =>
+    $compact ? 'var(--nav-scroll-height)' : 'var(--nav-height)'};
   right: 0;
-  height: calc(100vh - var(--nav-height));
+  height: ${({ $compact }) =>
+    $compact
+      ? 'calc(100vh - var(--nav-scroll-height))'
+      : 'calc(100vh - var(--nav-height))'};
   width: min(84vw, 360px);
   background-color: var(--bg-color);
   border-left: 1px solid var(--border-color);
   box-shadow: -10px 0 40px var(--shadow-color);
   transform: translateX(${({ $open }) => ($open ? '0' : '100%')});
-  transition: transform 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition:
+    transform 0.35s cubic-bezier(0.645, 0.045, 0.355, 1),
+    top 0.25s cubic-bezier(0.645, 0.045, 0.355, 1),
+    height 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   z-index: 15;
   display: flex;
   flex-direction: column;
@@ -360,14 +372,15 @@ const DesktopNavLinks: React.FC<{ navLinks: NavLink[] }> = ({ navLinks }) => (
    given back to mobile). */
 const MobileNavMenu: React.FC<{
   open: boolean;
+  compact: boolean;
   navLinks: NavLink[];
   onClose: () => void;
-}> = ({ open, navLinks, onClose }) => (
+}> = ({ open, compact, navLinks, onClose }) => (
   <>
-    <MobileMenuOverlay $open={open} onClick={onClose} />
+    <MobileMenuOverlay $open={open} $compact={compact} onClick={onClose} />
     {/* inert keeps the off-screen menu's links out of the tab order — the
         closed menu is only translated off-canvas, not display:none */}
-    <MobileMenu $open={open} inert={!open}>
+    <MobileMenu $open={open} $compact={compact} inert={!open}>
       <div className="menu-label">
         <span className="comment" aria-hidden="true">//</span>
         navigation
@@ -447,6 +460,7 @@ const Nav: React.FC = () => {
 
       <MobileNavMenu
         open={isMenuOpen}
+        compact={!scrolledToTop}
         navLinks={navLinks}
         onClose={() => setIsMenuOpen(false)}
       />
